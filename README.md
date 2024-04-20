@@ -46,15 +46,14 @@ Each color is defined using a scale with 12 steps.
 - text
 - text-subtle
 
----
-
-This color scale schema is largely inspired by [radix-colors](https://radix-ui.com/colors), the differences being:
-- semantic names are used instead of their number based naming.
-- `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark mode.
-- `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used.
- 
-In fact, you can pass the CSS output of [radix's scale builder](#) directly to a [helper script](#) we have available.
-We're currently working on a theme builder that will make this process easier, without relying on anything radix related.
+> [!NOTE]
+> This color scale schema is largely inspired by [radix-colors](https://radix-ui.com/colors), the differences being:
+> - semantic names are used instead of their number based naming.
+> - `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
+> - `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used.
+>
+> In fact, you can pass the CSS output of [radix's scale builder](#) directly to a [helper script](#) we have available.
+> We're currently working on a theme builder that will make this process easier, without relying on anything radix related.
 
 ## Font Families
 
