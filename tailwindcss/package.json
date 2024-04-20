@@ -1,0 +1,17 @@
+{
+  "name": "elm-theme-tailwindcss",
+  "version": "3.0.0",
+  "description": "Use elm-theme with tailwindcss.",
+  "main": "index.js",
+  "author": "Georges Boris",
+  "license": "MPL-2.0",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.4.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}
