@@ -4,12 +4,14 @@
 
 ## Color Palette
 
-- Base
-- Primary
-- Secondary
-- Success
-- Warning
-- Danger
+Every theme is built using a set of 6 colors.
+
+- **Base** — used for most of the content, the main background, text colors, etc.
+- **Primary** ­— used for content highlights with a contrasting color, sometimes called _"accent"_ color.
+- **Secondary** — used as an alternative to the primary color, giving flexibility to your designs.
+- **Success** — used for positive content. _e.g. success feedbacks, confirm buttons, …_
+- **Warning** ­— used for cautionary content. _e.g. non critical warning messages_
+- **Danger** — used for errors and destructive content. _e.g. failure feedbacks, delete buttons, …_
  
 ## Color Scale
 
