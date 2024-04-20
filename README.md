@@ -2,7 +2,16 @@
 
 > A theme schema designed for intuitive use without sacrificing flexibility
 
-## Color
+## Color Palette
+
+- Base
+- Primary
+- Secondary
+- Success
+- Warning
+- Danger
+ 
+## Color Scale
 
 - bg
 - bg-soft
@@ -18,16 +27,7 @@
 - text-soft
 - text
 
-## Palette
-
-- Base
-- Primary
-- Secondary
-- Success
-- Warning
-- Danger
-
-## Font Family
+## Font Families
 
 - Heading
 - Text
@@ -53,7 +53,7 @@
 - 2xl
 - 3xl
 
-## Tailwind Plugin
+# Tailwind Integration
 
 ```bash
 npm i -D w-theme
