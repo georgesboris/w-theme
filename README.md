@@ -2,7 +2,34 @@
 
 > A theme schema designed for intuitive use without sacrificing flexibility
 
+- [Generating themes](generating-themes)
+- [Design Tokens](design-tokens)
+  - [CSS Variables](css-variables)
+  - [Color Palette](color-palette)
+  - [Color Scale](color-scale)
+  - [Font Families](font-families)
+  - [Spacing](spacing)
+  - [Rounded Corners](rounded-corners)
+- [Tailwind Plugin]()
+- [Related Libraries]()
+  - [Elm]
+    - [elm-theme]
+    - [elm-widgets]
+    - [elm-book]
+  - [Gleam]
+    - [lustre_ui]
+
+# Creating a theme
+
+> [!NOTE]
+> - Using the javascript api to create CSS strings
+> - Generating color scales through color sample
+> - Built-in themes and colors
+
+# Design Tokens
+
 ## Color Palette
+a.k.a "color variants"
 
 Every theme is built using a palette of 6 colors.
 
@@ -61,7 +88,7 @@ Each color is defined using a scale with 12 steps.
 - Text
 - Code
 
-## Border Radius
+## Spacing
 
 - xs
 - sm
@@ -69,9 +96,10 @@ Each color is defined using a scale with 12 steps.
 - lg
 - xl
 - 2xl
-- 3xl
 
-## Spacing
+- 3xl
+## Rounded Corners
+a.k.a. "border radius"
 
 - xs
 - sm
