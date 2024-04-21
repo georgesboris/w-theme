@@ -1,0 +1,33 @@
+{
+  "name": "w-theme",
+  "description": "A theme schema designed for consistency and flexibility",
+  "version": "0.0.1",
+  "author": "Georges Boris",
+  "license": "MPL-2.0",
+  "main": "src/index.js",
+  "homepage": "https://github.com/georgesboris/w-theme#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgesboris/w-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/georgesboris/w-theme/issues"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "theme",
+    "css",
+    "variables",
+    "design",
+    "system",
+    "design",
+    "tokens",
+    "elm",
+    "elm-widgets"
+  ],
+}
