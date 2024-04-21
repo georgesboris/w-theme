@@ -18,6 +18,7 @@
   - [Generating color scales](#generating-color-scales)
   - [Defining custom color scales](#defining-custom-color-scales)
   - [Generating spacing and border radius values](#generating-spacing-and-border-radius-values)
+  - [Base Styles](#base-styles)
 - [Theme Sampler](#theme-sampler)
 - [Theme Debugger](#theme-debugger)
 - [Tailwind Plugin](#tailwind-plugin)
