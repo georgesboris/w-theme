@@ -1,6 +1,6 @@
 # w-theme
 
-> A theme schema designed for intuitive use without sacrificing flexibility with support for light/dark mode.
+> A theme schema designed for consistency and flexibility with support for light/dark mode.
 
 
 ## Table of Contents
@@ -18,6 +18,8 @@
   - [Generating color scales](#generating-color-scales)
   - [Defining custom color scales](#defining-custom-color-scales)
   - [Generating spacing and border radius values](#generating-spacing-and-border-radius-values)
+- [Theme Sampler](#theme-sampler)
+- [Theme Debugger](#theme-debugger)
 - [Tailwind Plugin](#tailwind-plugin)
 - [Related Libraries](#related-libraries)
   - [Elm](#elm)
@@ -217,8 +219,8 @@ wt.getCSSVariables(theme);
 
 #### Generating color scales
 
-> [!CAUTION]
-> Generating colors is still under development.
+> [!WARNING]
+> Work in progress…
 
 You can pass in custom values and new color scales will be generated from theme.
 Any format recognizable by [color.js](https://colorjs.io/) can be used.
@@ -289,6 +291,22 @@ When using our `setGlobalTheme` function you also get the benefit of a few utili
   - Text colors will be set to the related variant
 
 
+# Theme Sampler
+
+We provide a web-component that can be placed anywhere in your application and it will inherit the currently available tokens.
+This is a great way to test out different themes or debug design token inheritance in real applications.
+
+> [!WARNING]
+> Work in progress…
+
+# Theme Debugger
+
+We provide a drop-in script that can be used to debug your design tokens on live applications.
+This can be extremelly useful for debugging existing applications and visualizing design tokens live.
+
+> [!WARNING]
+> Work in progress…
+
 
 # Tailwind Plugin
 
@@ -313,7 +331,7 @@ module.exports = {
 
 ### Elm
 
-- [elm-theme](https://package.elm-lang.org/packages/georgesboris/elm-theme/latest/) — Quickly create themes and propagate them to parts of your application.
+- [elm-theme](https://package.elm-lang.org/packages/georgesboris/elm-theme/latest/) — A fully compliant w-theme library from Elm applications with support for automatically switching dark/light modes.
 - [elm-widgets](https://package.elm-lang.org/packages/georgesboris/elm-widgets/latest/) — A library of UI elements themed through w-theme.
 - [elm-book](https://package.elm-lang.org/packages/georgesboris/elm-book/latest/) — A documentation library themed through w-theme.
 
