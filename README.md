@@ -235,7 +235,7 @@ const theme = wt.theme({
 })
 
 // set theme on the body of your document
-wt.setGlobalTheme(theme);
+wt.setTheme(theme);
 
 // grab theme CSS content and apply it to other elements (e.g. through a class)
 wt.getCSSVariables(theme);
@@ -288,7 +288,7 @@ const theme = wt.theme({
     sm: "0.125rem",
     ...
   },
-  radius: {
+  borderRadius: {
     xs: "0.2rem",
     sm: "0.3rem",
     ...
@@ -297,13 +297,13 @@ const theme = wt.theme({
 
 const otherTheme = wt.theme({
   spacingScale: 1.2,
-  radiusScale: 0.2
+  borderRadiusScale: 0.2
 })
 ```
 
 #### Base styles
 
-When using our `setGlobalTheme` function you also get the benefit of a few utilities like:
+When using our `setTheme` function you also get the benefit of a few utilities like:
 
 - Set most elements to use `font-text` as font family
 - Set `h1, h2, h3, h4, h5, h6` elements use `font-heading`
@@ -318,18 +318,18 @@ When using our `setGlobalTheme` function you also get the benefit of a few utili
   - `color` will be set to `solid-text`
   - `:hover, :active` will change background to strong and subtle
 
-You can disable all or some of these base styles by passing in a secondary object to the `setGlobalTheme` function:
+You can disable all or some of these base styles by passing in a secondary object to the `setTheme` function:
 
 ```js
 import wt from "w-theme"
 
-wt.setGlobalTheme(myTheme, {
+wt.setTheme(myTheme, {
   baseStyles: true,
   baseSelectors: false
 })
 ```
 
-Also, you can get access to just these base styles through the `getBaseStylesCSS` function.
+Also, you can get access to just these base styles through the `getCSSBaseStyles` function.
 
 # Theme Sampler
 

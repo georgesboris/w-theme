@@ -68,30 +68,30 @@ function toRadiusVariables(theme) {
   const scale = theme.radiusScale || 1;
 
   return [
-    ["xs", theme.xs || 0.125],
-    ["sm", theme.sm || 0.25],
-    ["md", theme.md || 0.375],
-    ["lg", theme.lg || 0.5],
-    ["xl", theme.xl || 0.75],
-    ["2xl", theme["2xl"] || 1],
-    ["3xl", theme["3xl"] || 1.5],
+    ["xs", theme.xs || `${0.125 * scale}rem`],
+    ["sm", theme.sm || `${0.25 * scale}rem`],
+    ["md", theme.md || `${0.375 * scale}rem`],
+    ["lg", theme.lg || `${0.5 * scale}rem`],
+    ["xl", theme.xl || `${0.75 * scale}rem`],
+    ["2xl", theme["2xl"] || `${1 * scale}rem`],
+    ["3xl", theme["3xl"] || `${1.5 * scale}rem`],
   ]
-    .map(([k, v]) => `--w-radius-${k}:${v * scale}rem`)
+    .map(([k, v]) => `--w-radius-${k}:${v}`)
 }
 
 function toSpacingVariables(theme) {
   const scale = theme.spacingScale || 1;
 
   return [
-    ["xs", theme.xs || 0.25],
-    ["sm", theme.sm || 0.5],
-    ["md", theme.md || 0.75],
-    ["lg", theme.lg || 1],
-    ["xl", theme.xl || 1.5],
-    ["2xl", theme["2xl"] || 2.5],
-    ["3xl", theme["3xl"] || 4],
+    ["xs", theme.xs || `${0.25 * scale}rem`],
+    ["sm", theme.sm || `${0.5 * scale}rem`],
+    ["md", theme.md || `${0.75 * scale}rem`],
+    ["lg", theme.lg || `${1 * scale}rem`],
+    ["xl", theme.xl || `${1.5 * scale}rem`],
+    ["2xl", theme["2xl"] || `${2.5 * scale}rem`],
+    ["3xl", theme["3xl"] || `${4 * scale}rem`],
   ]
-    .map(([k, v]) => `--w-spacing-${k}:${v * scale}rem`)
+    .map(([k, v]) => `--w-spacing-${k}:${v}`)
 }
 
 function toFontVariables(theme) {
@@ -123,44 +123,44 @@ function getColorByName(colorName) {
 
 function colorToCSSVariablesChannels(variant, color) {
   return [
-    ["bg", "bg"],
-    ["bgSubtle", "bg-subtle"],
-    ["tint", "tint"],
-    ["tintSubtle", "tint-subtle"],
-    ["tintStrong", "tint-strong"],
-    ["detail", "detail"],
-    ["detailSubtle", "detail-subtle"],
-    ["detailStrong", "detail-strong"],
-    ["solid", "solid"],
-    ["solidSubtle", "solid-subtle"],
-    ["solidStrong", "solid-strong"],
-    ["solidText", "solid-text"],
-    ["textSubtle", "text-subtle"],
-    ["text", "text"],
-  ].map(([k, v]) => {
-    const [r, g, b] = color.channels[k];
-    return `--w-${variant}-${v}: ${r} ${g} ${b}`;
+    "bg",
+    "bg-subtle",
+    "tint",
+    "tint-subtle",
+    "tint-strong",
+    "detail",
+    "detail-subtle",
+    "detail-strong",
+    "solid",
+    "solid-subtle",
+    "solid-strong",
+    "solid-text",
+    "text-subtle",
+    "text",
+  ].map((c) => {
+    const [r, g, b] = color.channels[c];
+    return `--w-${variant}-${c}: ${r} ${g} ${b}`;
   })
 };
 
 function colorToCSSVariablesRGB(variant, color) {
   return [
-    ["bg", "bg"],
-    ["bgSubtle", "bg-subtle"],
-    ["tint", "tint"],
-    ["tintSubtle", "tint-subtle"],
-    ["tintStrong", "tint-strong"],
-    ["detail", "detail"],
-    ["detailSubtle", "detail-subtle"],
-    ["detailStrong", "detail-strong"],
-    ["solid", "solid"],
-    ["solidSubtle", "solid-subtle"],
-    ["solidStrong", "solid-strong"],
-    ["solidText", "solid-text"],
-    ["textSubtle", "text-subtle"],
-    ["text", "text"],
-  ].map(([k, v]) => {
-    return `--w-${variant}-${v}: ${color.rgb}`;
+    "bg",
+    "bg-subtle",
+    "tint",
+    "tint-subtle",
+    "tint-strong",
+    "detail",
+    "detail-subtle",
+    "detail-strong",
+    "solid",
+    "solid-subtle",
+    "solid-strong",
+    "solid-text",
+    "text-subtle",
+    "text",
+  ].map((c) => {
+    return `--w-${variant}-${c}: ${color.rgb}`;
   })
 };
 
