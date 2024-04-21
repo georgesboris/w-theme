@@ -51,9 +51,9 @@ This is a sample of the schema CSS variables, you can see a complete example [he
 > - Be [tailwindcss compatible]() so you can use their colors using tailwind's opacity functions `bg-primary/50`
 >
 > So, remember to always use the colors variables like this:
-> ```rgb(--var(--w-primary-solid))```
+> - ```rgb(--var(--w-primary-solid))```
 > Or, with different opacities, like this:
-> ```rgb(--var(--w-primary-solid) / 0.5)```
+> - ```rgb(--var(--w-primary-solid) / 0.5)```
 
 ## Colors
 
