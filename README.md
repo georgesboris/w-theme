@@ -352,7 +352,7 @@ module.exports = {
 
 ### [Elm](https://elm-lang.org)
 
-- [elm-theme](https://package.elm-lang.org/packages/georgesboris/elm-theme/latest/) — A fully compliant w-theme library from Elm applications with support for automatically switching dark/light modes.
+- [elm-theme](https://package.elm-lang.org/packages/georgesboris/elm-theme/latest/) — A fully compliant w-theme library for Elm applications with support for automatically switching dark/light modes, defining and extending themes with type-safety and more.
 - [elm-widgets](https://package.elm-lang.org/packages/georgesboris/elm-widgets/latest/) — A library of UI elements themed through w-theme.
 - [elm-book](https://package.elm-lang.org/packages/georgesboris/elm-book/latest/) — A documentation library themed through w-theme.
 
