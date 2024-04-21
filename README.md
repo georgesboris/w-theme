@@ -215,7 +215,7 @@ const theme = wt.theme({
 // set theme on the body of your document
 wt.setGlobalTheme(theme);
 
-// grab theme CSS content and create custom 
+// grab theme CSS content and apply it to other elements (e.g. through a class)
 wt.getCSSVariables(theme);
 ```
 
@@ -286,12 +286,28 @@ When using our `setGlobalTheme` function you also get the benefit of a few utili
 - Set most elements to use `font-text` as font family
 - Set `h1, h2, h3, h4, h5, h6` elements use `font-heading`
 - Set `code` element use 
-- We set selectors such as `[data-w-palette="primary"], .w-primary` to automatically apply a few palette related styles to their children.
-  - Background will be set to the tinted color of the related palette
+- Selectors `[data-w-palette="primary"], .w-primary` to automatically apply a few palette related styles to their children:
+  - `background-color` will be set to the tinted color
   - `border-color` will be set to the `detail` color
-  - Background and border colors will be set to their related variant
-  - Text colors will be set to the related variant
+  - `color` will be set to the related variant
+  -  `:hover, :active` will change background to strong and subtle
+- Previous selectors plus `.w-solid` will automatically apply:
+  - `background` will be set to `solid`
+  - `color` will be set to `solid-text`
+  - `:hover, :active` will change background to strong and subtle
 
+You can disable all or some of these base styles by passing in a secondary object to the `setGlobalTheme` function:
+
+```js
+import wt from "w-theme"
+
+wt.setGlobalTheme(myTheme, {
+  baseStyles: true,
+  baseSelectors: false
+})
+```
+
+Also, you can get access to just these base styles through the `getBaseStylesCSS` function.
 
 # Theme Sampler
 
