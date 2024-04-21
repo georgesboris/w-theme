@@ -350,13 +350,13 @@ module.exports = {
 
 ## Related Libraries
 
-### Elm
+### [Elm](https://elm-lang.org)
 
 - [elm-theme](https://package.elm-lang.org/packages/georgesboris/elm-theme/latest/) — A fully compliant w-theme library from Elm applications with support for automatically switching dark/light modes.
 - [elm-widgets](https://package.elm-lang.org/packages/georgesboris/elm-widgets/latest/) — A library of UI elements themed through w-theme.
 - [elm-book](https://package.elm-lang.org/packages/georgesboris/elm-book/latest/) — A documentation library themed through w-theme.
 
-### Gleam
+### [Gleam](https://gleam.run)
 
 - **TBD** :detective:
 
