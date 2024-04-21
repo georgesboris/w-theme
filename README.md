@@ -1,6 +1,6 @@
 # w-theme
 
-> A theme schema designed for consistency and flexibility with support for light/dark mode.
+> A theme schema designed for consistency and flexibility with support for light and dark modes.
 
 
 ## Table of Contents
