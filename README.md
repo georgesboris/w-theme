@@ -90,7 +90,7 @@ Each color is defined using a scale with 12 steps.
 - **text-subtle** — ...
 
 <details>
-<summary>Our color scale was largely inspired by [radix-colors](https://radix-ui.com/colors), see the differences</summary>
+<summary>Our color scale was largely inspired by radix-colors, see the differences.</summary>
 - semantic names are used instead of their number based naming.
 - `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
 - `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used.
