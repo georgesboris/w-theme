@@ -46,11 +46,14 @@ This is a sample of the schema CSS variables, you can see a complete example [he
 ```
 
 > [!Note]
-> We use "color channels" on our CSS variable color instead of a defined color space. So we can:
+> We use "color channels" on our CSS variable colors instead of a defined color space. So we can:
 > - Create transparent variations of any colors like this `rgb(--var(--w-base-bg) / 0.5)`
-> - Be [tailwindcss compatible]() so people can use their colors using tailwind's builtin opacity functions `bg-primary/50`
+> - Be [tailwindcss compatible]() so you can use their colors using tailwind's opacity functions `bg-primary/50`
 >
-> So, remember to always use the colors variables through a namespace function like `rgb(--var(--w-primary-solid))`
+> So, remember to always use the colors variables like this:
+> ```rgb(--var(--w-primary-solid))```
+> Or, with different opacities, like this:
+> ```rgb(--var(--w-primary-solid) / 0.5)```
 
 ## Colors
 
