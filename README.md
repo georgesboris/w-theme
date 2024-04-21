@@ -10,14 +10,14 @@
   - [Font Families](font-families)
   - [Spacing](spacing)
   - [Rounded Corners](rounded-corners)
-- [Tailwind Plugin]()
-- [Related Libraries]()
+- [Tailwind Plugin](tailwind-plugin)
+- [Related Libraries](related-libraries)
   - [Elm]
-    - [elm-theme]
-    - [elm-widgets]
-    - [elm-book]
-  - [Gleam]
-    - [lustre_ui]
+    - [elm-theme](elm-theme)
+    - [elm-widgets](elm-widgets)
+    - [elm-book](elm-book)
+  - [Gleam](gleam)
+    - Work in progress... :detective:
 
 # Creating a theme
 
@@ -109,7 +109,7 @@ a.k.a. "border radius"
 - 2xl
 - 3xl
 
-# Tailwind Integration
+# Tailwind Plugin
 
 ```bash
 npm i -D w-theme
@@ -128,7 +128,7 @@ module.exports = {
 ```
 
 
-## Elm
+## Related Libraries
 
 - elm-theme
 
