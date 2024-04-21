@@ -2,6 +2,8 @@
 
 > A theme schema designed for intuitive use without sacrificing flexibility
 
+## Table of Content
+
 - [Generating themes](generating-themes)
 - [Design Tokens](design-tokens)
   - [CSS Variables](css-variables)
@@ -17,9 +19,8 @@
     - [elm-widgets](elm-widgets)
     - [elm-book](elm-book)
   - [Gleam](gleam)
-    - Work in progress... :detective:
 
-# Creating a theme
+# Generating themes
 
 > [!NOTE]
 > - Using the javascript api to create CSS strings
@@ -46,32 +47,32 @@ Each color is defined using a scale with 12 steps.
 
 #### Background
 
-- bg
-- bg-subtle
+- **bg** — ...
+- **bg-subtle** — ...
 
 #### Tint
 
-- tint
-- tint-subtle
-- tint-strong
+- **tint** — ...
+- **tint-subtle** — ...
+- **tint-strong** — ...
 
 #### Detail
 
-- detail-subtle
-- detail
-- detail-strong
+- **detail-subtle** — ...
+- **detail** — ...
+- **detail-strong** — ...
 
 #### Solid
 
-- solid-subtle
-- solid
-- solid-strong
-- solid-text
+- **solid-subtle** — ...
+- **solid** — ...
+- **solid-strong** — ...
+- **solid-text** — ...
 
 #### Text
 
-- text
-- text-subtle
+- **text** — ...
+- **text-subtle** — ...
 
 > [!NOTE]
 > This color scale schema is largely inspired by [radix-colors](https://radix-ui.com/colors), the differences being:
@@ -130,5 +131,21 @@ module.exports = {
 
 ## Related Libraries
 
-- elm-theme
+### Elm
+
+#### elm-theme
+
+Work in progress :detective:
+
+#### elm-widgets
+
+Work in progress :detective:
+
+#### elm-book
+
+Work in progress :detective:
+
+### Gleam
+
+Work in progress :detective:
 
