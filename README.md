@@ -17,7 +17,7 @@
   - [Using built-in colors](#using-built-in-colors)
   - [Generating color scales](#generating-color-scales)
   - [Defining custom color scales](#defining-custom-color-scales)
-  - [Generating spacings and border radius](#generating-spacings-and-border-radius)
+  - [Generating spacing and border radius values](#generating-spacing-and-border-radius-values)
 - [Tailwind Plugin](#tailwind-plugin)
 - [Related Libraries](#related-libraries)
   - [Elm](#elm)
@@ -36,12 +36,19 @@ This is a sample of the schema CSS variables, you can see a complete example [he
 ```css
 :root {
   --w-font-heading: sans-serif; 
-  --w-base-bg: white;
-  --w-primary-text: blue;
+  --w-base-bg: 255 255 255;
+  --w-primary-text: 0 0 255;
   --w-spacing-xs: 0.1rem;
   --w-radius-xs: 0.1rem;
 }
 ```
+
+> [!Note]
+> We use "color channels" on our CSS variable color instead of a defined color space. So we can:
+> - Create transparent variations of any colors like this `rgb(--var(--w-base-bg) / 0.5)`
+> - Be [tailwindcss compatible]() so people can use their colors using tailwind's builtin opacity functions `bg-primary/50`
+>
+> So, remember to always use the colors variables through a namespace function like `rgb(--var(--w-primary-solid))`
 
 ## Colors
 
@@ -116,11 +123,20 @@ Radix Colors are built using a 1-12 scale with semantic meaning given through [d
 
 ## Font Families
 
+> [!NOTE]
+> Docs in progress…
+
 - Heading
 - Text
 - Code
 
 ## Spacing
+
+The most important thing about spacing variables is to use `rem` based values. This way your whole interface gets properly spaced when the user decides to increase their default font value for accessibility reasons.
+Also, you can even play around with base font values across different pages of your applications and get great looking results! For instance, maybe your marketing website would benefit from larger fonts and buttons, you can make that happen by just adjusting the `font-size` attribute of your `html` element. :sparkles:
+
+The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/customizing-spacing).
+The idea of using naming based values instead of number based is that you can even integrate w-theme with tailwind and still be able to use both scales interchangeably (e.g `p-4 m-sm`)
 
 - xs
 - sm
@@ -132,6 +148,8 @@ Radix Colors are built using a 1-12 scale with semantic meaning given through [d
 
 ## Border Radius
 
+Just as spacing values, we advise the usage of `rem` based values so that your border radius will scale consistently.
+
 - xs
 - sm
 - md
@@ -140,6 +158,24 @@ Radix Colors are built using a 1-12 scale with semantic meaning given through [d
 - 2xl
 - 3xl
 
+The default border radius we provide are usually 50% of the size of the related spacing variable, that way you can usually get good results when pairing them.
+
+```
+.button {
+  padding: var(--w-spacing-md);
+  border-radius: var(--w-radius-md);  
+}
+```
+
+The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/border-radius).
+In fact, you can integrate our scale into your tailwind theme with no surprises! Just be aware of one small translation:
+
+```css
+.rounded-sm  /* --w-radius-xs (our "xs" becomes tailwind's "sm") */
+.rounded     /* --w-radius-sm (our "sm" becomes tailwind's default) */
+.rounded-md  /* --w-radius-md (things are named equally starting from here) */
+...
+```
 
 
 # Javascript API
@@ -152,7 +188,7 @@ npm i -D w-theme
 
 > [!NOTE]
 > You should mostly use our Javascript API for code-generation (css/js/html).
-> It is not optimized to be used as part of your production application.
+> This library is not optimized to be used as part of your production application.
 > However, you're free to use it on the browser for theme exploration sandboxes, etc.
 
 
@@ -212,7 +248,7 @@ const theme = wt.theme({
 })
 ```
 
-#### Generating spacings and border radius
+#### Generating spacing and border radius values
 
 Just as colors, you can pass in both a complete set of values to your spacings and rounded colors.
 However, you can also pass in a scale value that will be used to auto-generate all other values.
@@ -238,6 +274,21 @@ const otherTheme = wt.theme({
   radiusScale: 0.2
 })
 ```
+
+#### Base styles
+
+When using our `setGlobalTheme` function you also get the benefit of a few utilities like:
+
+- Set most elements to use `font-text` as font family
+- Set `h1, h2, h3, h4, h5, h6` elements use `font-heading`
+- Set `code` element use 
+- We set selectors such as `[data-w-palette="primary"], .w-primary` to automatically apply a few palette related styles to their children.
+  - Background will be set to the tinted color of the related palette
+  - `border-color` will be set to the `detail` color
+  - Background and border colors will be set to their related variant
+  - Text colors will be set to the related variant
+
+
 
 # Tailwind Plugin
 
