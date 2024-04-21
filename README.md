@@ -1,15 +1,15 @@
 # w-theme
 
-> A theme schema designed for intuitive use without sacrificing flexibility
-
+> A theme schema designed for intuitive use without sacrificing flexibility with support for light/dark mode.
 
 
 ## Table of Contents
 
 - [Design Tokens](#design-tokens)
   - [CSS Variables](#css-variables)
-  - [Color Palette](#color-palette)
-  - [Color Scale](#color-scale)
+  - [Colors](#colors)
+    - [Color Palette](#color-palette)
+    - [Color Scale](#color-scale)
   - [Font Families](#font-families)
   - [Spacing](#spacing)
   - [Border Radius](border-radius)
@@ -43,8 +43,15 @@ This is a sample of the schema CSS variables, you can see a complete example [he
 }
 ```
 
+## Colors
 
-## Color Palette
+We can safely say that colors are the star of the show of any theme.
+Our theme specification is made of a *color palette of 6 colors* and each color is made of a *scale of 12 variations*.
+This might seem like _a lot_ of available colors, but this was decided through a lot of real world experimentation and minimalistic color scales ended up relying on other factors such as opacity for achieving the flexibility needed for building rich UI's.
+This ends up becoming a huge pain to maintain and opacity is _not_ an ideal way of mixing colors.
+With this set of colors available, we're confident that you can build rich interfaces without opting for escape hatches of your design system.
+
+### Color Palette
 a.k.a "color variants"
 
 Every theme is built using a palette of 6 colors.
@@ -56,7 +63,7 @@ Every theme is built using a palette of 6 colors.
 - **Warning** ­— used for cautionary content. _e.g. non critical warning messages_
 - **Danger** — used for errors and destructive content. _e.g. failure feedbacks, delete buttons, …_
  
-## Color Scale
+### Color Scale
 
 Each color is defined using a scale with 12 steps.
 
@@ -67,33 +74,44 @@ Each color is defined using a scale with 12 steps.
 
 #### Tint
 
-- **tint** — the base tinted color.
+- **tint** — useful for subtle backgrounds of some UI elements.
 - **tint-subtle** — subtler variation, useful for "pressed" states.
 - **tint-strong** — stronger variation, useful for "hovered" states.
 
 #### Detail
 
-- **detail** — subtler variation, useful for "pressed" states.
-- **detail-subtle** — 
+- **detail** — useful for dividers, borders and other small UI elements.
+- **detail-subtle** — subtle variation, useful for "pressed" states.
 - **detail-strong** — stronger variation, useful for "hovered" states.
 
 #### Solid
 
-- **solid** — ...
-- **solid-subtle** — ...
-- **solid-strong** — ...
-- **solid-text** — ...
+- **solid** — useful for solid elements such as buttons.
+- **solid-subtle** — subtle variation, useful for "pressed" states.
+- **solid-strong** — stronger variation, useful for "hovered" states.
+- **solid-text** — contrasting color ensuring legibility of text over solid backgrounds
 
 #### Text
 
-- **text** — ...
-- **text-subtle** — ...
+- **text** — the main text color of your application.
+- **text-subtle** — subtler variation for secondary text.
+
+Both **text colors** are guaranteed to be **accessible** over any **background** and **tint** colors.
+**Detail** colors are not made for background usage, they should be used for single color elements.
+**Solid** colors should use **solid-text** as it's text color for proper accessibility.
 
 <details>
 <summary>Our color scale was largely inspired by radix-colors, see the differences.</summary>
-- semantic names are used instead of their number based naming.
+
+Radix Colors are built using a 1-12 scale with semantic meaning given through [documentation](https://www.radix-ui.com/colors).
+
+- We prefer semantic names are used instead of their number based naming.
+- We prefer consistency across the main color spaces, so our **tint**, **detail** and **solid** colors have the same tones available.
+- We included the contrasting `solid-text` into our scale, instead of relying on [different implied values for some colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale#steps-910-solid-backgrounds).
+- We 
 - `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
 - `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used.
+
 </details>
 
 ## Font Families
