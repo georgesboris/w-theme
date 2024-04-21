@@ -50,10 +50,9 @@ This is a sample of the schema CSS variables, you can see a complete example [he
 > - Create transparent variations of any colors like this `rgb(--var(--w-base-bg) / 0.5)`
 > - Be [tailwindcss compatible]() so you can use their colors using tailwind's opacity functions `bg-primary/50`
 >
-> So, remember to always use the colors variables like this:
+> So, remember to always use the colors variables like
 > - ```rgb(--var(--w-primary-solid))```
-> Or, with different opacities, like this:
-> - ```rgb(--var(--w-primary-solid) / 0.5)```
+> - Or ```rgb(--var(--w-primary-solid) / 0.5)```
 
 ## Colors
 
@@ -64,7 +63,7 @@ This ends up becoming a huge pain to maintain and opacity is _not_ an ideal way 
 With this set of colors available, we're confident that you can build rich interfaces without opting for escape hatches of your design system.
 
 ### Color Palette
-a.k.a "color variants"
+> a.k.a "color variants"
 
 Every theme is built using a palette of 6 colors.
 
