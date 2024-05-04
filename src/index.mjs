@@ -1,13 +1,12 @@
+import colors from "./w/colors.js"
+
 /**
  * @typedef Theme {
  *   id: string | null
  *   fontFamilies: FontFamilies
  *   spacing: SpacingAndBorderRadius
  *   borderRadius: SpacingAndBorderRadius
- *   colors: {
- *     light: ColorPalette
- *     dark: ColorPalette
- *   }
+ *   colors: ColorPalette
  * }
  *
  * @typedef FontFamilies {
@@ -16,25 +15,24 @@
  *   code: string
  * }
  *
- *
  * @typedef ColorPalette {
- *    base: ColorSpec
- *    primary: ColorSpec
- *    secondary: ColorSpec
- *    success: ColorSpec
- *    warning: ColorSpec
- *    danger: ColorSpec
+ *    base: ColorScale
+ *    primary: ColorScale
+ *    secondary: ColorScale
+ *    success: ColorScale
+ *    warning: ColorScale
+ *    danger: ColorScale
  * }
  *
- * @typedef ColorSpec {
+ * @typedef ColorScale {
  *   bg: string
  *   bg-subtle: string
  *   tint: string
  *   tint-subtle: string
  *   tint-strong: string
- *   detail: string
- *   detail-subtle: string
- *   detail-strong: string
+ *   accent: string
+ *   accent-subtle: string
+ *   accent-strong: string
  *   solid: string
  *   solid-subtle: string
  *   solid-strong: string
@@ -43,7 +41,7 @@
  *   text: string
  * }
  *
- * @typedef SpacingAndBorderRadius {
+ * @typedef SizeScale {
  *    xs: string
  *    sm: string
  *    md: string
@@ -55,22 +53,25 @@
  *
  */
 
+const DEFAULT_SANS_SERIF = `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`
+
 /**
  * Generates a theme record.
  *
  * @param {{
- *   primary: string | ColorSpec
- *   secondary?: string | ColorSpec
- *   base?: string | ColorSpec
- *   success?: string | ColorSpec
- *   warning?: string | ColorSpec
- *   danger?: string | ColorSpec
+ *   useDarkColorScheme?: bool
+ *   primary?: string | ColorScale
+ *   secondary?: string | ColorScale
+ *   base?: string | ColorScale
+ *   success?: string | ColorScale
+ *   warning?: string | ColorScale
+ *   danger?: string | ColorScale
  *   fontFamilies?: {
  *     heading?: string
  *     text?: string
  *     code?: string
  *   }
- *   spacingScale?: string
+ *   spacingScale?: number
  *   spacing?: {
  *    xs?: string
  *    sm?: string
@@ -80,7 +81,7 @@
  *    2xl?: string
  *    3xl?: string
  *   }
- *   borderRadiusScale?: string
+ *   borderRadiusScale?: number
  *   borderRadius?: {
  *    xs?: string
  *    sm?: string
@@ -95,22 +96,27 @@
  * @returns Theme
  */
 function theme(config) {
+  const colorScheme = config.useDarkColorScheme ? "dark" : "light";
+  const id = config.id || colorScheme;
+
+  const fontFamilies = {
+    heading: config.fontFamilies?.heading || DEFAULT_SANS_SERIF,
+    text: config.fontFamilies?.text || DEFAULT_SANS_SERIF,
+    code: config.fontFamilies?.code || "monospace",
+  }
+
   const palettes = {
-    base: toThemeColor(config.base || "slate"),
-    primary: toThemeColor(config.primary),
-    secondary: toThemeColor(config.secondary || config.primary),
-    success: toThemeColor(config.success || "green"),
-    warning: toThemeColor(config.warning || "yellow"),
-    danger: toThemeColor(config.danger || "red"),
+    base: toThemeColor(config.base || "slate", colorScheme),
+    primary: toThemeColor(config.primary || "blue", colorScheme),
+    secondary: toThemeColor(config.secondary || "pink", colorScheme),
+    success: toThemeColor(config.success || "green", colorScheme),
+    warning: toThemeColor(config.warning || "yellow", colorScheme),
+    danger: toThemeColor(config.danger || "red", colorScheme),
   }
 
   return {
-    id: config.id || null,
-    fonts: {
-      heading: config.fontFamilies?.heading || HEADING_DEFAULT_FONT_FAMILY,
-      text: config.fontFamilies?.text || TEXT_DEFAULT_FONT_FAMILY,
-      code: config.fontFamilies?.code || CODE_DEFAULT_FONT_FAMILY,
-    },
+    id,
+    fontFamilies,
     spacing: toThemeSpacing(config.spacing, config.spacingScale),
     radius: toThemeRadius(config.radius, config.radiusScale),
     colors: {
@@ -121,11 +127,61 @@ function theme(config) {
 }
 
 /**
+ * Returns theme to the body of the document or to a specific class.
+ * @param {string | ColorScale} color
+ * @param {"light" | "dark"} colorScheme
+ * @returns ColorScale
+ */
+function toThemeColor(color, colorScheme) {
+  if (typeof color === "string") {
+    if (!colors[color]) throw new Error("color must be a valid color name or a color scale object.")
+
+    return colors[color][colorScheme];
+  }
+
+  return color;
+}
+
+/**
+ * Returns a size scale with default spacing values and applied scale factor.
+ */
+function toThemeSpacing(spacing, scaleFactor) {
+  const scale = scaleFactor ?? 1.0;
+
+  return {
+    "xs": spacing.xs || `${0.25 * scale}rem`,
+    "sm": spacing.sm || `${0.5 * scale}rem`,
+    "md": spacing.md || `${0.75 * scale}rem`,
+    "lg": spacing.lg || `${1 * scale}rem`,
+    "xl": spacing.xl || `${1.5 * scale}rem`,
+    "2xl": spacing["2xl"] || `${2.5 * scale}rem`,
+    "3xl": spacing["3xl"] || `${4 * scale}rem`,
+  }
+}
+
+/**
+ * Returns a size scale with default radius values and applied scale factor.
+ */
+function toThemeRadius(radius, scaleFactor) {
+  const scale = scaleFactor ?? 1.0;
+  return {
+    "xs": radius["xs"] || `${0.125 * scale}rem`,
+    "sm": radius["sm"] || `${0.25 * scale}rem`,
+    "md": radius["md"] || `${0.375 * scale}rem`,
+    "lg": radius["lg"] || `${0.5 * scale}rem`,
+    "xl": radius["xl"] || `${0.75 * scale}rem`,
+    "2xl": radius["2xl"] || `${1 * scale}rem`,
+    "3xl": radius["3xl"] || `${1.5 * scale}rem`,
+  }
+}
+
+/**
  * Applies theme to the body of the document or to a specific class.
  * @param {Theme} theme
  * @param {?{
- *   darkModeClass?: bool
  *   class?: bool
+ *   darkModeTheme?: theme
+ *   darkModeClass?: bool
  *   baseStyles?: bool
  *   baseSelectors?: bool
  *   baseClassPrefix?: string
@@ -189,9 +245,9 @@ const colorSet = [
   "tint",
   "tint-subtle",
   "tint-strong",
-  "detail",
-  "detail-subtle",
-  "detail-strong",
+  "accent",
+  "accent-subtle",
+  "accent-strong",
   "solid",
   "solid-subtle",
   "solid-strong",

@@ -42,9 +42,9 @@ function colorsFromRadixList(colorsHex, colorScheme = "light") {
   colorChannels = colorsHex.map(toColorChannels);
 
   if (colorScheme == "light") {
-    [bg, bgSubtle, tintSubtle, tint, tintStrong, detailSubtle, detail, detailStrong, solid, solidStrong, textSubtle, text, solidText] = colorChannels;
+    [bg, bgSubtle, tintSubtle, tint, tintStrong, accentSubtle, accent, accentStrong, solid, solidStrong, textSubtle, text, solidText] = colorChannels;
   } else {
-    [bgSubtle, bg, tintSubtle, tint, tintStrong, detailSubtle, detail, detailStrong, solid, solidStrong, textSubtle, text, solidText] = colorChannels;
+    [bgSubtle, bg, tintSubtle, tint, tintStrong, accentSubtle, accent, accentStrong, solid, solidStrong, textSubtle, text, solidText] = colorChannels;
   }
 
   const solidSubtle = toSolidSubtle(solid, solidStrong);
@@ -55,9 +55,9 @@ function colorsFromRadixList(colorsHex, colorScheme = "light") {
     "tint-subtle": tintSubtle,
     "tint": tint,
     "tint-strong": tintStrong,
-    "detail-subtle": detailSubtle,
-    "detail": detail,
-    "detail-strong": detailStrong,
+    "accent-subtle": accentSubtle,
+    "accent": accent,
+    "accent-strong": accentStrong,
     "solid-subtle": solidSubtle,
     "solid": solid,
     "solid-strong": solidStrong,
@@ -69,39 +69,39 @@ function colorsFromRadixList(colorsHex, colorScheme = "light") {
 
 function toRGB(colorChannels) {
   return {
-    "bg": rgbFromChannels(colorChannels.bg),
-    "bg-subtle": rgbFromChannels(colorChannels.bgSubtle),
-    "tint-subtle": rgbFromChannels(colorChannels.tintSubtle),
-    "tint": rgbFromChannels(colorChannels.tint),
-    "tint-strong": rgbFromChannels(colorChannels.tintStrong),
-    "detail-subtle": rgbFromChannels(colorChannels.detailSubtle),
-    "detail": rgbFromChannels(colorChannels.detail),
-    "detail-strong": rgbFromChannels(colorChannels.detailStrong),
-    "solid-subtle": rgbFromChannels(colorChannels.solidSubtle),
-    "solid": rgbFromChannels(colorChannels.solid),
-    "solid-strong": rgbFromChannels(colorChannels.solidStrong),
-    "solid-text": rgbFromChannels(colorChannels.solidText),
-    "text-subtle": rgbFromChannels(colorChannels.textSubtle),
-    "text": rgbFromChannels(colorChannels.text),
+    "bg": rgbFromChannels(colorChannels["bg"]),
+    "bg-subtle": rgbFromChannels(colorChannels["bg-subtle"]),
+    "tint-subtle": rgbFromChannels(colorChannels["tint-subtle"]),
+    "tint": rgbFromChannels(colorChannels["tint"]),
+    "tint-strong": rgbFromChannels(colorChannels["tint-strong"]),
+    "accent-subtle": rgbFromChannels(colorChannels["accent-subtle"]),
+    "accent": rgbFromChannels(colorChannels["accent"]),
+    "accent-strong": rgbFromChannels(colorChannels["accent-strong"]),
+    "solid-subtle": rgbFromChannels(colorChannels["solid-subtle"]),
+    "solid": rgbFromChannels(colorChannels["solid"]),
+    "solid-strong": rgbFromChannels(colorChannels["solid-strong"]),
+    "solid-text": rgbFromChannels(colorChannels["solid-text"]),
+    "text-subtle": rgbFromChannels(colorChannels["text-subtle"]),
+    "text": rgbFromChannels(colorChannels["text"]),
   };
 }
 
 function toCSSVariables(colorChannels) {
   return {
-    "--w-bg": rgbFromChannels(colorChannels.bg),
-    "--w-bg-subtle": rgbFromChannels(colorChannels.bgSubtle),
-    "--w-tint-subtle": rgbFromChannels(colorChannels.tintSubtle),
-    "--w-tint": rgbFromChannels(colorChannels.tint),
-    "--w-tint-strong": rgbFromChannels(colorChannels.tintStrong),
-    "--w-detail-subtle": rgbFromChannels(colorChannels.detailSubtle),
-    "--w-detail": rgbFromChannels(colorChannels.detail),
-    "--w-detail-strong": rgbFromChannels(colorChannels.detailStrong),
-    "--w-solid-subtle": rgbFromChannels(colorChannels.solidSubtle),
-    "--w-solid": rgbFromChannels(colorChannels.solid),
-    "--w-solid-strong": rgbFromChannels(colorChannels.solidStrong),
-    "--w-solid-text": rgbFromChannels(colorChannels.solidText),
-    "--w-text-subtle": rgbFromChannels(colorChannels.textSubtle),
-    "--w-text": rgbFromChannels(colorChannels.text),
+    "--w-bg": rgbFromChannels(colorChannels["bg"]),
+    "--w-bg-subtle": rgbFromChannels(colorChannels["bg-subtle"]),
+    "--w-tint-subtle": rgbFromChannels(colorChannels["tint-subtle"]),
+    "--w-tint": rgbFromChannels(colorChannels["tint"]),
+    "--w-tint-strong": rgbFromChannels(colorChannels["tint-strong"]),
+    "--w-accent-subtle": rgbFromChannels(colorChannels["accent-subtle"]),
+    "--w-accent": rgbFromChannels(colorChannels["accent"]),
+    "--w-accent-strong": rgbFromChannels(colorChannels["accent-strong"]),
+    "--w-solid-subtle": rgbFromChannels(colorChannels["solid-subtle"]),
+    "--w-solid": rgbFromChannels(colorChannels["solid"]),
+    "--w-solid-strong": rgbFromChannels(colorChannels["solid-strong"]),
+    "--w-solid-text": rgbFromChannels(colorChannels["solid-text"]),
+    "--w-text-subtle": rgbFromChannels(colorChannels["text-subtle"]),
+    "--w-text": rgbFromChannels(colorChannels["text"]),
   };
 }
 

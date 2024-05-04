@@ -38,7 +38,6 @@ const colors = {
   dark: utils.mergeKeys({ rgb: colorsAsRGB.dark, channels: colorsAsChannels.dark }),
 };
 
-
 Object.entries(colors).forEach(([colorScheme, colorSchemeColors]) => {
   Object.entries(colorSchemeColors).forEach(([name, values]) => {
     fs.mkdirSync(`../colors/${colorScheme}/${name}`, { recursive: true });
@@ -70,4 +69,64 @@ const colorsFileColors =
 const colorsFileContent = prettier.format(`module.exports = { ${colorsFileColors} };`, { parser: "babel" });
 
 fs.writeFileSync(`../colors/index.js`, colorsFileContent);
+
+/**
+ * Now we generate the JS file itself that can be used to access colors programatically.
+ */
+
+const colorsGleamHeader = `
+import gleam_cummunity/colour
+
+type ColorScale {
+  ColorScale(
+    bg: colour.Color,
+    bg_subtle: colour.Color,
+    tint: colour.Color,
+    tint_subtle: colour.Color,
+    tint_strong: colour.Color,
+    accent: colour.Color,
+    accent_subtle: colour.Color,
+    accent_strong: colour.Color,
+    solid: colour.Color,
+    solid_subtle: colour.Color,
+    solid_strong: colour.Color,
+    solid_text: colour.Color,
+    text: colour.Color,
+    text_subtle: colour.Color,
+  )
+}
+
+`;
+
+const colorsGleam =
+  Object.entries(colors).reduce((acc, [colorScheme, colorSchemeColors]) => {
+    return Object.entries(colorSchemeColors).reduce((acc, [name, values]) => {
+      return `${acc}
+      pub const ${toGleamColorName(name, colorScheme)} = ${toGleamColorScale(values)})
+      `;
+    }, acc);
+  }, colorsGleamHeader);
+
+function toGleamColorName(name, colorScheme) {
+  return colorScheme === "light" ? name : `${name}_${colorScheme}`;
+}
+
+function toGleamColorScale(values) {
+  const valuesString = Object.entries(values.channels).reduce((acc, [name, value]) => {
+    return `${acc}
+      ${name.replace("-", "_")}: ${toGleamColor(value)},
+    `;
+  }, "");
+
+  return `ColorScale(
+    ${valuesString}
+  )`;
+}
+
+function toGleamColor([r, g, b]) {
+  return `colour.from_rgb(${r}, ${g}, ${b})`;
+}
+
+
+fs.writeFileSync("../colors/colors.gleam", colorsGleam);
 

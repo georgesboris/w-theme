@@ -157,7 +157,7 @@ debuggerStylesheet.innerHTML = `
   letter-spacing: 0.1em;
   padding: 0.25rem 0.5rem;
 }
-.w-debugger-token { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.25rem 0.5rem; font-weight: 700; border-top: 1px solid rgb(var(--w-base-detail-subtle)); }
+.w-debugger-token { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.25rem 0.5rem; font-weight: 700; border-top: 1px solid rgb(var(--w-base-accent-subtle)); }
 .w-debugger-token::after { display: block; font-weight: 400; color: rgb(var(--w-base-text-subtle)); }
 ${debuggerTokensContentStyles}
 `;

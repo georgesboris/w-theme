@@ -68,9 +68,9 @@ const colorVariants = [
   ["tint", "tint"],
   ["tint-subtle", "tint-subtle"],
   ["tint-strong", "tint-strong"],
-  ["detail", "detail"],
-  ["detail-subtle", "detail-subtle"],
-  ["detail-strong", "detail-strong"],
+  ["accent", "accent"],
+  ["accent-subtle", "accent-subtle"],
+  ["accent-strong", "accent-strong"],
   ["solid", "solid"],
   ["solid-subtle", "solid-subtle"],
   ["solid-strong", "solid-strong"],
@@ -185,7 +185,6 @@ module.exports = {
     const strictTextColors = options.strictTextColors ?? true;
     const strictSpacing = options.strictSpacing ?? false;
     const useSpacing = options.useSpacing ?? false;
-
 
     const textColor = strictTextColors ? { textColor: textColors } : {};
     const textColorExtended = strictTextColors ? {} : { textColor: textColors };

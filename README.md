@@ -111,11 +111,11 @@ Each color is defined using a scale with 12 steps.
 - **tint-subtle** — subtler variation, useful for "pressed" states.
 - **tint-strong** — stronger variation, useful for "hovered" states.
 
-#### Detail
+#### Accent
 
-- **detail** — useful for dividers, borders and other small UI elements.
-- **detail-subtle** — subtle variation, useful for "pressed" states.
-- **detail-strong** — stronger variation, useful for "hovered" states.
+- **accent** — useful for dividers, borders and other small UI elements.
+- **accent-subtle** — subtle variation, useful for "pressed" states.
+- **accent-strong** — stronger variation, useful for "hovered" states.
 
 #### Solid
 
@@ -130,22 +130,22 @@ Each color is defined using a scale with 12 steps.
 - **text-subtle** — subtler variation for secondary text.
 
 Both **text colors** are guaranteed to be **accessible** over any **background** and **tint** colors.
-**Detail** colors are not made for background usage, they should be used for single color elements.
+**Accent** colors are not made for background usage, they should be used for single color elements.
 **Solid** colors should use **solid-text** as it's text color for proper accessibility.
 
-<details>
+<accents>
 <summary>Our color scale was largely inspired by radix-colors, see the differences.</summary>
 
 Radix Colors are built using a 1-12 scale with semantic meaning given through [documentation](https://www.radix-ui.com/colors).
 
 - We prefer semantic names are used instead of their number based naming.
-- We prefer consistency across the main color spaces, so our **tint**, **detail** and **solid** colors have the same tones available.
+- We prefer consistency across the main color spaces, so our **tint**, **accent** and **solid** colors have the same tones available.
 - We included the contrasting `solid-text` into our scale, instead of relying on [different implied values for some colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale#steps-910-solid-backgrounds).
 - We 
 - `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
 - `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used.
 
-</details>
+</accents>
 
 ## Font Families
 
@@ -310,7 +310,7 @@ When using our `setTheme` function you also get the benefit of a few utilities l
 - Set `code` element use 
 - Selectors `[data-w-palette="primary"], .w-primary` to automatically apply a few palette related styles to their children:
   - `background-color` will be set to the tinted color
-  - `border-color` will be set to the `detail` color
+  - `border-color` will be set to the `accent` color
   - `color` will be set to the related variant
   -  `:hover, :active` will change background to strong and subtle
 - Previous selectors plus `.w-solid` will automatically apply:
