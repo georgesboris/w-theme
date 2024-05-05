@@ -236,7 +236,7 @@ Both **text colors** are guaranteed to be **accessible** over any **background**
 **Accent** colors are not made for background usage, they should be used for single color elements.
 **Solid** colors should use **solid-text** as it's text color for proper accessibility.
 
-> [!Note]
+> [!TIP]
 > We use "color channels" on our CSS variable colors instead of a defined color space. So we can:
 > - Create transparent variations of any colors like this `rgb(--var(--w-base-bg) / 0.5)`
 > - Be [tailwindcss compatible]() so you can use their colors using tailwind's opacity functions `bg-primary/50`
@@ -245,18 +245,15 @@ Both **text colors** are guaranteed to be **accessible** over any **background**
 > - ```rgb(--var(--w-primary-solid))```
 > - Or ```rgb(--var(--w-primary-solid) / 0.5)```
 
-<details>
-<summary>Our color scale was largely inspired by radix-colors, see the differences.</summary>
-
-Radix Colors are built using a 1-12 scale with semantic meaning given through [documentation](https://www.radix-ui.com/colors).
-
-- We prefer semantic names are used instead of their number based naming.
-- We prefer consistency across the main color spaces, so our **tint**, **accent** and **solid** colors have the same tones available.
-- We included the contrasting `solid-text` into our scale, instead of relying on [different implied values for some colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale#steps-910-solid-backgrounds).
-- We 
-- `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
-- `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used.
-</details>
+> [!NOTE]
+> Our color scale was largely inspired by [radix-colors](https://www.radix-ui.com/colors). Do you want to know what are the differences?
+> Their colors are built using a 1-12 scale with semantic meaning given through documentation.
+>
+> - Semantic names are used instead of their number based naming.
+> - We ensure consistency across the main color spaces, so our **tint**, **accent** and **solid** colors have the same tones available.
+> - We included the contrasting `solid-text` into our scale, instead of relying on [different implied values for some colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale#steps-910-solid-backgrounds).
+> - `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
+> - `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used. 
 
 ## Font Families
 
