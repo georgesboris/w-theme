@@ -19,8 +19,8 @@
   },
   "scripts": {
     "build": "npm run build:lib && npm run build:debugger",
-    "build:lib": "esbuild ./src/index.js --bundle --format=esm --outdir=dist",
-    "build:debugger": "esbuild ./src/debugger --bundle --outdir=dist"
+    "build:lib": "esbuild ./src/index.js --bundle --minify --format=esm --outdir=dist",
+    "build:debugger": "esbuild ./src/debugger --minify --bundle --outdir=dist"
   },
   "keywords": [
     "theme",
