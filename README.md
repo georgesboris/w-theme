@@ -11,11 +11,11 @@
     - [Color Scale](#color-scale)
   - [Font Families](#font-families)
   - [Spacing](#spacing)
-  - [Border Radius](border-radius)
+  - [Border Radius](#border-radius)
 - [Javascript API](#javascript-api)
   - [Using built-in colors](#using-built-in-colors)
-  - [Generating color scales](#generating-color-scales)
   - [Defining custom color scales](#defining-custom-color-scales)
+  - [Generating color scales](#generating-color-scales)
   - [Generating spacing and border radius values](#generating-spacing-and-border-radius-values)
   - [Base Styles](#base-styles)
 - [Theme Sampler](#theme-sampler)
@@ -34,7 +34,6 @@
 
 While `w-theme` is just a schema, there is tooling and libraries that rely on a specific implementation of this schema through CSS variables.
 
-This is a sample of the schema CSS variables, you can see a complete example [here](#TODO).
 
 ```css
 :root {
@@ -45,6 +44,136 @@ This is a sample of the schema CSS variables, you can see a complete example [he
   --w-radius-xs: 0.1rem;
 }
 ```
+
+<details>
+  <summary>This is a sample of the schema CSS variables, you can see a complete example here.</summary>
+
+```css
+:root {
+  /* defining color schema is important for controlling native browser widgets */
+  color-schema: light;
+
+  /* the id variable is used for w-theme debugger */
+  --w-id: "my theme";
+
+  /* Font Family Variables */
+  --w-font-heading: serif; 
+  --w-font-text: sans-serif; 
+  --w-font-code: monospace; 
+
+  /* Spacing and Border Radius variables follow a "size scale" that is tailwind compatible */
+
+	--w-spacing-xs: 0.25rem;
+	--w-spacing-sm: 0.5rem;
+	--w-spacing-md: 0.75rem;
+	--w-spacing-lg: 1rem;
+	--w-spacing-xl: 1.5rem;
+	--w-spacing-2xl: 2.5rem;
+	--w-spacing-3xl: 4rem;
+
+	--w-radius-xs: 0.125rem;
+	--w-radius-sm: 0.25rem;
+	--w-radius-md: 0.375rem;
+	--w-radius-lg: 0.5rem;
+	--w-radius-xl: 0.75rem;
+	--w-radius-2xl: 1rem;
+	--w-radius-3xl: 1.5rem;
+
+  /* Each variant of our palette follows a "color scale" that is inspired by radix-ui */
+
+	--w-base-bg: 252 252 253;
+	--w-base-bg-subtle: 249 249 251;
+	--w-base-tint: 232 232 236;
+	--w-base-tint-subtle: 240 240 243;
+	--w-base-tint-strong: 224 225 230;
+	--w-base-accent: 205 206 214;
+	--w-base-accent-subtle: 217 217 224;
+	--w-base-accent-strong: 185 187 198;
+	--w-base-solid: 139 141 152;
+	--w-base-solid-subtle: 150 152 162;
+	--w-base-solid-strong: 128 131 141;
+	--w-base-solid-text: 255 255 255;
+	--w-base-text-subtle: 96 100 108;
+	--w-base-text: 28 32 36;
+
+	--w-primary-bg: 251 253 255;
+	--w-primary-bg-subtle: 244 250 255;
+	--w-primary-tint: 213 239 255;
+	--w-primary-tint-subtle: 230 244 254;
+	--w-primary-tint-strong: 194 229 255;
+	--w-primary-accent: 142 200 246;
+	--w-primary-accent-subtle: 172 216 252;
+	--w-primary-accent-strong: 94 177 239;
+	--w-primary-solid: 0 144 255;
+	--w-primary-solid-subtle: 5 148 260;
+	--w-primary-solid-strong: 5 136 240;
+	--w-primary-solid-text: 255 255 255;
+	--w-primary-text-subtle: 13 116 206;
+	--w-primary-text: 17 50 100;
+
+	--w-secondary-bg: 255 252 254;
+	--w-secondary-bg-subtle: 254 247 251;
+	--w-secondary-tint: 251 220 239;
+	--w-secondary-tint-subtle: 254 233 245;
+	--w-secondary-tint-strong: 246 206 231;
+	--w-secondary-accent: 231 172 208;
+	--w-secondary-accent-subtle: 239 191 221;
+	--w-secondary-accent-strong: 221 147 194;
+	--w-secondary-solid: 214 64 159;
+	--w-secondary-solid-subtle: 220 72 166;
+	--w-secondary-solid-strong: 207 56 151;
+	--w-secondary-solid-text: 255 255 255;
+	--w-secondary-text-subtle: 194 41 138;
+	--w-secondary-text: 101 18 73;
+
+	--w-success-bg: 251 254 252;
+	--w-success-bg-subtle: 244 251 246;
+	--w-success-tint: 214 241 223;
+	--w-success-tint-subtle: 230 246 235;
+	--w-success-tint-strong: 196 232 209;
+	--w-success-accent: 142 206 170;
+	--w-success-accent-subtle: 173 221 192;
+	--w-success-accent-strong: 91 185 139;
+	--w-success-solid: 48 164 108;
+	--w-success-solid-subtle: 53 173 115;
+	--w-success-solid-strong: 43 154 102;
+	--w-success-solid-text: 255 255 255;
+	--w-success-text-subtle: 33 131 88;
+	--w-success-text: 25 59 45;
+
+	--w-warning-bg: 253 253 249;
+	--w-warning-bg-subtle: 254 252 233;
+	--w-warning-tint: 255 243 148;
+	--w-warning-tint-subtle: 255 250 184;
+	--w-warning-tint-strong: 255 231 112;
+	--w-warning-accent: 228 199 103;
+	--w-warning-accent-subtle: 243 215 104;
+	--w-warning-accent-strong: 213 174 57;
+	--w-warning-solid: 255 230 41;
+	--w-warning-solid-subtle: 255 234 82;
+	--w-warning-solid-strong: 255 220 0;
+	--w-warning-solid-text: 71 59 31;
+	--w-warning-text-subtle: 158 108 0;
+	--w-warning-text: 71 59 31;
+
+	--w-danger-bg: 255 252 252;
+	--w-danger-bg-subtle: 255 247 247;
+	--w-danger-tint: 255 219 220;
+	--w-danger-tint-subtle: 254 235 236;
+	--w-danger-tint-strong: 255 205 206;
+	--w-danger-accent: 244 169 170;
+	--w-danger-accent-subtle: 253 189 190;
+	--w-danger-accent-strong: 235 142 144;
+	--w-danger-solid: 229 72 77;
+	--w-danger-solid-subtle: 236 83 88;
+	--w-danger-solid-strong: 220 62 66;
+	--w-danger-solid-text: 255 255 255;
+	--w-danger-text-subtle: 206 44 49;
+	--w-danger-text: 100 23 35;
+}
+```
+
+</details>
 
 > [!Note]
 > We use "color channels" on our CSS variable colors instead of a defined color space. So we can:
@@ -199,7 +328,7 @@ npm i -D w-theme
 
 #### Using built-in colors
 
-The quickest way to create a theme is to use one of our [built-in colors](https://github.com/georgesboris/w-theme/tree/main/colors/light).
+The quickest way to create a theme is to use one of our [built-in colors](https://github.com/georgesboris/w-theme/tree/main/src/w/colors.js).
 
 ```js
 import wt from "w-theme"
@@ -219,6 +348,21 @@ wt.setTheme(theme);
 // grab theme CSS content and apply it to other elements (e.g. through a class)
 wt.getCSSVariables(theme);
 ```
+#### Defining custom color scales
+
+You can also bypass our colors completely and pass in your custom color scale.
+
+```js
+import wt from "w-theme"
+
+const theme = wt.theme({
+  primary: {
+    bg: "#fff"
+    "bg-subtle": "#fafafa",
+    ...
+  },
+})
+```
 
 #### Generating color scales
 
@@ -234,22 +378,6 @@ import wt from "w-theme"
 const theme = wt.theme({
   primary: "#0A4",
   secondary: "rgb(0, 200, 100)"
-})
-```
-
-#### Defining custom color scales
-
-You can also bypass our colors completely and pass in your custom color scale.
-
-```js
-import wt from "w-theme"
-
-const theme = wt.theme({
-  primary: {
-    bg: "#fff"
-    "bg-subtle": "#fafafa",
-    ...
-  },
 })
 ```
 

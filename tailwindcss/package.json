@@ -1,7 +1,7 @@
 {
-  "name": "elm-theme-tailwindcss",
-  "version": "3.0.0",
-  "description": "Use elm-theme with tailwindcss.",
+  "name": "w-theme-tailwindcss",
+  "version": "1.0.0",
+  "description": "Use w-theme with tailwindcss.",
   "main": "index.js",
   "author": "Georges Boris",
   "license": "MPL-2.0",
