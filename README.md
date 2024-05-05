@@ -2,24 +2,6 @@
 
 > A theme schema designed for consistency and flexibility with support for light and dark modes.
 
-> [!Note]
-> You can check our `/example` folder for a working project using our tailwind plugin.
->
-> We're currently in the last steps of w-theme development. This is our todo list:
-> - [ ] Publish on NPM
->   - Needed to properly test tailwind integration
-> - [ ] Finalize our Tailwind plugin and it's docs
->   - Basically done, our `/example` folder uses it.
->   - Need to test through npm dependency, requiring a subpath, peer dependencies, etc
-> - [ ] Finalize our theme debugger
->   - Could use some love and right now it is not packaged as a web component, it is manually added to our example project.
-> - [ ] Finalize our theme sampler
->   - The idea here is to package the current "example" folder so all that markup is created through the theme sampler
-> - [ ] Generating colors
->   - We currently have scripts that generate colors through radix's colors and also through radix's custom CSS export
->   - The idea is to vendor that algorithm, add our small changes to the output and have it be accessed through our JS API
-
-
 ## Table of Contents
 
 - [Design Tokens](#design-tokens)
@@ -42,6 +24,7 @@
 - [Related Libraries](#related-libraries)
   - [Elm](#elm)
   - [Gleam](#gleam)
+- [Next Steps](#next-steps)
 
 
 
@@ -376,4 +359,16 @@ module.exports = {
 ### [Gleam](https://gleam.run)
 
 - **TBD** :detective:
+
+## Next Steps
+
+- [ ] Publish on NPM
+  - Needed to properly test tailwind integration
+- [ ] Finalize our theme debugger
+  - Could use some love and right now it is not packaged as a web component, it is manually added to our example project.
+- [ ] Finalize our theme sampler
+  - The idea here is to package the current "example" folder so all that markup is created through the theme sampler
+- [ ] Generating colors
+  - We currently have scripts that generate colors through radix's colors and also through radix's custom CSS export
+  - The idea is to vendor that algorithm, add our small changes to the output and have it be accessed through our JS API
 
