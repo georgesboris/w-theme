@@ -6,10 +6,6 @@
 > You can check our `/example` folder for a working project using our tailwind plugin.
 >
 > We're currently in the last steps of w-theme development. This is our todo list:
-> - [ ] Finalize Javascript API
->  - All parts are already there, just need to create the module that puts it all together in a clear API.
->  - Parts of the API are inside our color generation scripts, parts are inside our tailwind plugin.
->  - API is already exposed throughout this document.
 > - [ ] Publish on NPM
 >   - Needed to properly test tailwind integration
 > - [ ] Finalize our Tailwind plugin and it's docs

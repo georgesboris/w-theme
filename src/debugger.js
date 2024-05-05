@@ -13,19 +13,25 @@ function getThemes() {
 
   for (let s of document.styleSheets) {
     const isTheme = "wTheme" in s.ownerNode.dataset;
-
-    if (isTheme) {
-      for (let ruleset of s.cssRules) {
-        if (ruleset.style.getPropertyValue("--w-base-text")) {
-          cssRulesets.push(ruleset)
-        }
-      }
-    };
+    if (isTheme) { cssRulesets = cssRulesets.concat(findRulesets(s)); };
   }
 
   return cssRulesets.map(toThemeRecord);
 }
 
+function findRulesets(parent) {
+  let acc = [];
+
+  for (let ruleset of parent.cssRules) {
+    if (ruleset.type == 1 && ruleset.style.getPropertyValue("--w-base-text")) {
+      acc = acc.concat(ruleset)
+    } else if (ruleset.type == 4) {
+      acc = acc.concat(findRulesets(ruleset))
+    }
+  }
+
+  return acc;
+}
 
 function getSelectorClass(ruleset) {
   const selectorClassRegex = /\.((\w|\d|-|_)+)($|\,|\s|\{)/;
@@ -44,7 +50,7 @@ function toThemeRecord(ruleset) {
   )
 
   const radius = Object.fromEntries(
-    w.radiusValues.map((c) => {
+    w.borderRadiusValues.map((c) => {
       const remValue = ruleset.style.getPropertyValue(c.css);
       const pxValue = css.remToPx(remValue);
 
@@ -62,7 +68,7 @@ function toThemeRecord(ruleset) {
   )
 
   const fonts = Object.fromEntries(
-    w.fontValues.map((c) =>
+    w.fontFamilyValues.map((c) =>
       ([ruleset.style.getPropertyValue(c.css), c])
     )
   )
@@ -135,6 +141,7 @@ const debuggerTokensContentStyles = ["theme", "font", "text-color", "background"
 
 debuggerStylesheet.innerHTML = `
 .w-debugger {
+  visibility: var(--w-debugger-visibility, hidden);
   pointer-events: none;
   z-index: 9999;
   position: fixed;
@@ -245,6 +252,8 @@ window.addEventListener("mouseover", function(e) {
   if (theme) {
     debuggerElement.className = `w-debugger ${theme.selectorClass}`;
 
+    debuggerStyles.push(`--w-debugger-visibility: visible`);
+
     const alignTop = e.clientY / window.innerHeight < 0.5;
     const alignLeft = e.clientX / window.innerWidth > 0.5;
 
@@ -290,7 +299,7 @@ window.addEventListener("mouseover", function(e) {
     debuggerStyles.push(`--w-debugger-margin: "${themeMargin}"`);
   } else {
 
-    debuggerStyles.push(`--w-debugger-display: hidden`);
+    debuggerStyles.push(`--w-debugger-visibility: hidden`);
   }
 
   setDebuggerStyles(debuggerStyles);

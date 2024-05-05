@@ -1,9 +1,8 @@
 module.exports = function(config) {
   config.addPassthroughCopy({
     "./index.mjs": "index.mjs",
-    "./node_modules/w-theme/src/debugger.js": "/w-debugger.js",
-    "./node_modules/w-theme/src/index.js": "/w-theme.js",
-    "./node_modules/w-theme/src/w": "/w",
+    "./node_modules/w-theme/dist/debugger.js": "/w-debugger.js",
+    "./node_modules/w-theme/dist/index.js": "/w-theme.js",
   });
 
   config.addGlobalData("palette", async () => {
