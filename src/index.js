@@ -302,11 +302,11 @@ function setTheme(theme, options) {
 
   if (options?.darkModeTheme) {
     styles +=
-     (options.darkModeClass)
-       ? options.class
-         ? `.${options.darkModeClass} .${options.class}, ${options.class}.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }`
-         : `body.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }`
-       : `@media (prefers-color-scheme: dark) { body { ${getCSSVariables(options.darkModeTheme)} } }`
+      (options.darkModeClass)
+        ? options.class
+          ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }`
+          : `body.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }`
+        : `@media (prefers-color-scheme: dark) { body { ${getCSSVariables(options.darkModeTheme)} } }`
   }
 
   appendStyleElement(styles, (el) => el.setAttribute("data-w-theme", true));
@@ -342,18 +342,18 @@ function getCSSVariables(theme) {
 }
 
 function themeIdAndColorSchemeVars(theme) {
-  return  [
+  return [
     ["color-scheme", theme.colorScheme],
     [varId("id"), theme.id],
   ];
 }
 
 function toCssVars(values, themeValues) {
-  return values.map(({id, cssId}) => [cssId, themeValues[id]]);
+  return values.map(({ id, cssId }) => [cssId, themeValues[id]]);
 }
 
 function toCssVarsWithVariants(values, themeValues) {
-  return values.map(({variant, id, cssId}) => {
+  return values.map(({ variant, id, cssId }) => {
     return [cssId, themeValues[variant][id]];
   });
 }
@@ -365,34 +365,34 @@ function toCssVarsWithVariants(values, themeValues) {
  * }} options
  */
 function getCSSBaseStyles(options) {
-  let styles = `
-    body {
-      background: ${cssVar("base-bg")};
-      color: ${cssVar("base-text")};
-      font-family: ${cssVar("font-text")};
-    }
-    h1, h2, h3, h4, h5, h6 {
-      font-family: ${cssVar("font-heading")};
-    }
-    code {
-      font-family: ${cssVar("font-code")};
-    }
-  `;
+  let styles = [
+    "body {",
+    `  background: ${cssRGB("base-bg")};`,
+    `  color: ${cssRGB("base-text")};`,
+    `  font-family: ${cssRGB("font-text")};`,
+    "}",
+    "h1, h2, h3, h4, h5, h6 {",
+    `  font-family: ${cssRGB("font-heading")};`,
+    "}",
+    "code {",
+    `  font-family: ${cssRGB("font-code")};`,
+    "}"
+  ];
 
   if (options?.baseSelectors) {
     palette.forEach((variant) => {
-      styles += `
-        .bg-${variant}-solid, .bg-${variant}-solid-subtle, .bg-${variant}-solid-strong {
-          color: ${cssVar(variant + "-solid-text")};
-        }
-        .bg-${variant}, .bg-${variant}-subtle, .bg-${variant}-tint, .bg-${variant}-tint-subtle, .bg-${variant}-tint-strong,  {
-          color: ${cssVar(variant + "-text")};
-        }
-      `;
+      styles = styles.concat([
+        `.bg-${variant}-solid, .bg-${variant}-solid-subtle, .bg-${variant}-solid-strong {`,
+        `  color: ${cssRGB(variant + "-solid-text")};`,
+        "}",
+        `.bg-${variant}, .bg-${variant}-subtle, .bg-${variant}-tint, .bg-${variant}-tint-subtle, .bg-${variant}-tint-strong {`,
+        `  color: ${cssRGB(variant + "-text")};`,
+        "}"
+      ]);
     });
   }
 
-  return styles;
+  return styles.join("");
 }
 
 
@@ -406,6 +406,10 @@ function varId(id) {
 
 function cssVar(id) {
   return `var(${varId(id)})`;
+}
+
+function cssRGB(id) {
+  return `rgb(var(${varId(id)}))`;
 }
 
 /**

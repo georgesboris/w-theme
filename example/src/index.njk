@@ -9,81 +9,61 @@
   <body>
 
     <!-- theme sampler -->
-    <article class="p-xl bg-base-subtle">
-      <div class="p-xl bg-base rounded-2xl shadow-lg grid grid-cols-3 gap-lg">
+    {% for theme in ["theme", "theme dark"] %}
+      <article class="p-2xl bg-base-subtle flex justify-center {{ theme }}">
+        <div class="p-xl bg-base rounded-2xl shadow-lg space-y-md max-w-2xl">
 
-        <!-- header + code block -->
-        <div class="flex flex-col gap-lg">
+          <!-- header + code block -->
+          <div class="flex flex-col gap-lg">
 
-          <!-- header -->
-          <div>
-            <h1 class="text-xl">Theme Sample</h1>
-            <p class="text-subtle text-sm">All theme colors, fonts and border radius are displayed here.</p>
+            <!-- header -->
+            <div>
+              <h1 class="text-xl font-bold">w theme</h1>
+              <p class="text-subtle text-sm">A theme schema designed for consistency and flexibility.</p>
+            </div>
+
+
           </div>
 
-          <!-- code block -->
-          <div class="flex-grow rounded-lg p-lg overflow-auto border bg-base-tint border-base-accent-subtle">
-            <code>
-              <div>Use accessibility ratings for making sure your theme works for everyone.</div>
-              <div class="text-subtle">This is a subtle text but it is still quite readable, no?</div>
-            </code>
-          </div>
+          <!-- color samples -->
+          <div class="col-span-2 grid grid-cols-2 gap-lg">
+            {% for variant in palette %}
+              <article class="flex flex-col gap-md bg-{{variant}}-subtle border border-solid border-{{variant}}-tint p-md shadow shadow-{{variant}}-text-subtle rounded-md">
 
-          <!-- border radius -->
-          <div class="flex flex-col justify-stretch gap-xs">
-            <div class="h-xs rounded-sm bg-primary-solid"></div>
-            <div class="h-sm rounded bg-primary-solid"></div>
-            <div class="h-md rounded-md bg-primary-solid"></div>
-            <div class="h-lg rounded-lg bg-primary-solid"></div>
-            <div class="h-xl rounded-xl bg-primary-solid"></div>
-            <div class="h-2xl rounded-2xl bg-primary-solid"></div>
-            <div class="h-3xl rounded-3xl bg-primary-solid"></div>
-          </div>
+                <div class="grid grid-cols-5 items-center">
+                  <!-- heading -->
+                  <div class="col-span-3">
+                    <h1 class="text-xs text-left font-bold leading-none tracking-wide uppercase">{{variant}}</h1>
+                  </div>
 
-          <!-- border radius -->
-          <div class="flex gap-sm">
-            <div class="h-xs w-xs rounded-sm bg-primary-solid"></div>
-            <div class="h-sm w-sm rounded-sm bg-primary-solid"></div>
-            <div class="h-md w-md rounded bg-primary-solid"></div>
-            <div class="h-lg w-lg rounded-md bg-primary-solid"></div>
-            <div class="h-xl w-xl rounded-lg bg-primary-solid"></div>
-            <div class="h-2xl w-2xl rounded-xl bg-primary-solid"></div>
-            <div class="h-3xl w-3xl rounded-2xl bg-primary-solid"></div>
-            <div class="h-3xl w-3xl rounded-3xl bg-primary-solid"></div>
-          </div>
+                  <div class="col-span-2 grid grid-cols-2 gap-sm">
+                    <button class="text-sm tracking-wide transition rounded p-xs px-sm outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring ring-{{ variant }}-accent-subtle bg-{{ variant }}-tint hover:bg-{{ variant }}-tint active:bg-{{ variant }}-tint-subtle">
+                      A
+                    </button>
+                    <button class="text-sm tracking-wide transition rounded p-xs px-sm shadow outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring  ring-{{ variant }}-accent-subtle bg-{{ variant }}-solid hover:bg-{{ variant }}-solid-strong active:bg-{{ variant }}-solid-subtle shadow-{{ variant }}-accent">
+                      B
+                    </button>
+                  </div>
+                </div>
 
-        </div>
-
-        <!-- color samples -->
-        <div class="col-span-2 grid grid-cols-2 gap-lg">
-          {% for variant in palette %}
-            <article class="flex flex-col gap-sm text-center bg-{{variant}} border border-solid border-{{variant}}-tint-subtle p-lg shadow rounded-md">
-              <div class="grid grid-cols-4 items-center gap-sm">
-                <h1 class="text-xs text-left font-bold tracking-wide uppercase">{{variant}}</h1>
-                <div class="col-span-3 grid gap-sm" style="grid-template-columns:repeat(14,minmax(0,1fr))">
-                  {% for color in themes.colorSet %}
+                <div class="flex justify-between">
+                  {% for color in colorScale %}
                     <div
-                      class="aspect-square rounded-sm border border-solid"
-                      style="background:rgb(var(--w-{{ variant }}-{{ color }})); border-color:rgb(var(--w-{{ variant }}-tint))">
+                      class="w-lg h-lg rounded-full border border-2 border-base"
+                      style="background:rgb(var(--w-{{ variant }}-{{ color }}))">
                     </div>
                   {% endfor %}
                 </div>
-              </div>
-              <button class="transition p-sm px-md shadow outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring rounded ring-{{ variant }}-accent-subtle bg-{{ variant }}-solid hover:bg-{{ variant }}-solid-strong active:bg-{{ variant }}-solid-subtle shadow-{{ variant }}-accent">
-                Solid Button
-              </button>
-              <button class="transition rounded border-2 p-sm px-md outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring ring-{{ variant }}-accent-subtle text-{{ variant }} hover:bg-{{ variant }}-subtle border-{{ variant }}-accent strong:border-{{ variant }}-accent-strong active:border-{{ variant }}-accent-subtle">
-                Outline Button
-              </button>
-              <button class="transition rounded p-sm px-md outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring ring-{{ variant }}-accent-subtle bg-{{ variant }}-tint-subtle hover:bg-{{ variant }}-tint active:bg-{{ variant }}-tint-subtle">
-                Tinted Button
-              </button>
-            </article>
-          {% endfor %}
-        </div>
 
-      </div>
-    </article>
+              </article>
+
+
+            {% endfor %}
+          </div>
+
+        </div>
+      </article>
+    {% endfor %}
 
     <script type="module" src="/index.mjs"></script>
     <script type="module" src="/w-debugger.js"></script>

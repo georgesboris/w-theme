@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+  min-height: 100vh;
+}
+
+.w-sample-variant-hex::after {
+  display: inline-block;
+  content: var(--color);
+}
