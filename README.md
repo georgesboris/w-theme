@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="100%" src="https://github.com/georgesboris/w-theme/assets/3660797/b9ecd31e-b0c7-40b0-a5ee-fd2648cba1fc">
+</p>
+
 # w-theme
 
 > A theme schema designed for consistency and flexibility with support for light and dark modes.
@@ -410,33 +414,34 @@ const otherTheme = wt.theme({
 
 #### Base styles
 
-When using our `setTheme` function you also get the benefit of a few utilities like:
+The `setBaseStyles` function can be used for a few utilities like:
 
 - Set most elements to use `font-text` as font family
-- Set `h1, h2, h3, h4, h5, h6` elements use `font-heading`
-- Set `code` element use 
+- Set `h1, h2, h3, h4, h5, h6` elements to use `font-heading`
+- Set `code` element to use `font-code`
 - Selectors `[data-w-palette="primary"], .w-primary` to automatically apply a few palette related styles to their children:
   - `background-color` will be set to the tinted color
   - `border-color` will be set to the `accent` color
   - `color` will be set to the related variant
-  -  `:hover, :active` will change background to strong and subtle
+  -  if the class is added to an `a` or `button` tag, the `:hover, :active` will change background to `tint-strong` and `tint-subtle`
 - Previous selectors plus `.w-solid` will automatically apply:
   - `background` will be set to `solid`
   - `color` will be set to `solid-text`
-  - `:hover, :active` will change background to strong and subtle
+  - when appropriate, the `:hover, :active` will change background to `solid-strong` and `solid-subtle` colors
 
-You can disable all or some of these base styles by passing in a secondary object to the `setTheme` function:
+You can disable styles attributed base elements by passing in `base: false` in the options object.
+You can also disable the class related styles by passing in `selectors: false` to the options object.
 
 ```js
 import wt from "w-theme"
 
-wt.setTheme(myTheme, {
-  baseStyles: true,
-  baseSelectors: false
+wt.setBaseStyles({
+  base: true,
+  selectors: false
 })
 ```
 
-Also, you can get access to just these base styles through the `getCSSBaseStyles` function.
+Also, you can get access to just these base styles through the `getCSSBaseStyles` function, the same options apply.
 
 # Theme Sampler
 
@@ -444,7 +449,7 @@ We provide a web-component that can be placed anywhere in your application and i
 This is a great way to test out different themes or debug design token inheritance in real applications.
 
 > [!WARNING]
-> Work in progress…
+> Work in progress… you can see a standalone version of the theme sampler on our examples folder.
 
 # Theme Debugger
 
@@ -452,7 +457,7 @@ We provide a drop-in script that can be used to debug your design tokens on live
 This can be extremelly useful for debugging existing applications and visualizing design tokens live.
 
 > [!WARNING]
-> Work in progress…
+> Work in progress… the example page showcases the development version of our debugger.
 
 
 # Tailwind Plugin
@@ -473,8 +478,39 @@ module.exports = {
 }
 ```
 
-> [!WARNING]
-> Work in progress…
+Our tailwind plugin accepts the following options:
+
+```js
+const options = {
+  // disable tailwind's default colors, spacing and border radius
+  strict: false,
+  // disable tailwind's default spacing variables
+  strictSpacing: false,
+  // disable the usage of non-text colors as text colors
+  // (e.g. tint colors are not valid text colors)
+  strictTextColors: true, 
+  // add more color options to tailwind's color options
+  extraColors: {...},
+  // add base styles (e.g. body background color, text color, heading font families, etc.)
+  baseStyles: true,
+  // add base class styles (e.g. .w-primary and .w-primary-solid)
+  baseSelectors: true
+}
+
+module.exports = {
+  plugins: [
+    require("w-theme/tailwindcss")(options)
+  ]
+}
+```
+
+You can then use our variables as normal tailwind values like so:
+
+```html
+<button class="px-md py-sm bg-solid bg-solid-text hover:bg-solid-strong active:bg-solid-subtle">
+  ...
+</button>
+```
 
 ## Related Libraries
 
