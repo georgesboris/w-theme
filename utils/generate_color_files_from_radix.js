@@ -72,59 +72,65 @@ fs.writeFileSync(`../src/w/colors.js`, colorsFileContent);
  * Gleam Output
  */
 
-// const colorsGleamHeader = `
-// import gleam_cummunity/colour
+const colorsGleamHeader = `
+import gleam_community/colour
 
-// type ColorScale {
-//   ColorScale(
-//     bg: colour.Color,
-//     bg_subtle: colour.Color,
-//     tint: colour.Color,
-//     tint_subtle: colour.Color,
-//     tint_strong: colour.Color,
-//     accent: colour.Color,
-//     accent_subtle: colour.Color,
-//     accent_strong: colour.Color,
-//     solid: colour.Color,
-//     solid_subtle: colour.Color,
-//     solid_strong: colour.Color,
-//     solid_text: colour.Color,
-//     text: colour.Color,
-//     text_subtle: colour.Color,
-//   )
-// }
+fn color(r, g, b) {
+  let assert Ok(c) = colour.from_rgb255(r, g, b)
 
-// `;
+  c
+}
 
-// const colorsGleam =
-//   Object.entries(colors).reduce((acc, [colorScheme, colorSchemeColors]) => {
-//     return Object.entries(colorSchemeColors).reduce((acc, [name, values]) => {
-//       return `${acc}
-//       pub const ${toGleamColorName(name, colorScheme)} = ${toGleamColorScale(values)})
-//       `;
-//     }, acc);
-//   }, colorsGleamHeader);
+pub type ColorScale {
+  ColorScale(
+    bg: colour.Color,
+    bg_subtle: colour.Color,
+    tint: colour.Color,
+    tint_subtle: colour.Color,
+    tint_strong: colour.Color,
+    accent: colour.Color,
+    accent_subtle: colour.Color,
+    accent_strong: colour.Color,
+    solid: colour.Color,
+    solid_subtle: colour.Color,
+    solid_strong: colour.Color,
+    solid_text: colour.Color,
+    text: colour.Color,
+    text_subtle: colour.Color,
+  )
+}
 
-// function toGleamColorName(name, colorScheme) {
-//   return colorScheme === "light" ? name : `${name}_${colorScheme}`;
-// }
+`;
 
-// function toGleamColorScale(values) {
-//   const valuesString = Object.entries(values.channels).reduce((acc, [name, value]) => {
-//     return `${acc}
-//       ${name.replace("-", "_")}: ${toGleamColor(value)},
-//     `;
-//   }, "");
+const colorsGleam =
+  Object.entries(colors).reduce((acc, [colorScheme, colorSchemeColors]) => {
+    return Object.entries(colorSchemeColors).reduce((acc, [name, values]) => {
+      return `${acc}
+      pub fn ${toGleamColorName(name, colorScheme)}() { ${toGleamColorScale(values)} }
+      `;
+    }, acc);
+  }, colorsGleamHeader);
 
-//   return `ColorScale(
-//     ${valuesString}
-//   )`;
-// }
+function toGleamColorName(name, colorScheme) {
+  return colorScheme === "light" ? name : `${name}_${colorScheme}`;
+}
 
-// function toGleamColor([r, g, b]) {
-//   return `colour.from_rgb(${r}, ${g}, ${b})`;
-// }
+function toGleamColorScale(values) {
+  const valuesString = Object.entries(values.channels).reduce((acc, [name, value]) => {
+    return `${acc}
+      ${name.replace("-", "_")}: ${toGleamColor(value)},
+    `;
+  }, "");
+
+  return `ColorScale(
+    ${valuesString}
+  )`;
+}
+
+function toGleamColor([r, g, b]) {
+  return `color(${r}, ${g}, ${b})`;
+}
 
 
-// fs.writeFileSync(`${BASE_DIR}/colors.gleam`, colorsGleam);
+fs.writeFileSync(`../src/w/colors.gleam`, colorsGleam);
 

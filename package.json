@@ -5,11 +5,14 @@
   "author": "Georges Boris",
   "license": "MPL-2.0",
   "homepage": "https://github.com/georgesboris/w-theme#readme",
-  "main": "dist/index.js",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/georgesboris/w-theme.git"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    "./": "./dist/"
   },
   "bugs": {
     "url": "https://github.com/georgesboris/w-theme/issues"

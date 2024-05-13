@@ -131,7 +131,15 @@ function parseColorsHex(lines) {
 }
 
 function toColorChannels(hex) {
-  return (new Color(hex)).srgb.map(x => Math.floor(x * 255));
+  return colorChannelsFromColor(new Color(hex))
+}
+
+function colorChannelsFromColor(color) {
+  return color.srgb.map(x =>
+    (x >= 0.0)
+      ? Math.floor(x * 255)
+      : Math.floor((1 + x) * 255)
+  );
 }
 
 function colorFromChannels(channels) {
@@ -145,9 +153,9 @@ function toSolidSubtle(solidChannels, solidStrongChannels) {
   const sDiff = solidStrong.hsl.s - solid.hsl.s;
   const lDiff = solidStrong.hsl.l - solid.hsl.l;
 
-  const solidSubtle = new Color("hsl", [solid.hsl.h, solid.hsl.s - sDiff, solid.hsl.l - lDiff]);
+  const solidSubtle = new Color("hsl", [solid.hsl.h, Math.max(0, solid.hsl.s - sDiff), Math.max(0, solid.hsl.l - lDiff)]);
 
-  return toColorChannels(solidSubtle);
+  return colorChannelsFromColor(solidSubtle);
 }
 
 function rgbFromChannels([r, g, b]) {

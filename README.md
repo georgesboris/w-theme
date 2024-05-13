@@ -261,12 +261,21 @@ Both **text colors** are guaranteed to be **accessible** over any **background**
 
 ## Font Families
 
-> [!NOTE]
-> Docs in progress…
+Not a lot to cover regarding our font family tokens. You can define then with fallback values, just like you would when defining the [font-family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family) css property.
 
-- Heading
-- Text
-- Code
+```yaml
+- heading
+- text
+- code
+```
+
+> ![NOTE]
+> **Why no font size tokens?**
+>
+> Font sizes (and related values like line heights, tracking, …) do not have a one-size-fits-all solution.
+> Therefore, we decided to leave that up to the higher level framework that is using **w-theme** for it's design tokens.
+> For example, if you're using [TailwindCSS](https://tailwindcss.com/docs/font-size) you can use their default font size classes.
+> While if you're using [elm-widgets](https://package.elm-lang.org/packages/georgesboris/elm-widgets/latest/) you might want to use the size properties of widgets like `W.Text` and `W.Heading`.
 
 ## Spacing
 
@@ -276,6 +285,7 @@ Also, you can even play around with base font values across different pages of y
 The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/customizing-spacing).
 The idea of using naming based values instead of number based is that you can even integrate w-theme with tailwind and still be able to use both scales interchangeably (e.g `p-4 m-sm`)
 
+```yaml
 - xs
 - sm
 - md
@@ -283,6 +293,7 @@ The idea of using naming based values instead of number based is that you can ev
 - xl
 - 2xl
 - 3xl
+````
 
 ## Border Radius
 

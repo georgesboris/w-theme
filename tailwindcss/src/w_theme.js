@@ -122,13 +122,42 @@ const textColors = colorVariables.reduce((acc, variable) => {
  * Text Components (default color inside backgrounds)
  */
 
-const colorComponents = colorVariables.reduce((acc, variable) => {
-  acc[`.bg-${variable}-solid, .bg-${variable}-solid-subtle, .bg-${variable}-solid-strong`] = {
-    color: rawColorCssVar(`${variable}-solid-text`)
+const colorComponents = colorVariables.reduce((acc, variant) => {
+  acc[`.w-${variant}`] = {
+    backgroundColor: rawColorCssVar(`${variant}-tint`),
+    borderColor: rawColorCssVar(`${variant}-detail`),
+    color: rawColorCssVar(`${variant}-text`),
   };
 
-  acc[`.bg-${variable}, .bg-${variable}-subtle, .bg-${variable}-tint, .bg-${variable}-tint-subtle, .bg-${variable}-tint-strong`] = {
-    color: rawColorCssVar(`${variable}-text`)
+  acc[`.w-${variant}.w-solid`] = {
+    backgroundColor: rawColorCssVar(`${variant}-solid`),
+    color: rawColorCssVar(`${variant}-solid-text`),
+  };
+
+  // `.w-${variant} {`,
+  // `  background-color: ${cssRGB(variant + "-tint")};`,
+  // `  border-color: ${cssRGB(variant + "-detail")};`,
+  // `  color: ${cssRGB(variant + "-text")};`,
+  // "}",
+  // `a.w-${variant}:hover, button.w-${variant}:hover, input[type="submit"].w-${variant}:hover {`,
+  // `  background-color: ${cssRGB(variant + "-tint-strong")};`,
+  // "}",
+  // `a.w-${variant}:active, button.w-${variant}:active, input[type="submit"].w-${variant}:active {`,
+  // `  background-color: ${cssRGB(variant + "-tint-subtle")};`,
+  // "}",
+  // `.w-${variant}.w-solid {`,
+  // `  background-color: ${cssRGB(variant + "-solid")};`,
+  // `  border-color: ${cssRGB(variant + "-detail")};`,
+  // `  color: ${cssRGB(variant + "-solid-text")};`,
+  // "}",
+
+
+  acc[`.bg-${variant}-solid, .bg-${variant}-solid-subtle, .bg-${variant}-solid-strong`] = {
+    color: rawColorCssVar(`${variant}-solid-text`)
+  };
+
+  acc[`.bg-${variant}, .bg-${variant}-subtle, .bg-${variant}-tint, .bg-${variant}-tint-subtle, .bg-${variant}-tint-strong`] = {
+    color: rawColorCssVar(`${variant}-text`)
   };
 
   return acc;

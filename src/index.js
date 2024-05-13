@@ -126,14 +126,14 @@ const palette = [
 const colorScale = [
   "bg",
   "bg-subtle",
-  "tint",
   "tint-subtle",
+  "tint",
   "tint-strong",
-  "accent",
   "accent-subtle",
+  "accent",
   "accent-strong",
-  "solid",
   "solid-subtle",
+  "solid",
   "solid-strong",
   "solid-text",
   "text-subtle",
@@ -315,7 +315,8 @@ function setTheme(theme, options) {
 /**
  * Applies theme base styles.
  * @param {?{
- *   baseSelectors?: bool
+ *   base?: bool,
+ *   selectors?: bool
  * }} options
  */
 function setBaseStyles(options) {
@@ -361,27 +362,61 @@ function toCssVarsWithVariants(values, themeValues) {
 /**
  * Get the CSS definitions for the base styles of a theme.
  * @param {?{
- *   baseSelectors?: bool
+ *   base?: bool,
+ *   selectors?: bool
  * }} options
  */
 function getCSSBaseStyles(options) {
-  let styles = [
-    "body {",
-    `  background: ${cssRGB("base-bg")};`,
-    `  color: ${cssRGB("base-text")};`,
-    `  font-family: ${cssRGB("font-text")};`,
-    "}",
-    "h1, h2, h3, h4, h5, h6 {",
-    `  font-family: ${cssRGB("font-heading")};`,
-    "}",
-    "code {",
-    `  font-family: ${cssRGB("font-code")};`,
-    "}"
-  ];
+  const setBase = options?.base ?? true;
+  const setSelectors = options?.selectors ?? true;
 
-  if (options?.baseSelectors) {
+  let styles = [];
+
+  if (setBase) {
+    styles = styles.concat(
+      [
+        "body {",
+        `  background: ${cssRGB("base-bg")};`,
+        `  color: ${cssRGB("base-text")};`,
+        `  font-family: ${cssRGB("font-text")};`,
+        "}",
+        "h1, h2, h3, h4, h5, h6 {",
+        `  font-family: ${cssRGB("font-heading")};`,
+        "}",
+        "code {",
+        `  font-family: ${cssRGB("font-code")};`,
+        "}"
+      ]
+    )
+  }
+
+  if (setSelectors) {
     palette.forEach((variant) => {
       styles = styles.concat([
+        `.w-${variant} {`,
+        `  background-color: ${cssRGB(variant + "-tint")};`,
+        `  border-color: ${cssRGB(variant + "-accent")};`,
+        `  color: ${cssRGB(variant + "-text")};`,
+        "}",
+        `a.w-${variant}:hover, button.w-${variant}:hover, input[type="submit"].w-${variant}:hover {`,
+        `  background-color: ${cssRGB(variant + "-tint-strong")};`,
+        "}",
+        `a.w-${variant}:active, button.w-${variant}:active, input[type="submit"].w-${variant}:active {`,
+        `  background-color: ${cssRGB(variant + "-tint-subtle")};`,
+        "}",
+        `.w-${variant}.w-solid {`,
+        `  background-color: ${cssRGB(variant + "-solid")};`,
+        `  color: ${cssRGB(variant + "-solid-text")};`,
+        "}",
+        `a.w-${variant}.w-solid:hover, button.w-${variant}.w-solid:hover, input[type="submit"].w-${variant}.w-solid:hover {`,
+        `  background-color: ${cssRGB(variant + "-solid-strong")};`,
+        "}",
+        `a.w-${variant}.w-solid:active, button.w-${variant}.w-solid:active, input[type="submit"].w-${variant}.w-solid:active  {`,
+        `  background-color: ${cssRGB(variant + "-solid-subtle")};`,
+        "}",
+        `.w-${variant} {`,
+        `  color: ${cssRGB(variant + "-text")};`,
+        "}",
         `.bg-${variant}-solid, .bg-${variant}-solid-subtle, .bg-${variant}-solid-strong {`,
         `  color: ${cssRGB(variant + "-solid-text")};`,
         "}",
