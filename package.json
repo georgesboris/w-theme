@@ -31,10 +31,11 @@
     "variables",
     "design",
     "system",
-    "design",
     "tokens",
     "elm",
-    "elm-widgets"
+    "elm-widgets",
+    "gleam",
+    "lustre"
   ],
   "devDependencies": {
     "esbuild": "^0.20.2"
