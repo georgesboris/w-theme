@@ -1,12 +1,15 @@
 import w from "./index.js";
 import * as css from "./w/css.js";
 
+const themes = getThemes();
+
+window.addEventListener("mouseover", onMouseOver);
+
 /**
  * Page Themes
  * Look for theme variables on data-w-theme style elements.
  */
 
-const themes = getThemes();
 
 function getThemes() {
   let cssRulesets = [];
@@ -40,18 +43,17 @@ function getSelectorClass(ruleset) {
 
 function toThemeRecord(ruleset) {
   const selectorClass = getSelectorClass(ruleset);
-
   const title = ruleset.style.getPropertyValue("--w-theme-id") || ruleset.selectorText;
 
   const colors = Object.fromEntries(
     w.colorValues.map((c) =>
-      ([ruleset.style.getPropertyValue(c.css), c])
+      ([ruleset.style.getPropertyValue(c.cssId), c])
     )
   )
 
   const radius = Object.fromEntries(
     w.borderRadiusValues.map((c) => {
-      const remValue = ruleset.style.getPropertyValue(c.css);
+      const remValue = ruleset.style.getPropertyValue(c.cssId);
       const pxValue = css.remToPx(remValue);
 
       return [pxValue, { ...c, remValue }]
@@ -60,7 +62,7 @@ function toThemeRecord(ruleset) {
 
   const spacing = Object.fromEntries(
     w.spacingValues.map((c) => {
-      const remValue = ruleset.style.getPropertyValue(c.css);
+      const remValue = ruleset.style.getPropertyValue(c.cssId);
       const pxValue = css.remToPx(remValue);
 
       return [pxValue, { ...c, remValue }]
@@ -69,7 +71,7 @@ function toThemeRecord(ruleset) {
 
   const fonts = Object.fromEntries(
     w.fontFamilyValues.map((c) =>
-      ([ruleset.style.getPropertyValue(c.css), c])
+      ([ruleset.style.getPropertyValue(c.cssId), c])
     )
   )
 
@@ -149,10 +151,10 @@ debuggerStylesheet.innerHTML = `
   bottom: var(--w-debugger-bottom);
   left: var(--w-debugger-left);
   right: var(--w-debugger-right);
-  background: rgb(var(--w-base-bg));
+  background: rgb(var(--w-base-bg, 255 255 255));
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   font-size: 0.8rem;
-  color: rgb(var(--w-base-text));
+  color: rgb(var(--w-base-text, 20 20 20));
   line-height: 1.2em;
   padding: 0;
   margin: 0.5rem;
@@ -186,7 +188,7 @@ function setDebuggerStyles(cssVars) {
  * Debugger : Element Hover
  */
 
-window.addEventListener("mouseover", function(e) {
+function onMouseOver(e) {
   const elementStyles = window.getComputedStyle(e.target);
 
   /**
@@ -303,7 +305,7 @@ window.addEventListener("mouseover", function(e) {
   }
 
   setDebuggerStyles(debuggerStyles);
-});
+};
 
 function toColorDebugValue(color) {
   return color ? `${color.variant} ${color.id}` : "";
