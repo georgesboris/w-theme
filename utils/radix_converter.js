@@ -48,6 +48,7 @@ function colorsFromRadixList(colorsHex, colorScheme = "light") {
   }
 
   const solidSubtle = toSolidSubtle(solid, solidStrong);
+  const shadow = colorScheme == "light" ? textSubtle : toColorChannels("#000000");
 
   return {
     "bg": bg,
@@ -64,6 +65,7 @@ function colorsFromRadixList(colorsHex, colorScheme = "light") {
     "solid-text": solidText,
     "text-subtle": textSubtle,
     "text": text,
+    "shadow": shadow
   };
 }
 
@@ -83,6 +85,7 @@ function toRGB(colorChannels) {
     "solid-text": rgbFromChannels(colorChannels["solid-text"]),
     "text-subtle": rgbFromChannels(colorChannels["text-subtle"]),
     "text": rgbFromChannels(colorChannels["text"]),
+    "shadow": rgbFromChannels(colorChannels["shadow"]),
   };
 }
 
@@ -102,6 +105,7 @@ function toCSSVariables(colorChannels) {
     "--w-solid-text": rgbFromChannels(colorChannels["solid-text"]),
     "--w-text-subtle": rgbFromChannels(colorChannels["text-subtle"]),
     "--w-text": rgbFromChannels(colorChannels["text"]),
+    "--w-shadow": rgbFromChannels(colorChannels["shadow"]),
   };
 }
 

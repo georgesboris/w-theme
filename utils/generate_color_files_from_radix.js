@@ -1,4 +1,5 @@
 const fs = require("node:fs");
+const child_process = require("node:child_process");
 const prettier = require("@prettier/sync");
 const radixLightColors = require("./radix/light.js");
 const radixDarkColors = require("./radix/dark.js");
@@ -117,13 +118,13 @@ function toElmColorName(name, colorScheme) {
 }
 
 function toElmColorScale(values) {
-  const valuesString = Object.entries(values.channels).reduce((acc, [name, value]) => {
-    return `${acc}
-      ${name.replace("-", "").replace("subtle", "Subtle").replace("strong", "Strong").replace("solidtext", "solidText")} = ${toElmColor(value)},`;
-  }, "");
+  const valuesString = Object.entries(values.channels).map(([name, value]) => {
+    return `${name.replace("-", "").replace("subtle", "Subtle").replace("strong", "Strong").replace("solidtext", "solidText")} = ${toElmColor(value)}`;
+  }).join("\n    , ");
 
-  return `{${valuesString}
-  }`;
+  return `
+    { ${valuesString}
+    }`;
 }
 
 function capitalize(string) {
@@ -139,11 +140,13 @@ const colorNamesElm =
     return Object.entries(colorSchemeColors).map(([name, values]) => {
       return toElmColorName(name, colorScheme);
     });
-  }).concat().join(", ");
+  }).concat().join("\n  , ");
 
 const colorsElmWithExports = colorsElm.replace("$colorNames", colorNamesElm)
 
-fs.writeFileSync(`../src/w/Colors.elm`, colorsElmWithExports);
+fs.writeFileSync(`../src/w/elm/src/W/Theme/Colors.elm`, colorsElmWithExports);
+child_process.execSync("npx elm-format ../src/w/elm/src/W/Theme/Colors.elm --elm-version=0.19 --yes");
+
 
 /**
  * Gleam Output

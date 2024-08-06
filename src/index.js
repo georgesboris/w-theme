@@ -124,6 +124,7 @@ const palette = [
  * @type {string[]}
  */
 const colorScale = [
+  "shadow",
   "bg",
   "bg-subtle",
   "tint-subtle",

@@ -16,6 +16,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(100,100,100)",
         text: "rgb(32,32,32)",
+        shadow: "rgb(100,100,100)",
       },
       channels: {
         bg: [252, 252, 252],
@@ -32,6 +33,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [100, 100, 100],
         text: [32, 32, 32],
+        shadow: [100, 100, 100],
       },
     },
     mauve: {
@@ -50,6 +52,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(101,99,109)",
         text: "rgb(33,31,38)",
+        shadow: "rgb(101,99,109)",
       },
       channels: {
         bg: [253, 252, 253],
@@ -66,6 +69,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [101, 99, 109],
         text: [33, 31, 38],
+        shadow: [101, 99, 109],
       },
     },
     slate: {
@@ -84,6 +88,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(96,100,108)",
         text: "rgb(28,32,36)",
+        shadow: "rgb(96,100,108)",
       },
       channels: {
         bg: [252, 252, 253],
@@ -100,6 +105,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [96, 100, 108],
         text: [28, 32, 36],
+        shadow: [96, 100, 108],
       },
     },
     sage: {
@@ -118,6 +124,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(95,101,99)",
         text: "rgb(26,33,30)",
+        shadow: "rgb(95,101,99)",
       },
       channels: {
         bg: [251, 253, 252],
@@ -134,6 +141,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [95, 101, 99],
         text: [26, 33, 30],
+        shadow: [95, 101, 99],
       },
     },
     olive: {
@@ -152,6 +160,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(96,101,95)",
         text: "rgb(29,33,28)",
+        shadow: "rgb(96,101,95)",
       },
       channels: {
         bg: [252, 253, 252],
@@ -168,6 +177,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [96, 101, 95],
         text: [29, 33, 28],
+        shadow: [96, 101, 95],
       },
     },
     sand: {
@@ -186,6 +196,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(99,99,94)",
         text: "rgb(33,32,28)",
+        shadow: "rgb(99,99,94)",
       },
       channels: {
         bg: [253, 253, 252],
@@ -202,6 +213,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [99, 99, 94],
         text: [33, 32, 28],
+        shadow: [99, 99, 94],
       },
     },
     tomato: {
@@ -220,6 +232,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(209,52,21)",
         text: "rgb(92,39,31)",
+        shadow: "rgb(209,52,21)",
       },
       channels: {
         bg: [255, 252, 252],
@@ -236,6 +249,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [209, 52, 21],
         text: [92, 39, 31],
+        shadow: [209, 52, 21],
       },
     },
     red: {
@@ -254,6 +268,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(206,44,49)",
         text: "rgb(100,23,35)",
+        shadow: "rgb(206,44,49)",
       },
       channels: {
         bg: [255, 252, 252],
@@ -270,6 +285,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [206, 44, 49],
         text: [100, 23, 35],
+        shadow: [206, 44, 49],
       },
     },
     ruby: {
@@ -288,6 +304,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(202,36,77)",
         text: "rgb(100,23,43)",
+        shadow: "rgb(202,36,77)",
       },
       channels: {
         bg: [255, 252, 253],
@@ -304,6 +321,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [202, 36, 77],
         text: [100, 23, 43],
+        shadow: [202, 36, 77],
       },
     },
     crimson: {
@@ -322,6 +340,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(203,29,99)",
         text: "rgb(98,22,57)",
+        shadow: "rgb(203,29,99)",
       },
       channels: {
         bg: [255, 252, 253],
@@ -338,6 +357,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [203, 29, 99],
         text: [98, 22, 57],
+        shadow: [203, 29, 99],
       },
     },
     pink: {
@@ -356,6 +376,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(194,41,138)",
         text: "rgb(101,18,73)",
+        shadow: "rgb(194,41,138)",
       },
       channels: {
         bg: [255, 252, 254],
@@ -372,6 +393,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [194, 41, 138],
         text: [101, 18, 73],
+        shadow: [194, 41, 138],
       },
     },
     plum: {
@@ -390,6 +412,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(149,62,163)",
         text: "rgb(83,25,93)",
+        shadow: "rgb(149,62,163)",
       },
       channels: {
         bg: [254, 252, 255],
@@ -406,6 +429,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [149, 62, 163],
         text: [83, 25, 93],
+        shadow: [149, 62, 163],
       },
     },
     purple: {
@@ -424,6 +448,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(129,69,181)",
         text: "rgb(64,32,96)",
+        shadow: "rgb(129,69,181)",
       },
       channels: {
         bg: [254, 252, 254],
@@ -440,6 +465,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [129, 69, 181],
         text: [64, 32, 96],
+        shadow: [129, 69, 181],
       },
     },
     violet: {
@@ -458,6 +484,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(101,80,185)",
         text: "rgb(47,38,95)",
+        shadow: "rgb(101,80,185)",
       },
       channels: {
         bg: [253, 252, 254],
@@ -474,6 +501,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [101, 80, 185],
         text: [47, 38, 95],
+        shadow: [101, 80, 185],
       },
     },
     iris: {
@@ -492,6 +520,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(87,83,198)",
         text: "rgb(39,41,98)",
+        shadow: "rgb(87,83,198)",
       },
       channels: {
         bg: [253, 253, 255],
@@ -508,6 +537,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [87, 83, 198],
         text: [39, 41, 98],
+        shadow: [87, 83, 198],
       },
     },
     indigo: {
@@ -526,6 +556,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(58,91,199)",
         text: "rgb(31,45,92)",
+        shadow: "rgb(58,91,199)",
       },
       channels: {
         bg: [253, 253, 254],
@@ -542,6 +573,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [58, 91, 199],
         text: [31, 45, 92],
+        shadow: [58, 91, 199],
       },
     },
     blue: {
@@ -560,6 +592,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(13,116,206)",
         text: "rgb(17,50,100)",
+        shadow: "rgb(13,116,206)",
       },
       channels: {
         bg: [251, 253, 255],
@@ -576,6 +609,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [13, 116, 206],
         text: [17, 50, 100],
+        shadow: [13, 116, 206],
       },
     },
     cyan: {
@@ -594,6 +628,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(16,125,152)",
         text: "rgb(13,60,72)",
+        shadow: "rgb(16,125,152)",
       },
       channels: {
         bg: [250, 253, 254],
@@ -610,6 +645,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [16, 125, 152],
         text: [13, 60, 72],
+        shadow: [16, 125, 152],
       },
     },
     teal: {
@@ -628,6 +664,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(0,133,115)",
         text: "rgb(13,61,56)",
+        shadow: "rgb(0,133,115)",
       },
       channels: {
         bg: [250, 254, 253],
@@ -644,6 +681,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [0, 133, 115],
         text: [13, 61, 56],
+        shadow: [0, 133, 115],
       },
     },
     jade: {
@@ -662,6 +700,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(32,131,104)",
         text: "rgb(29,59,49)",
+        shadow: "rgb(32,131,104)",
       },
       channels: {
         bg: [251, 254, 253],
@@ -678,6 +717,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [32, 131, 104],
         text: [29, 59, 49],
+        shadow: [32, 131, 104],
       },
     },
     green: {
@@ -696,6 +736,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(33,131,88)",
         text: "rgb(25,59,45)",
+        shadow: "rgb(33,131,88)",
       },
       channels: {
         bg: [251, 254, 252],
@@ -712,6 +753,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [33, 131, 88],
         text: [25, 59, 45],
+        shadow: [33, 131, 88],
       },
     },
     grass: {
@@ -730,6 +772,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(42,126,59)",
         text: "rgb(32,60,37)",
+        shadow: "rgb(42,126,59)",
       },
       channels: {
         bg: [251, 254, 251],
@@ -746,6 +789,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [42, 126, 59],
         text: [32, 60, 37],
+        shadow: [42, 126, 59],
       },
     },
     brown: {
@@ -764,6 +808,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(129,94,70)",
         text: "rgb(62,51,46)",
+        shadow: "rgb(129,94,70)",
       },
       channels: {
         bg: [254, 253, 252],
@@ -780,6 +825,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [129, 94, 70],
         text: [62, 51, 46],
+        shadow: [129, 94, 70],
       },
     },
     bronze: {
@@ -798,6 +844,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(125,94,84)",
         text: "rgb(67,48,43)",
+        shadow: "rgb(125,94,84)",
       },
       channels: {
         bg: [253, 252, 252],
@@ -814,6 +861,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [125, 94, 84],
         text: [67, 48, 43],
+        shadow: [125, 94, 84],
       },
     },
     gold: {
@@ -832,6 +880,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(113,98,75)",
         text: "rgb(59,53,43)",
+        shadow: "rgb(113,98,75)",
       },
       channels: {
         bg: [253, 253, 252],
@@ -848,6 +897,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [113, 98, 75],
         text: [59, 53, 43],
+        shadow: [113, 98, 75],
       },
     },
     sky: {
@@ -866,6 +916,7 @@ export default {
         "solid-text": "rgb(29,62,86)",
         "text-subtle": "rgb(0,116,158)",
         text: "rgb(29,62,86)",
+        shadow: "rgb(0,116,158)",
       },
       channels: {
         bg: [249, 254, 255],
@@ -882,6 +933,7 @@ export default {
         "solid-text": [29, 62, 86],
         "text-subtle": [0, 116, 158],
         text: [29, 62, 86],
+        shadow: [0, 116, 158],
       },
     },
     mint: {
@@ -900,6 +952,7 @@ export default {
         "solid-text": "rgb(22,67,60)",
         "text-subtle": "rgb(2,120,100)",
         text: "rgb(22,67,60)",
+        shadow: "rgb(2,120,100)",
       },
       channels: {
         bg: [249, 254, 253],
@@ -916,6 +969,7 @@ export default {
         "solid-text": [22, 67, 60],
         "text-subtle": [2, 120, 100],
         text: [22, 67, 60],
+        shadow: [2, 120, 100],
       },
     },
     lime: {
@@ -934,6 +988,7 @@ export default {
         "solid-text": "rgb(55,64,28)",
         "text-subtle": "rgb(92,124,47)",
         text: "rgb(55,64,28)",
+        shadow: "rgb(92,124,47)",
       },
       channels: {
         bg: [252, 253, 250],
@@ -950,6 +1005,7 @@ export default {
         "solid-text": [55, 64, 28],
         "text-subtle": [92, 124, 47],
         text: [55, 64, 28],
+        shadow: [92, 124, 47],
       },
     },
     yellow: {
@@ -968,6 +1024,7 @@ export default {
         "solid-text": "rgb(71,59,31)",
         "text-subtle": "rgb(158,108,0)",
         text: "rgb(71,59,31)",
+        shadow: "rgb(158,108,0)",
       },
       channels: {
         bg: [253, 253, 249],
@@ -984,6 +1041,7 @@ export default {
         "solid-text": [71, 59, 31],
         "text-subtle": [158, 108, 0],
         text: [71, 59, 31],
+        shadow: [158, 108, 0],
       },
     },
     amber: {
@@ -1002,6 +1060,7 @@ export default {
         "solid-text": "rgb(79,52,34)",
         "text-subtle": "rgb(171,100,0)",
         text: "rgb(79,52,34)",
+        shadow: "rgb(171,100,0)",
       },
       channels: {
         bg: [254, 253, 251],
@@ -1018,6 +1077,7 @@ export default {
         "solid-text": [79, 52, 34],
         "text-subtle": [171, 100, 0],
         text: [79, 52, 34],
+        shadow: [171, 100, 0],
       },
     },
     orange: {
@@ -1036,6 +1096,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(204,78,0)",
         text: "rgb(88,45,29)",
+        shadow: "rgb(204,78,0)",
       },
       channels: {
         bg: [254, 252, 251],
@@ -1052,6 +1113,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [204, 78, 0],
         text: [88, 45, 29],
+        shadow: [204, 78, 0],
       },
     },
   },
@@ -1072,6 +1134,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(180,180,180)",
         text: "rgb(238,238,238)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [25, 25, 25],
@@ -1088,6 +1151,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [180, 180, 180],
         text: [238, 238, 238],
+        shadow: [0, 0, 0],
       },
     },
     mauve: {
@@ -1106,6 +1170,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(181,178,188)",
         text: "rgb(238,238,240)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [26, 25, 27],
@@ -1122,6 +1187,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [181, 178, 188],
         text: [238, 238, 240],
+        shadow: [0, 0, 0],
       },
     },
     slate: {
@@ -1140,6 +1206,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(176,180,186)",
         text: "rgb(237,238,240)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [24, 25, 27],
@@ -1156,6 +1223,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [176, 180, 186],
         text: [237, 238, 240],
+        shadow: [0, 0, 0],
       },
     },
     sage: {
@@ -1174,6 +1242,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(173,181,178)",
         text: "rgb(236,238,237)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [23, 25, 24],
@@ -1190,6 +1259,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [173, 181, 178],
         text: [236, 238, 237],
+        shadow: [0, 0, 0],
       },
     },
     olive: {
@@ -1208,6 +1278,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(175,181,173)",
         text: "rgb(236,238,236)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [24, 25, 23],
@@ -1224,6 +1295,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [175, 181, 173],
         text: [236, 238, 236],
+        shadow: [0, 0, 0],
       },
     },
     sand: {
@@ -1242,6 +1314,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(181,179,173)",
         text: "rgb(238,238,236)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [25, 25, 24],
@@ -1258,6 +1331,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [181, 179, 173],
         text: [238, 238, 236],
+        shadow: [0, 0, 0],
       },
     },
     tomato: {
@@ -1276,6 +1350,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(255,151,125)",
         text: "rgb(251,211,203)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [31, 21, 19],
@@ -1292,6 +1367,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [255, 151, 125],
         text: [251, 211, 203],
+        shadow: [0, 0, 0],
       },
     },
     red: {
@@ -1310,6 +1386,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(255,149,146)",
         text: "rgb(255,209,217)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [32, 19, 20],
@@ -1326,6 +1403,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [255, 149, 146],
         text: [255, 209, 217],
+        shadow: [0, 0, 0],
       },
     },
     ruby: {
@@ -1344,6 +1422,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(255,148,157)",
         text: "rgb(254,210,225)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [30, 21, 23],
@@ -1360,6 +1439,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [255, 148, 157],
         text: [254, 210, 225],
+        shadow: [0, 0, 0],
       },
     },
     crimson: {
@@ -1378,6 +1458,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(255,146,173)",
         text: "rgb(253,211,232)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [32, 19, 24],
@@ -1394,6 +1475,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [255, 146, 173],
         text: [253, 211, 232],
+        shadow: [0, 0, 0],
       },
     },
     pink: {
@@ -1412,6 +1494,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(255,141,204)",
         text: "rgb(253,209,234)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [33, 18, 29],
@@ -1428,6 +1511,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [255, 141, 204],
         text: [253, 209, 234],
+        shadow: [0, 0, 0],
       },
     },
     plum: {
@@ -1446,6 +1530,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(231,150,243)",
         text: "rgb(244,212,244)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [32, 19, 32],
@@ -1462,6 +1547,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [231, 150, 243],
         text: [244, 212, 244],
+        shadow: [0, 0, 0],
       },
     },
     purple: {
@@ -1480,6 +1566,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(209,157,255)",
         text: "rgb(236,217,250)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [30, 21, 35],
@@ -1496,6 +1583,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [209, 157, 255],
         text: [236, 217, 250],
+        shadow: [0, 0, 0],
       },
     },
     violet: {
@@ -1514,6 +1602,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(186,167,255)",
         text: "rgb(226,221,254)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [27, 21, 37],
@@ -1530,6 +1619,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [186, 167, 255],
         text: [226, 221, 254],
+        shadow: [0, 0, 0],
       },
     },
     iris: {
@@ -1548,6 +1638,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(177,169,255)",
         text: "rgb(224,223,254)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [23, 22, 37],
@@ -1564,6 +1655,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [177, 169, 255],
         text: [224, 223, 254],
+        shadow: [0, 0, 0],
       },
     },
     indigo: {
@@ -1582,6 +1674,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(158,177,255)",
         text: "rgb(214,225,255)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [20, 23, 38],
@@ -1598,6 +1691,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [158, 177, 255],
         text: [214, 225, 255],
+        shadow: [0, 0, 0],
       },
     },
     blue: {
@@ -1616,6 +1710,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(112,184,255)",
         text: "rgb(194,230,255)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [17, 25, 39],
@@ -1632,6 +1727,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [112, 184, 255],
         text: [194, 230, 255],
+        shadow: [0, 0, 0],
       },
     },
     cyan: {
@@ -1650,6 +1746,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(76,204,230)",
         text: "rgb(182,236,247)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [16, 27, 32],
@@ -1666,6 +1763,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [76, 204, 230],
         text: [182, 236, 247],
+        shadow: [0, 0, 0],
       },
     },
     teal: {
@@ -1684,6 +1782,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(11,216,182)",
         text: "rgb(173,240,221)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [17, 28, 27],
@@ -1700,6 +1799,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [11, 216, 182],
         text: [173, 240, 221],
+        shadow: [0, 0, 0],
       },
     },
     jade: {
@@ -1718,6 +1818,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(31,216,164)",
         text: "rgb(173,240,212)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [18, 28, 24],
@@ -1734,6 +1835,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [31, 216, 164],
         text: [173, 240, 212],
+        shadow: [0, 0, 0],
       },
     },
     green: {
@@ -1752,6 +1854,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(61,214,140)",
         text: "rgb(177,241,203)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [18, 27, 23],
@@ -1768,6 +1871,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [61, 214, 140],
         text: [177, 241, 203],
+        shadow: [0, 0, 0],
       },
     },
     grass: {
@@ -1786,6 +1890,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(113,208,131)",
         text: "rgb(194,240,194)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [20, 26, 21],
@@ -1802,6 +1907,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [113, 208, 131],
         text: [194, 240, 194],
+        shadow: [0, 0, 0],
       },
     },
     brown: {
@@ -1820,6 +1926,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(219,181,148)",
         text: "rgb(242,225,202)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [28, 24, 22],
@@ -1836,6 +1943,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [219, 181, 148],
         text: [242, 225, 202],
+        shadow: [0, 0, 0],
       },
     },
     bronze: {
@@ -1854,6 +1962,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(212,179,165)",
         text: "rgb(237,224,217)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [28, 25, 23],
@@ -1870,6 +1979,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [212, 179, 165],
         text: [237, 224, 217],
+        shadow: [0, 0, 0],
       },
     },
     gold: {
@@ -1888,6 +1998,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(203,185,159)",
         text: "rgb(232,226,217)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [27, 26, 23],
@@ -1904,6 +2015,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [203, 185, 159],
         text: [232, 226, 217],
+        shadow: [0, 0, 0],
       },
     },
     sky: {
@@ -1922,6 +2034,7 @@ export default {
         "solid-text": "rgb(17,26,39)",
         "text-subtle": "rgb(117,199,240)",
         text: "rgb(194,243,255)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [17, 26, 39],
@@ -1938,6 +2051,7 @@ export default {
         "solid-text": [17, 26, 39],
         "text-subtle": [117, 199, 240],
         text: [194, 243, 255],
+        shadow: [0, 0, 0],
       },
     },
     mint: {
@@ -1956,6 +2070,7 @@ export default {
         "solid-text": "rgb(15,27,27)",
         "text-subtle": "rgb(88,213,186)",
         text: "rgb(196,245,225)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [15, 27, 27],
@@ -1972,6 +2087,7 @@ export default {
         "solid-text": [15, 27, 27],
         "text-subtle": [88, 213, 186],
         text: [196, 245, 225],
+        shadow: [0, 0, 0],
       },
     },
     lime: {
@@ -1990,6 +2106,7 @@ export default {
         "solid-text": "rgb(21,26,16)",
         "text-subtle": "rgb(189,229,108)",
         text: "rgb(227,247,186)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [21, 26, 16],
@@ -2006,6 +2123,7 @@ export default {
         "solid-text": [21, 26, 16],
         "text-subtle": [189, 229, 108],
         text: [227, 247, 186],
+        shadow: [0, 0, 0],
       },
     },
     yellow: {
@@ -2024,6 +2142,7 @@ export default {
         "solid-text": "rgb(27,24,15)",
         "text-subtle": "rgb(245,225,71)",
         text: "rgb(246,238,180)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [27, 24, 15],
@@ -2040,6 +2159,7 @@ export default {
         "solid-text": [27, 24, 15],
         "text-subtle": [245, 225, 71],
         text: [246, 238, 180],
+        shadow: [0, 0, 0],
       },
     },
     amber: {
@@ -2058,6 +2178,7 @@ export default {
         "solid-text": "rgb(29,24,15)",
         "text-subtle": "rgb(255,202,22)",
         text: "rgb(255,231,179)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [29, 24, 15],
@@ -2074,6 +2195,7 @@ export default {
         "solid-text": [29, 24, 15],
         "text-subtle": [255, 202, 22],
         text: [255, 231, 179],
+        shadow: [0, 0, 0],
       },
     },
     orange: {
@@ -2092,6 +2214,7 @@ export default {
         "solid-text": "rgb(255,255,255)",
         "text-subtle": "rgb(255,160,87)",
         text: "rgb(255,224,194)",
+        shadow: "rgb(0,0,0)",
       },
       channels: {
         bg: [30, 22, 15],
@@ -2108,6 +2231,7 @@ export default {
         "solid-text": [255, 255, 255],
         "text-subtle": [255, 160, 87],
         text: [255, 224, 194],
+        shadow: [0, 0, 0],
       },
     },
   },

@@ -65,7 +65,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
 
   /* Font Family Variables */
   --w-font-heading: serif; 
-  --w-font-text: sans-serif; 
+  --w-font-base: sans-serif; 
   --w-font-code: monospace; 
 
   /* Spacing and Border Radius variables follow a "size scale" that is tailwind compatible */
@@ -88,6 +88,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
 
   /* Each variant of our palette follows a "color scale" that is inspired by radix-ui */
 
+  --w-base-shadow: 28 32 36;
   --w-base-bg: 252 252 253;
   --w-base-bg-subtle: 249 249 251;
   --w-base-tint: 232 232 236;
@@ -103,6 +104,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-base-text-subtle: 96 100 108;
   --w-base-text: 28 32 36;
 
+  --w-primary-shadow: 17 50 100;
   --w-primary-bg: 251 253 255;
   --w-primary-bg-subtle: 244 250 255;
   --w-primary-tint: 213 239 255;
@@ -118,6 +120,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-primary-text-subtle: 13 116 206;
   --w-primary-text: 17 50 100;
 
+  --w-secondary-shadow: 101 18 73;
   --w-secondary-bg: 255 252 254;
   --w-secondary-bg-subtle: 254 247 251;
   --w-secondary-tint: 251 220 239;
@@ -133,6 +136,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-secondary-text-subtle: 194 41 138;
   --w-secondary-text: 101 18 73;
 
+  --w-success-shadow: 25 59 45;
   --w-success-bg: 251 254 252;
   --w-success-bg-subtle: 244 251 246;
   --w-success-tint: 214 241 223;
@@ -148,6 +152,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-success-text-subtle: 33 131 88;
   --w-success-text: 25 59 45;
 
+  --w-warning-shadow: 71 59 31;
   --w-warning-bg: 253 253 249;
   --w-warning-bg-subtle: 254 252 233;
   --w-warning-tint: 255 243 148;
@@ -163,6 +168,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-warning-text-subtle: 158 108 0;
   --w-warning-text: 71 59 31;
 
+  --w-danger-shadow: 100 23 35;
   --w-danger-bg: 255 252 252;
   --w-danger-bg-subtle: 255 247 247;
   --w-danger-tint: 255 219 220;
@@ -224,6 +230,8 @@ Each color is defined using a scale with 12 steps.
 - **accent-subtle** — subtle variation, useful for "pressed" states.
 - **accent-strong** — stronger variation, useful for "hovered" states.
 
+**Accent** colors are not made for background or text usage as they're not guaranteed to have proper contrast, they should be used for colored elements.
+
 #### Solid
 
 - **solid** — useful for solid elements such as buttons.
@@ -231,14 +239,21 @@ Each color is defined using a scale with 12 steps.
 - **solid-strong** — stronger variation, useful for "hovered" states.
 - **solid-text** — contrasting color ensuring legibility of text over solid backgrounds
 
+**Solid** colors should use **solid-text** as their text color for proper accessibility.
+
 #### Text
 
 - **text** — the main text color of your application.
 - **text-subtle** — subtler variation for secondary text.
 
 Both **text colors** are guaranteed to be **accessible** over any **background** and **tint** colors.
-**Accent** colors are not made for background usage, they should be used for single color elements.
-**Solid** colors should use **solid-text** as it's text color for proper accessibility.
+
+#### Shadow
+
+- **shadow** — a darker shade of the color, useful for coloring shadows.
+
+Shadows are usually used with alpha values for better effects: `rgb(var(--w-base-shadow) / 0.25)`
+
 
 > [!TIP]
 > We use "color channels" on our CSS variable colors instead of a defined color space. So we can:
@@ -258,6 +273,7 @@ Both **text colors** are guaranteed to be **accessible** over any **background**
 > - We included the contrasting `solid-text` into our scale, instead of relying on [different implied values for some colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale#steps-910-solid-backgrounds).
 > - `bg-subtle` is _always_ darker than `bg`, while radix's 2nd color contrast differs between light and dark modes.
 > - `solid-text` is not an official color on the radix scale, it is supposed to be implied depending on the color used (most colors use white as contrast color but some hand-picked colors use a darker tone). We made it an official color so it is easier to build UI's without knowing the color that is being used. 
+> - `shadow` is a scale itself in radix and not a color shade.
 
 ## Font Families
 
@@ -265,7 +281,7 @@ Not a lot to cover regarding our font family tokens. You can define then with fa
 
 ```yaml
 - heading
-- text
+- base
 - code
 ```
 

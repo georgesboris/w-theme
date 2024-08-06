@@ -8,6 +8,10 @@ function cssVar(id) {
   return `var(--${NAMESPACE}-${id})`;
 }
 
+function rawColorCssVarWithAlpha(id, alpha) {
+  return `rgb(${cssVar(id)} / ${alpha})`;
+}
+
 function rawColorCssVar(id) {
   return `rgb(${cssVar(id)} / 1.0)`;
 }
@@ -22,7 +26,7 @@ function colorCssVar(id) {
 
 const fontFamily = {
   heading: cssVar("font-heading"),
-  text: cssVar("font-text"),
+  base: cssVar("font-base"),
   code: cssVar("font-code"),
 };
 
@@ -64,6 +68,7 @@ const spacings = {
 
 const colorVariants = [
   ["DEFAULT", "bg"],
+  ["bg", "bg"],
   ["subtle", "bg-subtle"],
   ["tint", "tint"],
   ["tint-subtle", "tint-subtle"],
@@ -74,6 +79,7 @@ const colorVariants = [
   ["solid", "solid"],
   ["solid-subtle", "solid-subtle"],
   ["solid-strong", "solid-strong"],
+  ["shadow", "shadow"],
 ];
 
 const colorVariables = [
@@ -100,6 +106,7 @@ const colors = colorVariables.reduce((acc, variable) => {
 
 const textColorVariants = [
   ["DEFAULT", "text"],
+  ["text", "text"],
   ["subtle", "text-subtle"],
   ["solid", "solid-text"]
 ];
@@ -114,6 +121,7 @@ const textColors = colorVariables.reduce((acc, variable) => {
 
   return acc;
 }, {
+  DEFAULT: colorCssVar("base-text"),
   subtle: colorCssVar("base-text-subtle"),
   solid: colorCssVar("base-solid-text")
 });
@@ -123,49 +131,74 @@ const textColors = colorVariables.reduce((acc, variable) => {
  */
 
 const colorComponents = colorVariables.reduce((acc, variant) => {
-  acc[`.w-${variant}`] = {
+
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}`] = {
     backgroundColor: rawColorCssVar(`${variant}-tint`),
-    borderColor: rawColorCssVar(`${variant}-detail`),
+    borderColor: rawColorCssVar(`${variant}-accent`),
     color: rawColorCssVar(`${variant}-text`),
   };
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:hover)`] = {
+    backgroundColor: rawColorCssVar(`${variant}-tint-strong`),
+    borderColor: rawColorCssVar(`${variant}-accent-strong`),
+  };
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:active)`] = {
+    backgroundColor: rawColorCssVar(`${variant}-tint-subtle`),
+    borderColor: rawColorCssVar(`${variant}-accent-subtle`),
+    color: rawColorCssVar(`${variant}-text-subtle`),
+  };
 
-  acc[`.w-${variant}.w-solid`] = {
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}.${NAMESPACE}-solid`] = {
     backgroundColor: rawColorCssVar(`${variant}-solid`),
     color: rawColorCssVar(`${variant}-solid-text`),
   };
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}.${NAMESPACE}-solid:is(a,button):is(:hover)`] = {
+    backgroundColor: rawColorCssVar(`${variant}-solid-strong`),
+  };
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}.${NAMESPACE}-solid:is(a,button):is(:active)`] = {
+    backgroundColor: rawColorCssVar(`${variant}-solid-subtle`),
+    color: rawColorCssVarWithAlpha(`${variant}-solid-text`, 0.8),
+  };
 
-  // `.w-${variant} {`,
-  // `  background-color: ${cssRGB(variant + "-tint")};`,
-  // `  border-color: ${cssRGB(variant + "-detail")};`,
-  // `  color: ${cssRGB(variant + "-text")};`,
-  // "}",
-  // `a.w-${variant}:hover, button.w-${variant}:hover, input[type="submit"].w-${variant}:hover {`,
-  // `  background-color: ${cssRGB(variant + "-tint-strong")};`,
-  // "}",
-  // `a.w-${variant}:active, button.w-${variant}:active, input[type="submit"].w-${variant}:active {`,
-  // `  background-color: ${cssRGB(variant + "-tint-subtle")};`,
-  // "}",
-  // `.w-${variant}.w-solid {`,
-  // `  background-color: ${cssRGB(variant + "-solid")};`,
-  // `  border-color: ${cssRGB(variant + "-detail")};`,
-  // `  color: ${cssRGB(variant + "-solid-text")};`,
-  // "}",
+  acc[".w-black"] = {
+    color: "purple"
+  };
 
+  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:focus-visible)`] = {
+    outline: "2px solid transparent",
+    outlineOffset: "2px",
+    boxShadow: `0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)}`;
+  };
 
-  acc[`.bg-${variant}-solid, .bg-${variant}-solid-subtle, .bg-${variant}-solid-strong`] = {
+  acc[`.${NAMESPACE}-bg-${variant}-solid, .${NAMESPACE}-bg-${variant}-solid-subtle, .${NAMESPACE}-bg-${variant}-solid-strong`] = {
     color: rawColorCssVar(`${variant}-solid-text`)
   };
 
-  acc[`.bg-${variant}, .bg-${variant}-subtle, .bg-${variant}-tint, .bg-${variant}-tint-subtle, .bg-${variant}-tint-strong`] = {
+  acc[`.${NAMESPACE}-bg-${variant}, .${NAMESPACE}-bg-${variant}-subtle, .${NAMESPACE}-bg-${variant}-tint, .${NAMESPACE}-bg-${variant}-tint-subtle, .${NAMESPACE}-bg-${variant}-tint-strong`] = {
     color: rawColorCssVar(`${variant}-text`)
   };
 
   return acc;
-}, {});
+}, {
+  ".w": {
+    boxSizing: "border-box",
+    padding: 0,
+    margin: 0,
+  }
+});
 
 /**
  * Export
  */
+
+// ::selection {
+//   background-color: """ ++ base.text ++ """;
+//   color: """ ++ base.bg ++ """;
+// }
+// .w {
+//   box-sizing: border-box;
+//   padding: 0;
+//   margin: 0;
+// }
 
 module.exports = {
   optionsHandler: (options = {}) => {
@@ -174,33 +207,23 @@ module.exports = {
         addBase({
           body: {
             background: colors["base-bg"],
-            color: textColors.default,
-            fontFamily: fontFamily.text,
+            color: colors["base-bg"],
+            fontFamily: fontFamily.base,
           },
-          button: {
-            fontFamily: fontFamily.text,
+          "article, section, header, aside, footer, button, a, p, div, span, ul, li, th, td": {
+            fontFamily: fontFamily.base,
+            color: textColors.DEFAULT,
           },
-          h1: {
+          "h1, h2, h3, h4, h5, h6": {
             fontFamily: fontFamily.heading,
           },
-          h2: {
-            fontFamily: fontFamily.heading,
-          },
-          h3: {
-            fontFamily: fontFamily.heading,
-          },
-          h4: {
-            fontFamily: fontFamily.heading,
-          },
-          h5: {
-            fontFamily: fontFamily.heading,
-          },
-          h6: {
-            fontFamily: fontFamily.heading,
-          },
-          code: {
+          "code, kbd, samp, pre": {
             fontFamily: fontFamily.code,
           },
+          "::selection": {
+            background: colors["base-bg"],
+            color: colors["base-bg"],
+          }
         });
       }
 

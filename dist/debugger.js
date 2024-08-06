@@ -17,7 +17,8 @@
           "solid-strong": "rgb(131,131,131)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(100,100,100)",
-          text: "rgb(32,32,32)"
+          text: "rgb(32,32,32)",
+          shadow: "rgb(100,100,100)"
         },
         channels: {
           bg: [252, 252, 252],
@@ -33,7 +34,8 @@
           "solid-strong": [131, 131, 131],
           "solid-text": [255, 255, 255],
           "text-subtle": [100, 100, 100],
-          text: [32, 32, 32]
+          text: [32, 32, 32],
+          shadow: [100, 100, 100]
         }
       },
       mauve: {
@@ -51,7 +53,8 @@
           "solid-strong": "rgb(132,130,142)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(101,99,109)",
-          text: "rgb(33,31,38)"
+          text: "rgb(33,31,38)",
+          shadow: "rgb(101,99,109)"
         },
         channels: {
           bg: [253, 252, 253],
@@ -67,7 +70,8 @@
           "solid-strong": [132, 130, 142],
           "solid-text": [255, 255, 255],
           "text-subtle": [101, 99, 109],
-          text: [33, 31, 38]
+          text: [33, 31, 38],
+          shadow: [101, 99, 109]
         }
       },
       slate: {
@@ -85,7 +89,8 @@
           "solid-strong": "rgb(128,131,141)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(96,100,108)",
-          text: "rgb(28,32,36)"
+          text: "rgb(28,32,36)",
+          shadow: "rgb(96,100,108)"
         },
         channels: {
           bg: [252, 252, 253],
@@ -101,7 +106,8 @@
           "solid-strong": [128, 131, 141],
           "solid-text": [255, 255, 255],
           "text-subtle": [96, 100, 108],
-          text: [28, 32, 36]
+          text: [28, 32, 36],
+          shadow: [96, 100, 108]
         }
       },
       sage: {
@@ -119,7 +125,8 @@
           "solid-strong": "rgb(124,132,129)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(95,101,99)",
-          text: "rgb(26,33,30)"
+          text: "rgb(26,33,30)",
+          shadow: "rgb(95,101,99)"
         },
         channels: {
           bg: [251, 253, 252],
@@ -135,7 +142,8 @@
           "solid-strong": [124, 132, 129],
           "solid-text": [255, 255, 255],
           "text-subtle": [95, 101, 99],
-          text: [26, 33, 30]
+          text: [26, 33, 30],
+          shadow: [95, 101, 99]
         }
       },
       olive: {
@@ -153,7 +161,8 @@
           "solid-strong": "rgb(127,132,125)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(96,101,95)",
-          text: "rgb(29,33,28)"
+          text: "rgb(29,33,28)",
+          shadow: "rgb(96,101,95)"
         },
         channels: {
           bg: [252, 253, 252],
@@ -169,7 +178,8 @@
           "solid-strong": [127, 132, 125],
           "solid-text": [255, 255, 255],
           "text-subtle": [96, 101, 95],
-          text: [29, 33, 28]
+          text: [29, 33, 28],
+          shadow: [96, 101, 95]
         }
       },
       sand: {
@@ -187,7 +197,8 @@
           "solid-strong": "rgb(130,130,124)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(99,99,94)",
-          text: "rgb(33,32,28)"
+          text: "rgb(33,32,28)",
+          shadow: "rgb(99,99,94)"
         },
         channels: {
           bg: [253, 253, 252],
@@ -203,7 +214,8 @@
           "solid-strong": [130, 130, 124],
           "solid-text": [255, 255, 255],
           "text-subtle": [99, 99, 94],
-          text: [33, 32, 28]
+          text: [33, 32, 28],
+          shadow: [99, 99, 94]
         }
       },
       tomato: {
@@ -221,7 +233,8 @@
           "solid-strong": "rgb(221,68,37)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(209,52,21)",
-          text: "rgb(92,39,31)"
+          text: "rgb(92,39,31)",
+          shadow: "rgb(209,52,21)"
         },
         channels: {
           bg: [255, 252, 252],
@@ -237,7 +250,8 @@
           "solid-strong": [221, 68, 37],
           "solid-text": [255, 255, 255],
           "text-subtle": [209, 52, 21],
-          text: [92, 39, 31]
+          text: [92, 39, 31],
+          shadow: [209, 52, 21]
         }
       },
       red: {
@@ -255,7 +269,8 @@
           "solid-strong": "rgb(220,62,66)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(206,44,49)",
-          text: "rgb(100,23,35)"
+          text: "rgb(100,23,35)",
+          shadow: "rgb(206,44,49)"
         },
         channels: {
           bg: [255, 252, 252],
@@ -271,7 +286,8 @@
           "solid-strong": [220, 62, 66],
           "solid-text": [255, 255, 255],
           "text-subtle": [206, 44, 49],
-          text: [100, 23, 35]
+          text: [100, 23, 35],
+          shadow: [206, 44, 49]
         }
       },
       ruby: {
@@ -289,7 +305,8 @@
           "solid-strong": "rgb(220,59,93)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(202,36,77)",
-          text: "rgb(100,23,43)"
+          text: "rgb(100,23,43)",
+          shadow: "rgb(202,36,77)"
         },
         channels: {
           bg: [255, 252, 253],
@@ -305,7 +322,8 @@
           "solid-strong": [220, 59, 93],
           "solid-text": [255, 255, 255],
           "text-subtle": [202, 36, 77],
-          text: [100, 23, 43]
+          text: [100, 23, 43],
+          shadow: [202, 36, 77]
         }
       },
       crimson: {
@@ -323,7 +341,8 @@
           "solid-strong": "rgb(223,52,120)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(203,29,99)",
-          text: "rgb(98,22,57)"
+          text: "rgb(98,22,57)",
+          shadow: "rgb(203,29,99)"
         },
         channels: {
           bg: [255, 252, 253],
@@ -339,7 +358,8 @@
           "solid-strong": [223, 52, 120],
           "solid-text": [255, 255, 255],
           "text-subtle": [203, 29, 99],
-          text: [98, 22, 57]
+          text: [98, 22, 57],
+          shadow: [203, 29, 99]
         }
       },
       pink: {
@@ -357,7 +377,8 @@
           "solid-strong": "rgb(207,56,151)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(194,41,138)",
-          text: "rgb(101,18,73)"
+          text: "rgb(101,18,73)",
+          shadow: "rgb(194,41,138)"
         },
         channels: {
           bg: [255, 252, 254],
@@ -373,7 +394,8 @@
           "solid-strong": [207, 56, 151],
           "solid-text": [255, 255, 255],
           "text-subtle": [194, 41, 138],
-          text: [101, 18, 73]
+          text: [101, 18, 73],
+          shadow: [194, 41, 138]
         }
       },
       plum: {
@@ -391,7 +413,8 @@
           "solid-strong": "rgb(161,68,175)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(149,62,163)",
-          text: "rgb(83,25,93)"
+          text: "rgb(83,25,93)",
+          shadow: "rgb(149,62,163)"
         },
         channels: {
           bg: [254, 252, 255],
@@ -407,7 +430,8 @@
           "solid-strong": [161, 68, 175],
           "solid-text": [255, 255, 255],
           "text-subtle": [149, 62, 163],
-          text: [83, 25, 93]
+          text: [83, 25, 93],
+          shadow: [149, 62, 163]
         }
       },
       purple: {
@@ -425,7 +449,8 @@
           "solid-strong": "rgb(131,71,185)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(129,69,181)",
-          text: "rgb(64,32,96)"
+          text: "rgb(64,32,96)",
+          shadow: "rgb(129,69,181)"
         },
         channels: {
           bg: [254, 252, 254],
@@ -441,7 +466,8 @@
           "solid-strong": [131, 71, 185],
           "solid-text": [255, 255, 255],
           "text-subtle": [129, 69, 181],
-          text: [64, 32, 96]
+          text: [64, 32, 96],
+          shadow: [129, 69, 181]
         }
       },
       violet: {
@@ -459,7 +485,8 @@
           "solid-strong": "rgb(101,77,196)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(101,80,185)",
-          text: "rgb(47,38,95)"
+          text: "rgb(47,38,95)",
+          shadow: "rgb(101,80,185)"
         },
         channels: {
           bg: [253, 252, 254],
@@ -475,7 +502,8 @@
           "solid-strong": [101, 77, 196],
           "solid-text": [255, 255, 255],
           "text-subtle": [101, 80, 185],
-          text: [47, 38, 95]
+          text: [47, 38, 95],
+          shadow: [101, 80, 185]
         }
       },
       iris: {
@@ -493,7 +521,8 @@
           "solid-strong": "rgb(81,81,205)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(87,83,198)",
-          text: "rgb(39,41,98)"
+          text: "rgb(39,41,98)",
+          shadow: "rgb(87,83,198)"
         },
         channels: {
           bg: [253, 253, 255],
@@ -509,7 +538,8 @@
           "solid-strong": [81, 81, 205],
           "solid-text": [255, 255, 255],
           "text-subtle": [87, 83, 198],
-          text: [39, 41, 98]
+          text: [39, 41, 98],
+          shadow: [87, 83, 198]
         }
       },
       indigo: {
@@ -527,7 +557,8 @@
           "solid-strong": "rgb(51,88,212)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(58,91,199)",
-          text: "rgb(31,45,92)"
+          text: "rgb(31,45,92)",
+          shadow: "rgb(58,91,199)"
         },
         channels: {
           bg: [253, 253, 254],
@@ -543,7 +574,8 @@
           "solid-strong": [51, 88, 212],
           "solid-text": [255, 255, 255],
           "text-subtle": [58, 91, 199],
-          text: [31, 45, 92]
+          text: [31, 45, 92],
+          shadow: [58, 91, 199]
         }
       },
       blue: {
@@ -561,7 +593,8 @@
           "solid-strong": "rgb(5,136,240)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(13,116,206)",
-          text: "rgb(17,50,100)"
+          text: "rgb(17,50,100)",
+          shadow: "rgb(13,116,206)"
         },
         channels: {
           bg: [251, 253, 255],
@@ -577,7 +610,8 @@
           "solid-strong": [5, 136, 240],
           "solid-text": [255, 255, 255],
           "text-subtle": [13, 116, 206],
-          text: [17, 50, 100]
+          text: [17, 50, 100],
+          shadow: [13, 116, 206]
         }
       },
       cyan: {
@@ -595,7 +629,8 @@
           "solid-strong": "rgb(7,151,185)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(16,125,152)",
-          text: "rgb(13,60,72)"
+          text: "rgb(13,60,72)",
+          shadow: "rgb(16,125,152)"
         },
         channels: {
           bg: [250, 253, 254],
@@ -611,7 +646,8 @@
           "solid-strong": [7, 151, 185],
           "solid-text": [255, 255, 255],
           "text-subtle": [16, 125, 152],
-          text: [13, 60, 72]
+          text: [13, 60, 72],
+          shadow: [16, 125, 152]
         }
       },
       teal: {
@@ -629,7 +665,8 @@
           "solid-strong": "rgb(13,155,138)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(0,133,115)",
-          text: "rgb(13,61,56)"
+          text: "rgb(13,61,56)",
+          shadow: "rgb(0,133,115)"
         },
         channels: {
           bg: [250, 254, 253],
@@ -645,7 +682,8 @@
           "solid-strong": [13, 155, 138],
           "solid-text": [255, 255, 255],
           "text-subtle": [0, 133, 115],
-          text: [13, 61, 56]
+          text: [13, 61, 56],
+          shadow: [0, 133, 115]
         }
       },
       jade: {
@@ -663,7 +701,8 @@
           "solid-strong": "rgb(38,153,123)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(32,131,104)",
-          text: "rgb(29,59,49)"
+          text: "rgb(29,59,49)",
+          shadow: "rgb(32,131,104)"
         },
         channels: {
           bg: [251, 254, 253],
@@ -679,7 +718,8 @@
           "solid-strong": [38, 153, 123],
           "solid-text": [255, 255, 255],
           "text-subtle": [32, 131, 104],
-          text: [29, 59, 49]
+          text: [29, 59, 49],
+          shadow: [32, 131, 104]
         }
       },
       green: {
@@ -697,7 +737,8 @@
           "solid-strong": "rgb(43,154,102)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(33,131,88)",
-          text: "rgb(25,59,45)"
+          text: "rgb(25,59,45)",
+          shadow: "rgb(33,131,88)"
         },
         channels: {
           bg: [251, 254, 252],
@@ -713,7 +754,8 @@
           "solid-strong": [43, 154, 102],
           "solid-text": [255, 255, 255],
           "text-subtle": [33, 131, 88],
-          text: [25, 59, 45]
+          text: [25, 59, 45],
+          shadow: [33, 131, 88]
         }
       },
       grass: {
@@ -731,7 +773,8 @@
           "solid-strong": "rgb(62,155,79)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(42,126,59)",
-          text: "rgb(32,60,37)"
+          text: "rgb(32,60,37)",
+          shadow: "rgb(42,126,59)"
         },
         channels: {
           bg: [251, 254, 251],
@@ -747,7 +790,8 @@
           "solid-strong": [62, 155, 79],
           "solid-text": [255, 255, 255],
           "text-subtle": [42, 126, 59],
-          text: [32, 60, 37]
+          text: [32, 60, 37],
+          shadow: [42, 126, 59]
         }
       },
       brown: {
@@ -765,7 +809,8 @@
           "solid-strong": "rgb(160,117,83)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(129,94,70)",
-          text: "rgb(62,51,46)"
+          text: "rgb(62,51,46)",
+          shadow: "rgb(129,94,70)"
         },
         channels: {
           bg: [254, 253, 252],
@@ -781,7 +826,8 @@
           "solid-strong": [160, 117, 83],
           "solid-text": [255, 255, 255],
           "text-subtle": [129, 94, 70],
-          text: [62, 51, 46]
+          text: [62, 51, 46],
+          shadow: [129, 94, 70]
         }
       },
       bronze: {
@@ -799,7 +845,8 @@
           "solid-strong": "rgb(149,116,104)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(125,94,84)",
-          text: "rgb(67,48,43)"
+          text: "rgb(67,48,43)",
+          shadow: "rgb(125,94,84)"
         },
         channels: {
           bg: [253, 252, 252],
@@ -815,7 +862,8 @@
           "solid-strong": [149, 116, 104],
           "solid-text": [255, 255, 255],
           "text-subtle": [125, 94, 84],
-          text: [67, 48, 43]
+          text: [67, 48, 43],
+          shadow: [125, 94, 84]
         }
       },
       gold: {
@@ -833,7 +881,8 @@
           "solid-strong": "rgb(140,122,94)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(113,98,75)",
-          text: "rgb(59,53,43)"
+          text: "rgb(59,53,43)",
+          shadow: "rgb(113,98,75)"
         },
         channels: {
           bg: [253, 253, 252],
@@ -849,7 +898,8 @@
           "solid-strong": [140, 122, 94],
           "solid-text": [255, 255, 255],
           "text-subtle": [113, 98, 75],
-          text: [59, 53, 43]
+          text: [59, 53, 43],
+          shadow: [113, 98, 75]
         }
       },
       sky: {
@@ -867,7 +917,8 @@
           "solid-strong": "rgb(116,218,248)",
           "solid-text": "rgb(29,62,86)",
           "text-subtle": "rgb(0,116,158)",
-          text: "rgb(29,62,86)"
+          text: "rgb(29,62,86)",
+          shadow: "rgb(0,116,158)"
         },
         channels: {
           bg: [249, 254, 255],
@@ -883,7 +934,8 @@
           "solid-strong": [116, 218, 248],
           "solid-text": [29, 62, 86],
           "text-subtle": [0, 116, 158],
-          text: [29, 62, 86]
+          text: [29, 62, 86],
+          shadow: [0, 116, 158]
         }
       },
       mint: {
@@ -901,7 +953,8 @@
           "solid-strong": "rgb(125,224,203)",
           "solid-text": "rgb(22,67,60)",
           "text-subtle": "rgb(2,120,100)",
-          text: "rgb(22,67,60)"
+          text: "rgb(22,67,60)",
+          shadow: "rgb(2,120,100)"
         },
         channels: {
           bg: [249, 254, 253],
@@ -917,7 +970,8 @@
           "solid-strong": [125, 224, 203],
           "solid-text": [22, 67, 60],
           "text-subtle": [2, 120, 100],
-          text: [22, 67, 60]
+          text: [22, 67, 60],
+          shadow: [2, 120, 100]
         }
       },
       lime: {
@@ -935,7 +989,8 @@
           "solid-strong": "rgb(176,230,76)",
           "solid-text": "rgb(55,64,28)",
           "text-subtle": "rgb(92,124,47)",
-          text: "rgb(55,64,28)"
+          text: "rgb(55,64,28)",
+          shadow: "rgb(92,124,47)"
         },
         channels: {
           bg: [252, 253, 250],
@@ -951,7 +1006,8 @@
           "solid-strong": [176, 230, 76],
           "solid-text": [55, 64, 28],
           "text-subtle": [92, 124, 47],
-          text: [55, 64, 28]
+          text: [55, 64, 28],
+          shadow: [92, 124, 47]
         }
       },
       yellow: {
@@ -969,7 +1025,8 @@
           "solid-strong": "rgb(255,220,0)",
           "solid-text": "rgb(71,59,31)",
           "text-subtle": "rgb(158,108,0)",
-          text: "rgb(71,59,31)"
+          text: "rgb(71,59,31)",
+          shadow: "rgb(158,108,0)"
         },
         channels: {
           bg: [253, 253, 249],
@@ -985,7 +1042,8 @@
           "solid-strong": [255, 220, 0],
           "solid-text": [71, 59, 31],
           "text-subtle": [158, 108, 0],
-          text: [71, 59, 31]
+          text: [71, 59, 31],
+          shadow: [158, 108, 0]
         }
       },
       amber: {
@@ -1003,7 +1061,8 @@
           "solid-strong": "rgb(255,186,24)",
           "solid-text": "rgb(79,52,34)",
           "text-subtle": "rgb(171,100,0)",
-          text: "rgb(79,52,34)"
+          text: "rgb(79,52,34)",
+          shadow: "rgb(171,100,0)"
         },
         channels: {
           bg: [254, 253, 251],
@@ -1019,7 +1078,8 @@
           "solid-strong": [255, 186, 24],
           "solid-text": [79, 52, 34],
           "text-subtle": [171, 100, 0],
-          text: [79, 52, 34]
+          text: [79, 52, 34],
+          shadow: [171, 100, 0]
         }
       },
       orange: {
@@ -1037,7 +1097,8 @@
           "solid-strong": "rgb(239,95,0)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(204,78,0)",
-          text: "rgb(88,45,29)"
+          text: "rgb(88,45,29)",
+          shadow: "rgb(204,78,0)"
         },
         channels: {
           bg: [254, 252, 251],
@@ -1053,7 +1114,8 @@
           "solid-strong": [239, 95, 0],
           "solid-text": [255, 255, 255],
           "text-subtle": [204, 78, 0],
-          text: [88, 45, 29]
+          text: [88, 45, 29],
+          shadow: [204, 78, 0]
         }
       }
     },
@@ -1073,7 +1135,8 @@
           "solid-strong": "rgb(123,123,123)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(180,180,180)",
-          text: "rgb(238,238,238)"
+          text: "rgb(238,238,238)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [25, 25, 25],
@@ -1089,7 +1152,8 @@
           "solid-strong": [123, 123, 123],
           "solid-text": [255, 255, 255],
           "text-subtle": [180, 180, 180],
-          text: [238, 238, 238]
+          text: [238, 238, 238],
+          shadow: [0, 0, 0]
         }
       },
       mauve: {
@@ -1107,7 +1171,8 @@
           "solid-strong": "rgb(124,122,133)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(181,178,188)",
-          text: "rgb(238,238,240)"
+          text: "rgb(238,238,240)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [26, 25, 27],
@@ -1123,7 +1188,8 @@
           "solid-strong": [124, 122, 133],
           "solid-text": [255, 255, 255],
           "text-subtle": [181, 178, 188],
-          text: [238, 238, 240]
+          text: [238, 238, 240],
+          shadow: [0, 0, 0]
         }
       },
       slate: {
@@ -1141,7 +1207,8 @@
           "solid-strong": "rgb(119,123,132)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(176,180,186)",
-          text: "rgb(237,238,240)"
+          text: "rgb(237,238,240)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [24, 25, 27],
@@ -1157,7 +1224,8 @@
           "solid-strong": [119, 123, 132],
           "solid-text": [255, 255, 255],
           "text-subtle": [176, 180, 186],
-          text: [237, 238, 240]
+          text: [237, 238, 240],
+          shadow: [0, 0, 0]
         }
       },
       sage: {
@@ -1175,7 +1243,8 @@
           "solid-strong": "rgb(113,125,121)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(173,181,178)",
-          text: "rgb(236,238,237)"
+          text: "rgb(236,238,237)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [23, 25, 24],
@@ -1191,7 +1260,8 @@
           "solid-strong": [113, 125, 121],
           "solid-text": [255, 255, 255],
           "text-subtle": [173, 181, 178],
-          text: [236, 238, 237]
+          text: [236, 238, 237],
+          shadow: [0, 0, 0]
         }
       },
       olive: {
@@ -1209,7 +1279,8 @@
           "solid-strong": "rgb(118,125,116)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(175,181,173)",
-          text: "rgb(236,238,236)"
+          text: "rgb(236,238,236)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [24, 25, 23],
@@ -1225,7 +1296,8 @@
           "solid-strong": [118, 125, 116],
           "solid-text": [255, 255, 255],
           "text-subtle": [175, 181, 173],
-          text: [236, 238, 236]
+          text: [236, 238, 236],
+          shadow: [0, 0, 0]
         }
       },
       sand: {
@@ -1243,7 +1315,8 @@
           "solid-strong": "rgb(124,123,116)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(181,179,173)",
-          text: "rgb(238,238,236)"
+          text: "rgb(238,238,236)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [25, 25, 24],
@@ -1259,7 +1332,8 @@
           "solid-strong": [124, 123, 116],
           "solid-text": [255, 255, 255],
           "text-subtle": [181, 179, 173],
-          text: [238, 238, 236]
+          text: [238, 238, 236],
+          shadow: [0, 0, 0]
         }
       },
       tomato: {
@@ -1277,7 +1351,8 @@
           "solid-strong": "rgb(236,97,66)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(255,151,125)",
-          text: "rgb(251,211,203)"
+          text: "rgb(251,211,203)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [31, 21, 19],
@@ -1293,7 +1368,8 @@
           "solid-strong": [236, 97, 66],
           "solid-text": [255, 255, 255],
           "text-subtle": [255, 151, 125],
-          text: [251, 211, 203]
+          text: [251, 211, 203],
+          shadow: [0, 0, 0]
         }
       },
       red: {
@@ -1311,7 +1387,8 @@
           "solid-strong": "rgb(236,93,94)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(255,149,146)",
-          text: "rgb(255,209,217)"
+          text: "rgb(255,209,217)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [32, 19, 20],
@@ -1327,7 +1404,8 @@
           "solid-strong": [236, 93, 94],
           "solid-text": [255, 255, 255],
           "text-subtle": [255, 149, 146],
-          text: [255, 209, 217]
+          text: [255, 209, 217],
+          shadow: [0, 0, 0]
         }
       },
       ruby: {
@@ -1345,7 +1423,8 @@
           "solid-strong": "rgb(236,90,114)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(255,148,157)",
-          text: "rgb(254,210,225)"
+          text: "rgb(254,210,225)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [30, 21, 23],
@@ -1361,7 +1440,8 @@
           "solid-strong": [236, 90, 114],
           "solid-text": [255, 255, 255],
           "text-subtle": [255, 148, 157],
-          text: [254, 210, 225]
+          text: [254, 210, 225],
+          shadow: [0, 0, 0]
         }
       },
       crimson: {
@@ -1379,7 +1459,8 @@
           "solid-strong": "rgb(238,81,138)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(255,146,173)",
-          text: "rgb(253,211,232)"
+          text: "rgb(253,211,232)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [32, 19, 24],
@@ -1395,7 +1476,8 @@
           "solid-strong": [238, 81, 138],
           "solid-text": [255, 255, 255],
           "text-subtle": [255, 146, 173],
-          text: [253, 211, 232]
+          text: [253, 211, 232],
+          shadow: [0, 0, 0]
         }
       },
       pink: {
@@ -1413,7 +1495,8 @@
           "solid-strong": "rgb(222,81,168)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(255,141,204)",
-          text: "rgb(253,209,234)"
+          text: "rgb(253,209,234)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [33, 18, 29],
@@ -1429,7 +1512,8 @@
           "solid-strong": [222, 81, 168],
           "solid-text": [255, 255, 255],
           "text-subtle": [255, 141, 204],
-          text: [253, 209, 234]
+          text: [253, 209, 234],
+          shadow: [0, 0, 0]
         }
       },
       plum: {
@@ -1447,7 +1531,8 @@
           "solid-strong": "rgb(182,88,196)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(231,150,243)",
-          text: "rgb(244,212,244)"
+          text: "rgb(244,212,244)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [32, 19, 32],
@@ -1463,7 +1548,8 @@
           "solid-strong": [182, 88, 196],
           "solid-text": [255, 255, 255],
           "text-subtle": [231, 150, 243],
-          text: [244, 212, 244]
+          text: [244, 212, 244],
+          shadow: [0, 0, 0]
         }
       },
       purple: {
@@ -1481,7 +1567,8 @@
           "solid-strong": "rgb(154,92,208)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(209,157,255)",
-          text: "rgb(236,217,250)"
+          text: "rgb(236,217,250)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [30, 21, 35],
@@ -1497,7 +1584,8 @@
           "solid-strong": [154, 92, 208],
           "solid-text": [255, 255, 255],
           "text-subtle": [209, 157, 255],
-          text: [236, 217, 250]
+          text: [236, 217, 250],
+          shadow: [0, 0, 0]
         }
       },
       violet: {
@@ -1515,7 +1603,8 @@
           "solid-strong": "rgb(125,102,217)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(186,167,255)",
-          text: "rgb(226,221,254)"
+          text: "rgb(226,221,254)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [27, 21, 37],
@@ -1531,7 +1620,8 @@
           "solid-strong": [125, 102, 217],
           "solid-text": [255, 255, 255],
           "text-subtle": [186, 167, 255],
-          text: [226, 221, 254]
+          text: [226, 221, 254],
+          shadow: [0, 0, 0]
         }
       },
       iris: {
@@ -1549,7 +1639,8 @@
           "solid-strong": "rgb(110,106,222)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(177,169,255)",
-          text: "rgb(224,223,254)"
+          text: "rgb(224,223,254)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [23, 22, 37],
@@ -1565,7 +1656,8 @@
           "solid-strong": [110, 106, 222],
           "solid-text": [255, 255, 255],
           "text-subtle": [177, 169, 255],
-          text: [224, 223, 254]
+          text: [224, 223, 254],
+          shadow: [0, 0, 0]
         }
       },
       indigo: {
@@ -1583,7 +1675,8 @@
           "solid-strong": "rgb(84,114,228)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(158,177,255)",
-          text: "rgb(214,225,255)"
+          text: "rgb(214,225,255)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [20, 23, 38],
@@ -1599,7 +1692,8 @@
           "solid-strong": [84, 114, 228],
           "solid-text": [255, 255, 255],
           "text-subtle": [158, 177, 255],
-          text: [214, 225, 255]
+          text: [214, 225, 255],
+          shadow: [0, 0, 0]
         }
       },
       blue: {
@@ -1617,7 +1711,8 @@
           "solid-strong": "rgb(59,158,255)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(112,184,255)",
-          text: "rgb(194,230,255)"
+          text: "rgb(194,230,255)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [17, 25, 39],
@@ -1633,7 +1728,8 @@
           "solid-strong": [59, 158, 255],
           "solid-text": [255, 255, 255],
           "text-subtle": [112, 184, 255],
-          text: [194, 230, 255]
+          text: [194, 230, 255],
+          shadow: [0, 0, 0]
         }
       },
       cyan: {
@@ -1651,7 +1747,8 @@
           "solid-strong": "rgb(35,175,208)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(76,204,230)",
-          text: "rgb(182,236,247)"
+          text: "rgb(182,236,247)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [16, 27, 32],
@@ -1667,7 +1764,8 @@
           "solid-strong": [35, 175, 208],
           "solid-text": [255, 255, 255],
           "text-subtle": [76, 204, 230],
-          text: [182, 236, 247]
+          text: [182, 236, 247],
+          shadow: [0, 0, 0]
         }
       },
       teal: {
@@ -1685,7 +1783,8 @@
           "solid-strong": "rgb(14,179,158)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(11,216,182)",
-          text: "rgb(173,240,221)"
+          text: "rgb(173,240,221)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [17, 28, 27],
@@ -1701,7 +1800,8 @@
           "solid-strong": [14, 179, 158],
           "solid-text": [255, 255, 255],
           "text-subtle": [11, 216, 182],
-          text: [173, 240, 221]
+          text: [173, 240, 221],
+          shadow: [0, 0, 0]
         }
       },
       jade: {
@@ -1719,7 +1819,8 @@
           "solid-strong": "rgb(39,176,139)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(31,216,164)",
-          text: "rgb(173,240,212)"
+          text: "rgb(173,240,212)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [18, 28, 24],
@@ -1735,7 +1836,8 @@
           "solid-strong": [39, 176, 139],
           "solid-text": [255, 255, 255],
           "text-subtle": [31, 216, 164],
-          text: [173, 240, 212]
+          text: [173, 240, 212],
+          shadow: [0, 0, 0]
         }
       },
       green: {
@@ -1753,7 +1855,8 @@
           "solid-strong": "rgb(51,176,116)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(61,214,140)",
-          text: "rgb(177,241,203)"
+          text: "rgb(177,241,203)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [18, 27, 23],
@@ -1769,7 +1872,8 @@
           "solid-strong": [51, 176, 116],
           "solid-text": [255, 255, 255],
           "text-subtle": [61, 214, 140],
-          text: [177, 241, 203]
+          text: [177, 241, 203],
+          shadow: [0, 0, 0]
         }
       },
       grass: {
@@ -1787,7 +1891,8 @@
           "solid-strong": "rgb(83,179,101)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(113,208,131)",
-          text: "rgb(194,240,194)"
+          text: "rgb(194,240,194)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [20, 26, 21],
@@ -1803,7 +1908,8 @@
           "solid-strong": [83, 179, 101],
           "solid-text": [255, 255, 255],
           "text-subtle": [113, 208, 131],
-          text: [194, 240, 194]
+          text: [194, 240, 194],
+          shadow: [0, 0, 0]
         }
       },
       brown: {
@@ -1821,7 +1927,8 @@
           "solid-strong": "rgb(184,140,103)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(219,181,148)",
-          text: "rgb(242,225,202)"
+          text: "rgb(242,225,202)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [28, 24, 22],
@@ -1837,7 +1944,8 @@
           "solid-strong": [184, 140, 103],
           "solid-text": [255, 255, 255],
           "text-subtle": [219, 181, 148],
-          text: [242, 225, 202]
+          text: [242, 225, 202],
+          shadow: [0, 0, 0]
         }
       },
       bronze: {
@@ -1855,7 +1963,8 @@
           "solid-strong": "rgb(174,140,126)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(212,179,165)",
-          text: "rgb(237,224,217)"
+          text: "rgb(237,224,217)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [28, 25, 23],
@@ -1871,7 +1980,8 @@
           "solid-strong": [174, 140, 126],
           "solid-text": [255, 255, 255],
           "text-subtle": [212, 179, 165],
-          text: [237, 224, 217]
+          text: [237, 224, 217],
+          shadow: [0, 0, 0]
         }
       },
       gold: {
@@ -1889,7 +1999,8 @@
           "solid-strong": "rgb(163,144,115)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(203,185,159)",
-          text: "rgb(232,226,217)"
+          text: "rgb(232,226,217)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [27, 26, 23],
@@ -1905,7 +2016,8 @@
           "solid-strong": [163, 144, 115],
           "solid-text": [255, 255, 255],
           "text-subtle": [203, 185, 159],
-          text: [232, 226, 217]
+          text: [232, 226, 217],
+          shadow: [0, 0, 0]
         }
       },
       sky: {
@@ -1923,7 +2035,8 @@
           "solid-strong": "rgb(168,238,255)",
           "solid-text": "rgb(17,26,39)",
           "text-subtle": "rgb(117,199,240)",
-          text: "rgb(194,243,255)"
+          text: "rgb(194,243,255)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [17, 26, 39],
@@ -1939,7 +2052,8 @@
           "solid-strong": [168, 238, 255],
           "solid-text": [17, 26, 39],
           "text-subtle": [117, 199, 240],
-          text: [194, 243, 255]
+          text: [194, 243, 255],
+          shadow: [0, 0, 0]
         }
       },
       mint: {
@@ -1957,7 +2071,8 @@
           "solid-strong": "rgb(168,245,229)",
           "solid-text": "rgb(15,27,27)",
           "text-subtle": "rgb(88,213,186)",
-          text: "rgb(196,245,225)"
+          text: "rgb(196,245,225)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [15, 27, 27],
@@ -1973,7 +2088,8 @@
           "solid-strong": [168, 245, 229],
           "solid-text": [15, 27, 27],
           "text-subtle": [88, 213, 186],
-          text: [196, 245, 225]
+          text: [196, 245, 225],
+          shadow: [0, 0, 0]
         }
       },
       lime: {
@@ -1991,7 +2107,8 @@
           "solid-strong": "rgb(212,255,112)",
           "solid-text": "rgb(21,26,16)",
           "text-subtle": "rgb(189,229,108)",
-          text: "rgb(227,247,186)"
+          text: "rgb(227,247,186)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [21, 26, 16],
@@ -2007,7 +2124,8 @@
           "solid-strong": [212, 255, 112],
           "solid-text": [21, 26, 16],
           "text-subtle": [189, 229, 108],
-          text: [227, 247, 186]
+          text: [227, 247, 186],
+          shadow: [0, 0, 0]
         }
       },
       yellow: {
@@ -2025,7 +2143,8 @@
           "solid-strong": "rgb(255,255,87)",
           "solid-text": "rgb(27,24,15)",
           "text-subtle": "rgb(245,225,71)",
-          text: "rgb(246,238,180)"
+          text: "rgb(246,238,180)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [27, 24, 15],
@@ -2041,7 +2160,8 @@
           "solid-strong": [255, 255, 87],
           "solid-text": [27, 24, 15],
           "text-subtle": [245, 225, 71],
-          text: [246, 238, 180]
+          text: [246, 238, 180],
+          shadow: [0, 0, 0]
         }
       },
       amber: {
@@ -2059,7 +2179,8 @@
           "solid-strong": "rgb(255,214,10)",
           "solid-text": "rgb(29,24,15)",
           "text-subtle": "rgb(255,202,22)",
-          text: "rgb(255,231,179)"
+          text: "rgb(255,231,179)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [29, 24, 15],
@@ -2075,7 +2196,8 @@
           "solid-strong": [255, 214, 10],
           "solid-text": [29, 24, 15],
           "text-subtle": [255, 202, 22],
-          text: [255, 231, 179]
+          text: [255, 231, 179],
+          shadow: [0, 0, 0]
         }
       },
       orange: {
@@ -2093,7 +2215,8 @@
           "solid-strong": "rgb(255,128,31)",
           "solid-text": "rgb(255,255,255)",
           "text-subtle": "rgb(255,160,87)",
-          text: "rgb(255,224,194)"
+          text: "rgb(255,224,194)",
+          shadow: "rgb(0,0,0)"
         },
         channels: {
           bg: [30, 22, 15],
@@ -2109,7 +2232,8 @@
           "solid-strong": [255, 128, 31],
           "solid-text": [255, 255, 255],
           "text-subtle": [255, 160, 87],
-          text: [255, 224, 194]
+          text: [255, 224, 194],
+          shadow: [0, 0, 0]
         }
       }
     }
@@ -2131,6 +2255,7 @@
     "danger"
   ];
   var colorScale = [
+    "shadow",
     "bg",
     "bg-subtle",
     "tint-subtle",
