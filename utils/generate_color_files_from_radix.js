@@ -69,6 +69,83 @@ const colorsFileContent = prettier.format(`export default { ${colorsFileColors} 
 fs.writeFileSync(`../src/w/colors.js`, colorsFileContent);
 
 /**
+ * Elm Output
+ */
+
+const colorsElmHeader = `
+module W.Theme.Colors exposing ($colorNames)
+
+import Color exposing (Color)
+
+
+type alias ColorScale =
+    { bg : Color
+    , bgSubtle : Color
+    , tint : Color
+    , tintSubtle : Color
+    , tintStrong : Color
+    , accent : Color
+    , accentSubtle : Color
+    , accentStrong : Color
+    , solid : Color
+    , solidSubtle : Color
+    , solidStrong : Color
+    , solidText : Color
+    , text : Color
+    , textSubtle : Color
+    , shadow : Color
+    }
+
+`;
+
+const colorsElm =
+  Object.entries(colors).reduce((acc, [colorScheme, colorSchemeColors]) => {
+    return Object.entries(colorSchemeColors).reduce((acc, [name, values]) => {
+      const colorName = toElmColorName(name, colorScheme);
+
+      return `${acc}
+
+${colorName} : ColorScale
+${colorName} = 
+  ${toElmColorScale(values)}
+`;
+    }, acc);
+  }, colorsElmHeader);
+
+function toElmColorName(name, colorScheme) {
+  return colorScheme === "light" ? name : `${name}Dark`;
+}
+
+function toElmColorScale(values) {
+  const valuesString = Object.entries(values.channels).reduce((acc, [name, value]) => {
+    return `${acc}
+      ${name.replace("-", "").replace("subtle", "Subtle").replace("strong", "Strong").replace("solidtext", "solidText")} = ${toElmColor(value)},`;
+  }, "");
+
+  return `{${valuesString}
+  }`;
+}
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function toElmColor([r, g, b]) {
+  return `Color.rgb255 ${r} ${g} ${b}`;
+}
+
+const colorNamesElm =
+  Object.entries(colors).map(([colorScheme, colorSchemeColors]) => {
+    return Object.entries(colorSchemeColors).map(([name, values]) => {
+      return toElmColorName(name, colorScheme);
+    });
+  }).concat().join(", ");
+
+const colorsElmWithExports = colorsElm.replace("$colorNames", colorNamesElm)
+
+fs.writeFileSync(`../src/w/Colors.elm`, colorsElmWithExports);
+
+/**
  * Gleam Output
  */
 
