@@ -132,34 +132,34 @@ const textColors = colorVariables.reduce((acc, variable) => {
 
 const colorComponents = colorVariables.reduce((acc, variant) => {
 
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}`] = {
+  acc[`.${NAMESPACE}\\/${variant}`] = {
     backgroundColor: rawColorCssVar(`${variant}-tint`),
     borderColor: rawColorCssVar(`${variant}-accent`),
     color: rawColorCssVar(`${variant}-text`),
   };
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:hover)`] = {
+  acc[`.${NAMESPACE}\\/${variant}:is(a,button):is(:hover)`] = {
     backgroundColor: rawColorCssVar(`${variant}-tint-strong`),
     borderColor: rawColorCssVar(`${variant}-accent-strong`),
   };
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:active)`] = {
+  acc[`.${NAMESPACE}\\/${variant}:is(a,button):is(:active)`] = {
     backgroundColor: rawColorCssVar(`${variant}-tint-subtle`),
     borderColor: rawColorCssVar(`${variant}-accent-subtle`),
     color: rawColorCssVar(`${variant}-text-subtle`),
   };
 
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}.${NAMESPACE}-solid`] = {
+  acc[`.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid`] = {
     backgroundColor: rawColorCssVar(`${variant}-solid`),
     color: rawColorCssVar(`${variant}-solid-text`),
   };
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}.${NAMESPACE}-solid:is(a,button):is(:hover)`] = {
+  acc[`.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:hover)`] = {
     backgroundColor: rawColorCssVar(`${variant}-solid-strong`),
   };
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}.${NAMESPACE}-solid:is(a,button):is(:active)`] = {
+  acc[`.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:active)`] = {
     backgroundColor: rawColorCssVar(`${variant}-solid-subtle`),
     color: rawColorCssVarWithAlpha(`${variant}-solid-text`, 0.8),
   };
 
-  acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:focus-visible)`] = {
+  acc[`.${NAMESPACE}\\/${variant}:is(a,button):is(:focus-visible)`] = {
     outline: "2px solid transparent",
     outlineOffset: "2px",
     boxShadow: `0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)}`
@@ -174,13 +174,7 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
   };
 
   return acc;
-}, {
-  ".w": {
-    boxSizing: "border-box",
-    padding: 0,
-    margin: 0,
-  }
-});
+}, {});
 
 /**
  * Export
