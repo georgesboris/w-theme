@@ -2241,7 +2241,7 @@
 
   // src/index.js
   var DEFAULT_SANS_SERIF = `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
-  var FONT_FAMILIES = ["heading", "text", "code"];
+  var FONT_FAMILIES = ["heading", "base", "code"];
   var SIZE_SCALE = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"];
   var fontFamilyValues = FONT_FAMILIES.map((id) => ({ id, cssId: varId(`font-${id}`), cssVar: cssVar(`font-${id}`) }));
   var borderRadiusValues = SIZE_SCALE.map((id) => ({ id, cssId: varId(`radius-${id}`), cssVar: cssVar(`radius-${id}`) }));
@@ -2286,7 +2286,7 @@
     const id = config.id || colorScheme;
     const fontFamilies = {
       heading: config.fontFamilies?.heading || DEFAULT_SANS_SERIF,
-      text: config.fontFamilies?.text || DEFAULT_SANS_SERIF,
+      base: config.fontFamilies?.base || DEFAULT_SANS_SERIF,
       code: config.fontFamilies?.code || "monospace"
     };
     const colors = {
@@ -2340,16 +2340,44 @@
   }
   function setTheme(theme2, options) {
     let styles = "";
-    styles += options?.class ? `.${options.class} { ${getCSSVariables(theme2)} }` : `body { ${getCSSVariables(theme2)} }`;
+    styles += options?.class ? `.${options.class} { ${getCSSDefinitions(theme2)} }` : `body { ${getCSSDefinitions(theme2)} }`;
+    styles += options?.class ? getThemeBaseStyles(`.${options.class}`) : getThemeBaseStyles("body");
     if (options?.darkModeTheme) {
-      styles += options.darkModeClass ? options.class ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }` : `body.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }` : `@media (prefers-color-scheme: dark) { body { ${getCSSVariables(options.darkModeTheme)} } }`;
+      styles += options.darkModeClass ? options.class ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }` : `body.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }` : `@media (prefers-color-scheme: dark) { body { ${getCSSDefinitions(options.darkModeTheme)} } }`;
     }
     appendStyleElement(styles, (el) => el.setAttribute("data-w-theme", true));
+  }
+  function getThemeBaseStyles(prefix) {
+    return `
+${prefix} {
+  background-color: ${cssRGB("base-bg")};
+  color: ${cssRGB("base-text")};
+  font-family: ${cssVar("font-base")};
+}
+${prefix} h1,
+${prefix} h2,
+${prefix} h3,
+${prefix} h4,
+${prefix} h5,
+${prefix} h6 {
+  font-family: ${cssVar("font-heading")};
+}
+${prefix} code,
+${prefix} kbd,
+${prefix} samp,
+${prefix} pre {
+  font-family: ${cssVar("font-code")};
+}
+${prefix} ::selection {
+  background: ${cssRGB("base-text")};
+  color: ${cssRGB("base-bg")};
+}
+`;
   }
   function setBaseStyles(options) {
     appendStyleElement(getCSSBaseStyles(options));
   }
-  function getCSSVariables(theme2) {
+  function getCSSDefinitions(theme2) {
     return [
       themeIdAndColorSchemeVars(theme2),
       toCssVars(fontFamilyValues, theme2.fontFamilies),
@@ -2382,13 +2410,13 @@
           "body {",
           `  background: ${cssRGB("base-bg")};`,
           `  color: ${cssRGB("base-text")};`,
-          `  font-family: ${cssRGB("font-text")};`,
+          `  font-family: ${cssVar("font-base")};`,
           "}",
           "h1, h2, h3, h4, h5, h6 {",
-          `  font-family: ${cssRGB("font-heading")};`,
+          `  font-family: ${cssVar("font-heading")};`,
           "}",
           "code {",
-          `  font-family: ${cssRGB("font-code")};`,
+          `  font-family: ${cssVar("font-code")};`,
           "}"
         ]
       );
@@ -2456,7 +2484,7 @@
     theme,
     setTheme,
     setBaseStyles,
-    getCSSVariables,
+    getCSSDefinitions,
     getCSSBaseStyles,
     colorScale,
     colorValues,

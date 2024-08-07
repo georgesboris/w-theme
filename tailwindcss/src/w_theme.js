@@ -159,14 +159,10 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
     color: rawColorCssVarWithAlpha(`${variant}-solid-text`, 0.8),
   };
 
-  acc[".w-black"] = {
-    color: "purple"
-  };
-
   acc[`.${NAMESPACE}.${NAMESPACE}-${variant}:is(a,button):is(:focus-visible)`] = {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    boxShadow: `0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)}`;
+    boxShadow: `0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)}`
   };
 
   acc[`.${NAMESPACE}-bg-${variant}-solid, .${NAMESPACE}-bg-${variant}-solid-subtle, .${NAMESPACE}-bg-${variant}-solid-strong`] = {
@@ -190,43 +186,9 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
  * Export
  */
 
-// ::selection {
-//   background-color: """ ++ base.text ++ """;
-//   color: """ ++ base.bg ++ """;
-// }
-// .w {
-//   box-sizing: border-box;
-//   padding: 0;
-//   margin: 0;
-// }
-
 module.exports = {
   optionsHandler: (options = {}) => {
-    return ({ addBase, addComponents }) => {
-      if (options.strict) {
-        addBase({
-          body: {
-            background: colors["base-bg"],
-            color: colors["base-bg"],
-            fontFamily: fontFamily.base,
-          },
-          "article, section, header, aside, footer, button, a, p, div, span, ul, li, th, td": {
-            fontFamily: fontFamily.base,
-            color: textColors.DEFAULT,
-          },
-          "h1, h2, h3, h4, h5, h6": {
-            fontFamily: fontFamily.heading,
-          },
-          "code, kbd, samp, pre": {
-            fontFamily: fontFamily.code,
-          },
-          "::selection": {
-            background: colors["base-bg"],
-            color: colors["base-bg"],
-          }
-        });
-      }
-
+    return ({ addComponents }) => {
       if (options.colorComponents ?? true) {
         addComponents(colorComponents);
       }

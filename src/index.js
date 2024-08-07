@@ -12,7 +12,7 @@ import colors from "./w/colors.js"
  *
  * @typedef FontFamilies {
  *   heading: string
- *   text: string
+ *   base: string
  *   code: string
  * }
  *
@@ -61,7 +61,7 @@ import colors from "./w/colors.js"
 
 const DEFAULT_SANS_SERIF = `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`
 
-const FONT_FAMILIES = ["heading", "text", "code"];
+const FONT_FAMILIES = ["heading", "base", "code"];
 
 const SIZE_SCALE = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"]
 
@@ -174,7 +174,7 @@ const colorValues =
  *   danger?: string | ColorScale
  *   fontFamilies?: {
  *     heading?: string
- *     text?: string
+ *     base?: string
  *     code?: string
  *   }
  *   spacingScale?: number
@@ -207,7 +207,7 @@ function theme(config = {}) {
 
   const fontFamilies = {
     heading: config.fontFamilies?.heading || DEFAULT_SANS_SERIF,
-    text: config.fontFamilies?.text || DEFAULT_SANS_SERIF,
+    base: config.fontFamilies?.base || DEFAULT_SANS_SERIF,
     code: config.fontFamilies?.code || "monospace",
   };
 
@@ -298,19 +298,53 @@ function setTheme(theme, options) {
 
   styles +=
     options?.class
-      ? `.${options.class} { ${getCSSVariables(theme)} }`
-      : `body { ${getCSSVariables(theme)} }`
+      ? `.${options.class} { ${getCSSDefinitions(theme)} }`
+      : `body { ${getCSSDefinitions(theme)} }`;
+
+  styles +=
+    options?.class
+      ? getThemeBaseStyles(`.${options.class}`)
+      : getThemeBaseStyles("body");
 
   if (options?.darkModeTheme) {
     styles +=
       (options.darkModeClass)
         ? options.class
-          ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }`
-          : `body.${options.darkModeClass} { ${getCSSVariables(options.darkModeTheme)} }`
-        : `@media (prefers-color-scheme: dark) { body { ${getCSSVariables(options.darkModeTheme)} } }`
+          ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }`
+          : `body.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }`
+        : `@media (prefers-color-scheme: dark) { body { ${getCSSDefinitions(options.darkModeTheme)} } }`
   }
 
   appendStyleElement(styles, (el) => el.setAttribute("data-w-theme", true));
+}
+
+
+function getThemeBaseStyles(prefix) {
+ return `
+${prefix} {
+  background-color: ${cssRGB("base-bg")};
+  color: ${cssRGB("base-text")};
+  font-family: ${cssVar("font-base")};
+}
+${prefix} h1,
+${prefix} h2,
+${prefix} h3,
+${prefix} h4,
+${prefix} h5,
+${prefix} h6 {
+  font-family: ${cssVar("font-heading")};
+}
+${prefix} code,
+${prefix} kbd,
+${prefix} samp,
+${prefix} pre {
+  font-family: ${cssVar("font-code")};
+}
+${prefix} ::selection {
+  background: ${cssRGB("base-text")};
+  color: ${cssRGB("base-bg")};
+}
+`;
 }
 
 /**
@@ -324,13 +358,11 @@ function setBaseStyles(options) {
   appendStyleElement(getCSSBaseStyles(options));
 }
 
-
-
 /**
  * Get the CSS definitions for a given theme.
  * @param {Theme} theme
  */
-function getCSSVariables(theme) {
+function getCSSDefinitions(theme) {
   return [
     themeIdAndColorSchemeVars(theme),
     toCssVars(fontFamilyValues, theme.fontFamilies),
@@ -379,13 +411,13 @@ function getCSSBaseStyles(options) {
         "body {",
         `  background: ${cssRGB("base-bg")};`,
         `  color: ${cssRGB("base-text")};`,
-        `  font-family: ${cssRGB("font-text")};`,
+        `  font-family: ${cssVar("font-base")};`,
         "}",
         "h1, h2, h3, h4, h5, h6 {",
-        `  font-family: ${cssRGB("font-heading")};`,
+        `  font-family: ${cssVar("font-heading")};`,
         "}",
         "code {",
-        `  font-family: ${cssRGB("font-code")};`,
+        `  font-family: ${cssVar("font-code")};`,
         "}"
       ]
     )
@@ -476,7 +508,7 @@ export default {
   theme,
   setTheme,
   setBaseStyles,
-  getCSSVariables,
+  getCSSDefinitions,
   getCSSBaseStyles,
   colorScale,
   colorValues,

@@ -8,65 +8,69 @@
   </head>
   <body>
 
+  <div class="flex flex-col justify-center items-stretch w-full min-h-screen p-[40px] gap-[40px]">
     <!-- theme sampler -->
     {% for theme in ["theme", "theme dark"] %}
-      <article class="p-2xl bg-base-subtle flex justify-center {{ theme }}">
-        <div class="p-xl bg-base rounded-2xl shadow-lg space-y-md max-w-2xl">
+      <div class="{{ theme }}" style="background:transparent;">
+        <article class="p-2xl bg-base-subtle flex justify-center rounded-3xl">
+          <div class="p-xl bg-base rounded-2xl shadow-lg shadow-base-shadow/25 space-y-md max-w-2xl">
 
-          <!-- header + code block -->
-          <div class="flex flex-col gap-lg">
+            <!-- header + code block -->
+            <div class="flex flex-col gap-lg">
 
-            <!-- header -->
-            <div>
-              <h1 class="text-xl font-bold">w theme</h1>
-              <p class="text-subtle text-sm">A theme schema designed for consistency and flexibility.</p>
+              <!-- header -->
+              <div>
+                <h1 class="text-xl font-bold">w theme</h1>
+                <p class="text-subtle text-sm">A theme schema designed for consistency and flexibility.</p>
+              </div>
+
+
             </div>
 
+            <!-- color samples -->
+            <div class="col-span-2 grid grid-cols-2 gap-lg">
+              {% for variant in palette %}
+                <article class="flex flex-col gap-md bg-{{variant}}-subtle border border-solid border-{{variant}}-tint p-md shadow shadow-{{variant}}-text-subtle rounded-md">
 
-          </div>
-
-          <!-- color samples -->
-          <div class="col-span-2 grid grid-cols-2 gap-lg">
-            {% for variant in palette %}
-              <article class="flex flex-col gap-md bg-{{variant}}-subtle border border-solid border-{{variant}}-tint p-md shadow shadow-{{variant}}-text-subtle rounded-md">
-
-                <div class="grid grid-cols-5 items-center">
-                  <!-- heading -->
-                  <div class="col-span-3">
-                    <h1 class="text-xs text-left font-bold leading-none tracking-wide uppercase">{{variant}}</h1>
-                  </div>
-
-                  <div class="col-span-2 grid grid-cols-2 gap-sm">
-                    <!-- <button class="text-sm tracking-wide transition rounded p-xs px-sm outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring ring-{{ variant }}-accent-subtle bg-{{ variant }}-tint hover:bg-{{ variant }}-tint active:bg-{{ variant }}-tint-subtle"> -->
-                    <button class="w w-{{ variant }} transition rounded p-xs px-sm">
-                      A
-                    </button>
-                    <button class="w w-{{ variant }} w-solid transition rounded p-xs px-sm">
-                      B
-                    </button>
-                  </div>
-                </div>
-
-                <div class="flex justify-between">
-                  {% for color in colorScale %}
-                    <div
-                      class="w-lg h-lg rounded-full border border-2 border-base"
-                      style="background:rgb(var(--w-{{ variant }}-{{ color }}))">
+                  <div class="grid grid-cols-5 items-center">
+                    <!-- heading -->
+                    <div class="col-span-3">
+                      <h1 class="text-xs text-left font-bold leading-none tracking-wide uppercase">{{variant}}</h1>
                     </div>
-                  {% endfor %}
-                </div>
 
-              </article>
+                    <div class="col-span-2 grid grid-cols-2 gap-sm">
+                      <!-- <button class="text-sm tracking-wide transition rounded p-xs px-sm outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring ring-{{ variant }}-accent-subtle bg-{{ variant }}-tint hover:bg-{{ variant }}-tint active:bg-{{ variant }}-tint-subtle"> -->
+                      <button class="w w-{{ variant }} transition rounded p-xs px-sm">
+                        A
+                      </button>
+                      <button class="w w-{{ variant }} w-solid transition rounded p-xs px-sm">
+                        B
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-between">
+                    {% for color in colorScale %}
+                      <div
+                        class="w-lg h-lg rounded-full border border-2 border-base"
+                        style="background:rgb(var(--w-{{ variant }}-{{ color }}))">
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                </article>
 
 
-            {% endfor %}
+              {% endfor %}
+            </div>
+
           </div>
-
-        </div>
-      </article>
+        </article>
+      </div>
     {% endfor %}
+    </div>
 
     <script type="module" src="/index.mjs"></script>
-    <script type="module" src="/w-debugger.js"></script>
+    <!-- <script type="module" src="/w-debugger.js"></script> -->
   </body>
 </html>
