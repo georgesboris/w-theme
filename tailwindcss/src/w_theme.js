@@ -69,7 +69,7 @@ const spacings = {
 const colorVariants = [
   ["DEFAULT", "bg"],
   ["bg", "bg"],
-  ["subtle", "bg-subtle"],
+  ["bg-subtle", "bg-subtle"],
   ["tint", "tint"],
   ["tint-subtle", "tint-subtle"],
   ["tint-strong", "tint-strong"],
