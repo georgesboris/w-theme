@@ -9,7 +9,7 @@
     "test": "node --test test/"
   },
   "peerDependencies": {
-    "tailwindcss": ">=3.4.0"
+    "tailwindcss": ">=3.4.7"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3"
