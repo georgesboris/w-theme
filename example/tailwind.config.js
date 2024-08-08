@@ -5,7 +5,8 @@ module.exports = {
     require("w-theme/tailwindcss")({
       strict: true,
       useSpacing: true,
-      strictSpacing: true
+      strictSpacing: true,
+      colorComponents: true
     })
   ],
 }

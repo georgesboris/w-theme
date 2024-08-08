@@ -183,7 +183,7 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
 module.exports = {
   optionsHandler: (options = {}) => {
     return ({ addComponents }) => {
-      if (options.colorComponents ?? true) {
+      if (options.colorComponents ?? false) {
         addComponents(colorComponents);
       }
     };
