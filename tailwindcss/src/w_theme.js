@@ -69,7 +69,7 @@ const colors = {
   "accent": twCssVar("accent"),
   "accent-subtle": twCssVar("accent-subtle"),
   "accent-strong": twCssVar("accent-strong"),
-  "solid": twCssVar("solid"),
+  "solid-color": twCssVar("solid"),
   "solid-subtle": twCssVar("solid-subtle"),
   "solid-strong": twCssVar("solid-strong"),
   "solid-text": twCssVar("solid-text"),
