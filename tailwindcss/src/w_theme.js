@@ -46,6 +46,7 @@ const borderRadius = {
 
 const spacings = {
   none: "0",
+  "0": "0",
   px: "1px",
   xs: cssVar("spacing-xs"),
   sm: cssVar("spacing-sm"),
