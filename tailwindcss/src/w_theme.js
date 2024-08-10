@@ -2,21 +2,15 @@
  * Constants
  */
 
-const NAMESPACE = "w";
-
 function cssVar(id) {
-  return `var(--${NAMESPACE}-${id})`;
+  return `var(--w-${id})`;
 }
 
-function rawColorCssVarWithAlpha(id, alpha) {
-  return `rgb(${cssVar(id)} / ${alpha})`;
+function cssColor(id) {
+  return `rgb(${cssVar(id)})`;
 }
 
-function rawColorCssVar(id) {
-  return `rgb(${cssVar(id)} / 1.0)`;
-}
-
-function colorCssVar(id) {
+function twCssVar(id) {
   return `rgb(${cssVar(id)} / <alpha-value>)`;
 }
 
@@ -66,21 +60,37 @@ const spacings = {
  * Colors
  */
 
-const colorVariants = [
-  ["DEFAULT", "bg"],
-  ["bg", "bg"],
-  ["bg-subtle", "bg-subtle"],
-  ["tint", "tint"],
-  ["tint-subtle", "tint-subtle"],
-  ["tint-strong", "tint-strong"],
-  ["accent", "accent"],
-  ["accent-subtle", "accent-subtle"],
-  ["accent-strong", "accent-strong"],
-  ["solid", "solid"],
-  ["solid-subtle", "solid-subtle"],
-  ["solid-strong", "solid-strong"],
-  ["shadow", "shadow"],
-];
+const colors = {
+  "bg": twCssVar("bg"),
+  "bg-subtle": twCssVar("bg-subtle"),
+  "tint": twCssVar("tint"),
+  "tint-subtle": twCssVar("tint-subtle"),
+  "tint-strong": twCssVar("tint-strong"),
+  "accent": twCssVar("accent"),
+  "accent-subtle": twCssVar("accent-subtle"),
+  "accent-strong": twCssVar("accent-strong"),
+  "solid": twCssVar("solid"),
+  "solid-subtle": twCssVar("solid-subtle"),
+  "solid-strong": twCssVar("solid-strong"),
+  "solid-text": twCssVar("solid-text"),
+  "text-subtle": twCssVar("text-subtle"),
+  "text": twCssVar("text"),
+  "shadow": twCssVar("shadow"),
+};
+
+/**
+ * Text Colors
+ */
+
+const textColors = {
+  "default": twCssVar("text"),
+  "subtle": twCssVar("text-subtle"),
+  "solid": twCssVar("solid-text")
+}
+
+/**
+ * Text Components (default color inside backgrounds)
+ */
 
 const colorVariables = [
   "base",
@@ -91,90 +101,72 @@ const colorVariables = [
   "danger"
 ];
 
-const colors = colorVariables.reduce((acc, variable) => {
-  acc[variable] = colorVariants.reduce((accum, [k, v]) => {
-    accum[k] = colorCssVar(`${variable}-${v}`);
-    return accum;
-  }, {});
-
-  return acc;
-}, {});
-
-/**
- * Text Colors
- */
-
-const textColorVariants = [
-  ["DEFAULT", "text"],
-  ["text", "text"],
-  ["subtle", "text-subtle"],
-  ["solid", "solid-text"]
-];
-
-const textColors = colorVariables.reduce((acc, variable) => {
-  if (variable !== "base") {
-    acc[variable] = textColorVariants.reduce((accum, [k, v]) => {
-      accum[k] = colorCssVar(`${variable}-${v}`);
-      return accum;
-    }, {});
-  }
-
+const colorComponents = colorVariables.reduce((acc, variant) => {
+  acc[`.w\\/${variant}`] =
+    {
+      "--w-color": variant,
+      "--w-bg": `var(--w-${variant}-bg)`,
+      "--w-bg-subtle": `var(--w-${variant}-bg-subtle)`,
+      "--w-tint": `var(--w-${variant}-tint)`,
+      "--w-tint-subtle": `var(--w-${variant}-tint-subtle)`,
+      "--w-tint-strong": `var(--w-${variant}-tint-strong)`,
+      "--w-accent": `var(--w-${variant}-accent)`,
+      "--w-accent-subtle": `var(--w-${variant}-accent-subtle)`,
+      "--w-accent-strong": `var(--w-${variant}-accent-strong)`,
+      "--w-solid": `var(--w-${variant}-solid)`,
+      "--w-solid-subtle": `var(--w-${variant}-solid-subtle)`,
+      "--w-solid-strong": `var(--w-${variant}-solid-strong)`,
+      "--w-solid-text": `var(--w-${variant}-solid-text)`,
+      "--w-text": `var(--w-${variant}-text)`,
+      "--w-text-subtle": `var(--w-${variant}-text-subtle)`,
+      "--w-shadow": `var(--w-${variant}-shadow)`,
+      "color": cssColor("text"),
+    };
   return acc;
 }, {
-  DEFAULT: colorCssVar("base-text"),
-  subtle: colorCssVar("base-text-subtle"),
-  solid: colorCssVar("base-solid-text")
-});
-
-/**
- * Text Components (default color inside backgrounds)
- */
-
-const colorComponents = colorVariables.reduce((acc, variant) => {
-
-  acc[`.${NAMESPACE}\\/${variant}`] = {
-    backgroundColor: rawColorCssVar(`${variant}-tint`),
-    borderColor: rawColorCssVar(`${variant}-accent`),
-    color: rawColorCssVar(`${variant}-text`),
-  };
-  acc[`.${NAMESPACE}\\/${variant}:is(a,button):is(:hover)`] = {
-    backgroundColor: rawColorCssVar(`${variant}-tint-strong`),
-    borderColor: rawColorCssVar(`${variant}-accent-strong`),
-  };
-  acc[`.${NAMESPACE}\\/${variant}:is(a,button):is(:active)`] = {
-    backgroundColor: rawColorCssVar(`${variant}-tint-subtle`),
-    borderColor: rawColorCssVar(`${variant}-accent-subtle`),
-    color: rawColorCssVar(`${variant}-text-subtle`),
-  };
-
-  acc[`.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid`] = {
-    backgroundColor: rawColorCssVar(`${variant}-solid`),
-    color: rawColorCssVar(`${variant}-solid-text`),
-  };
-  acc[`.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:hover)`] = {
-    backgroundColor: rawColorCssVar(`${variant}-solid-strong`),
-  };
-  acc[`.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:active)`] = {
-    backgroundColor: rawColorCssVar(`${variant}-solid-subtle`),
-    color: rawColorCssVarWithAlpha(`${variant}-solid-text`, 0.8),
-  };
-
-  acc[`.${NAMESPACE}\\/${variant}:is(a,button):is(:focus-visible)`] = {
+  ".w\\/tint": {
+    backgroundColor: "rgb(var(--w-tint))",
+    borderColor: "rgb(var(--w-accent))",
+    color: "rgb(var(--w-text))",
+  },
+  ".w\\/tint:is(a,button):is(:hover)": {
+    backgroundColor: "rgb(var(--w-tint-strong))",
+    borderColor: "rgb(var(--w-accent-strong))",
+  },
+  ".w\\/tint:is(a,button):is(:active)": {
+    backgroundColor: "rgb(var(--w-tint-subtle))",
+    borderColor: "rgb(var(--w-accent-subtle))",
+  },
+  ".w\\/solid": {
+    backgroundColor: "rgb(var(--w-solid))",
+    borderColor: "rgb(var(--w-accent))",
+    color: "rgb(var(--w-solid-text)) !important",
+  },
+  ".w\\/solid:is(a,button):is(:hover)": {
+    backgroundColor: "rgb(var(--w-solid-strong))",
+    borderColor: "rgb(var(--w-accent-strong))",
+  },
+  ".w\\/solid:is(a,button):is(:active)": {
+    backgroundColor: "rgb(var(--w-solid-subtle))",
+    borderColor: "rgb(var(--w-accent-subtle))",
+  },
+  ".w\\/tint:is(a,button):is(:focus-visible)": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    boxShadow: `0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)}`
-  };
+    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
+  },
+  ".w\\/solid:is(a,button):is(:focus-visible)": {
+    outline: "2px solid transparent",
+    outlineOffset: "2px",
+    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
+  },
+  ".w\\/focus:is(a,button):is(:focus-visible)": {
+    outline: "2px solid transparent",
+    outlineOffset: "2px",
+    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
+  },
+});
 
-  acc[`.${NAMESPACE}-bg-${variant}-solid, .${NAMESPACE}-bg-${variant}-solid-subtle, .${NAMESPACE}-bg-${variant}-solid-strong`] = {
-    color: rawColorCssVar(`${variant}-solid-text`)
-  };
-
-  acc[`.${NAMESPACE}-bg-${variant}, .${NAMESPACE}-bg-${variant}-subtle, .${NAMESPACE}-bg-${variant}-tint, .${NAMESPACE}-bg-${variant}-tint-subtle, .${NAMESPACE}-bg-${variant}-tint-strong`] = {
-    color: rawColorCssVar(`${variant}-text`)
-  };
-
-  return acc;
-}, {});
 
 /**
  * Export
@@ -182,7 +174,16 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
 
 module.exports = {
   optionsHandler: (options = {}) => {
-    return ({ addBase }) => {
+    return ({ addBase, addComponents }) => {
+      addComponents({
+        ".bg": {
+          backgroundColor: cssColor("bg")
+        },
+        ".bg-subtle": {
+          backgroundColor: cssColor("bg-subtle")
+        },
+      })
+
       if (options.colorComponents ?? false) {
         addBase(colorComponents);
       }

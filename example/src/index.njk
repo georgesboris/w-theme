@@ -12,8 +12,8 @@
     <!-- theme sampler -->
     {% for theme in ["theme", "theme dark"] %}
       <div class="{{ theme }}" style="background:transparent;">
-        <article class="p-2xl bg-base-subtle flex justify-center rounded-3xl">
-          <div class="p-xl bg-base rounded-2xl shadow-lg shadow-base-shadow/25 space-y-md max-w-2xl">
+        <article class="p-2xl bg-subtle flex justify-center rounded-3xl">
+          <div class="p-xl bg rounded-2xl shadow-lg shadow-shadow/25 space-y-md max-w-2xl">
 
             <!-- header + code block -->
             <div class="flex flex-col gap-lg">
@@ -30,7 +30,7 @@
             <!-- color samples -->
             <div class="col-span-2 grid grid-cols-2 gap-lg">
               {% for variant in palette %}
-                <article class="flex flex-col gap-md bg-{{variant}}-subtle border border-solid border-{{variant}}-tint p-md shadow shadow-{{variant}}-text-subtle rounded-md">
+                <article class="w/{{variant}} bg-subtle flex flex-col gap-md border border-solid border-tint p-md shadow shadow-shadow/25 rounded-md">
 
                   <div class="grid grid-cols-5 items-center">
                     <!-- heading -->
@@ -39,8 +39,7 @@
                     </div>
 
                     <div class="col-span-2 grid grid-cols-2 gap-sm">
-                      <!-- <button class="text-sm tracking-wide transition rounded p-xs px-sm outline-none ring-offset-1 ring-offset-{{ variant }} focus:ring ring-{{ variant }}-accent-subtle bg-{{ variant }}-tint hover:bg-{{ variant }}-tint active:bg-{{ variant }}-tint-subtle"> -->
-                      <button class="w/{{ variant }} transition rounded p-xs px-sm">
+                      <button class="w/{{ variant }} w/tint transition rounded p-xs px-sm">
                         A
                       </button>
                       <button class="w/{{ variant }} w/solid transition rounded p-xs px-sm">
@@ -52,7 +51,7 @@
                   <div class="flex justify-between">
                     {% for color in colorScale %}
                       <div
-                        class="w-lg h-lg rounded-full border border-2 border-base"
+                        class="w-lg h-lg rounded-full border border-2 border-bg"
                         style="background:rgb(var(--w-{{ variant }}-{{ color }}))">
                       </div>
                     {% endfor %}

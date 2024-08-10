@@ -285,7 +285,8 @@ function toThemeRadius(radius = {}, scaleFactor) {
 // ---------------------------------------------------------------------------
 
 /**
- * Applies theme to the body of the document or to a specific class.
+ * Applies a theme to the body of the document or to a specific class.
+ * Optionally also applies a dark theme based on a class or system preferences.
  * @param {Theme} theme
  * @param {?{
  *   class?: bool
@@ -293,37 +294,55 @@ function toThemeRadius(radius = {}, scaleFactor) {
  *   darkModeClass?: bool
  * }} options
  */
+
 function setTheme(theme, options) {
+  appendStyleElement(
+    getThemeCSS(theme, options),
+    (el) => el.setAttribute("data-w-theme", true)
+  );
+}
+
+/**
+ * Gets the CSS definitions for a given theme and its display options.
+ * @param {Theme} theme
+ * @param {?{
+ *   class?: bool
+ *   darkModeTheme?: theme
+ *   darkModeClass?: bool
+ * }} options
+ */
+
+function getThemeCSS(theme, options) {
   let styles = "";
 
   styles +=
     options?.class
-      ? `.${options.class} { ${getCSSDefinitions(theme)} }`
-      : `body { ${getCSSDefinitions(theme)} }`;
+      ? `.${options.class} { ${getThemeBaseCSS(theme)} ${getThemeColorsCSS(theme)} }`
+      : `body { ${getThemeBaseCSS(theme)} ${getThemeColorsCSS(theme)} }`;
 
   styles +=
     options?.class
-      ? getThemeBaseStyles(`.${options.class}`)
-      : getThemeBaseStyles("body");
+      ? getThemeRootCSS(`.${options.class}`)
+      : getThemeRootCSS("body");
 
   if (options?.darkModeTheme) {
     styles +=
       (options.darkModeClass)
         ? options.class
-          ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }`
-          : `body.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }`
-        : `@media (prefers-color-scheme: dark) { body { ${getCSSDefinitions(options.darkModeTheme)} } }`
+          ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getThemeColorsCSS(options.darkModeTheme)} }`
+          : `body.${options.darkModeClass} { ${getThemeColorsCSS(options.darkModeTheme)} }`
+        : `@media (prefers-color-scheme: dark) { body { ${getThemeColorsCSS(options.darkModeTheme)} } }`
   }
 
-  appendStyleElement(styles, (el) => el.setAttribute("data-w-theme", true));
+  return styles
 }
 
 
-function getThemeBaseStyles(prefix) {
+function getThemeRootCSS(prefix) {
  return `
 ${prefix} {
-  background-color: ${cssRGB("base-bg")};
-  color: ${cssRGB("base-text")};
+  background-color: ${cssRGB("bg")};
+  color: ${cssRGB("text")};
   font-family: ${cssVar("font-base")};
 }
 ${prefix} h1,
@@ -341,38 +360,41 @@ ${prefix} pre {
   font-family: ${cssVar("font-code")};
 }
 ${prefix} ::selection {
-  background: ${cssRGB("base-text")};
-  color: ${cssRGB("base-bg")};
+  background: ${cssRGB("text")};
+  color: ${cssRGB("bg")};
 }
 `;
 }
 
-/**
- * Applies theme base styles.
- * @param {?{
- *   base?: bool,
- *   selectors?: bool
- * }} options
- */
-function setBaseStyles(options) {
-  appendStyleElement(getCSSBaseStyles(options));
-}
 
 /**
  * Get the CSS definitions for a given theme.
  * @param {Theme} theme
  */
-function getCSSDefinitions(theme) {
+function getThemeBaseCSS(theme) {
   return [
     themeIdAndColorSchemeVars(theme),
     toCssVars(fontFamilyValues, theme.fontFamilies),
     toCssVars(spacingValues, theme.spacing),
     toCssVars(borderRadiusValues, theme.borderRadius),
-    toCssVarsWithVariants(colorValues, theme.colors)
   ]
     .flat()
-    .map(([k, v]) => k + ":" + v)
-    .join(";")
+    .map(([k, v]) => `${k}: ${v};`)
+    .join("");
+}
+
+/**
+ * Get the CSS definitions for a given theme colors.
+ * @param {Theme} theme
+ */
+function getThemeColorsCSS(theme) {
+  const baseVariant = colorScale.reduce((acc, color) => {
+    return `${acc} ${varId(color)}: ${cssVar(`base-${color}`)};`;
+  }, "--w-color: base;");
+  
+  return colorValues.reduce((acc, { variant, id, cssId }) => {
+    return `${acc} ${cssId}: ${theme.colors[variant][id]};`;
+  }, baseVariant);
 }
 
 function themeIdAndColorSchemeVars(theme) {
@@ -386,79 +408,91 @@ function toCssVars(values, themeValues) {
   return values.map(({ id, cssId }) => [cssId, themeValues[id]]);
 }
 
-function toCssVarsWithVariants(values, themeValues) {
-  return values.map(({ variant, id, cssId }) => {
-    return [cssId, themeValues[variant][id]];
-  });
-}
-
 /**
- * Get the CSS definitions for the base styles of a theme.
+ * Applies theme components styles.
  * @param {?{
  *   base?: bool,
  *   selectors?: bool
  * }} options
  */
-function getCSSBaseStyles(options) {
-  const setBase = options?.base ?? true;
-  const setSelectors = options?.selectors ?? true;
+function setThemeComponents(options) {
+  appendStyleElement(getThemeComponentsCSS(options));
+}
 
+/**
+ * Get the CSS definitions for w-theme components.
+ */
+
+function getThemeComponentsCSS() {
   let styles = [];
 
-  if (setBase) {
-    styles = styles.concat(
-      [
-        "body {",
-        `  background: ${cssRGB("base-bg")};`,
-        `  color: ${cssRGB("base-text")};`,
-        `  font-family: ${cssVar("font-base")};`,
-        "}",
-        "h1, h2, h3, h4, h5, h6 {",
-        `  font-family: ${cssVar("font-heading")};`,
-        "}",
-        "code {",
-        `  font-family: ${cssVar("font-code")};`,
-        "}"
-      ]
-    )
-  }
+  /**
+   * .w/{variant}
+   */
 
-  if (setSelectors) {
-    palette.forEach((variant) => {
-      styles = styles.concat([
-        `.${NAMESPACE}\\/${variant} {`,
-        `  backgroundColor: ${rawColorCssVar(`${variant}-tint`)};`,
-        `  borderColor: ${rawColorCssVar(`${variant}-nt`)};`,
-        `  color: ${rawColorCssVar(`${variant}-text`)};`,
-        "}",
-        `.${NAMESPACE}\\/${variant}:is(a,button):is(:hover) {`,
-        `  backgroundColor: ${rawColorCssVar(`${variant}-tint-strong`)};`,
-        `  borderColor: ${rawColorCssVar(`${variant}-nt-strong`)};`,
-        "}",
-        `.${NAMESPACE}\\/${variant}:is(a,button):is(:active) {`,
-        `  backgroundColor: ${rawColorCssVar(`${variant}-tint-subtle`)};`,
-        `  borderColor: ${rawColorCssVar(`${variant}-nt-subtle`)};`,
-        `  color: ${rawColorCssVar(`${variant}-text-subtle`)};`,
-        "}",
-        `.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid {`,
-        `  backgroundColor: ${rawColorCssVar(`${variant}-solid`)};`,
-        `  color: ${rawColorCssVar(`${variant}-solid-text`)};`,
-        "}",
-        `.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:hover) {`,
-        `  backgroundColor: ${rawColorCssVar(`${variant}-solid-strong`)}`,
-        "}",
-        `.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:active) {`,
-        `  backgroundColor: ${rawColorCssVar(`${variant}-solid-subtle`)};`,
-        `  color: ${rawColorCssVarWithAlpha(`${variant}-solid-text`, 0.8)};`,
-        "}",
-        `.${NAMESPACE}\\/${variant}:is(a,button):is(:focus-visible) {`,
-        `  outline: 2px solid transparent;`,
-        `  outlineOffset: 2px;`,
-        `  boxShadow: 0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)};`,
-        `}`
-      ]);
-    });
-  }
+  palette.forEach((variant) => {
+    styles = styles.push(`${wClass(variant)} {`);
+    styles = styles.push(`--w-color: ${variant};`);
+    styles = styles.concat(colorScale.map((color) =>
+        `  ${varId(color)}: ${cssVar(`${variant}-${color}`)};`,
+    ))
+    styles = styles.push(`color: ${cssRGB("text")};`);
+    styles = styles.push("}");
+  });
+
+  /**
+   * .w/tint
+   */
+
+  styles = styles.concat([
+    `${wClass("tint")} {`,
+    `  background-color: ${cssRGB("tint")};`,
+    `  border-color: ${cssRGB("accent")};`,
+    `  color: ${cssRGB("text")};`,
+    "}"
+    `${wClass("tint")}:is(a,button):is(:hover) {`,
+    `  background-color: ${cssRGB("tint-strong")};`,
+    `  border-color: ${cssRGB("accent-strong")};`,
+    "}"
+    `${wClass("tint")}:is(a,button):is(:active) {`,
+    `  background-color: ${cssRGB("tint-subtle")};`,
+    `  border-color: ${cssRGB("accent-subtle")};`,
+    "}"
+  ])
+
+  /**
+   * .w/solid
+   */
+
+  styles = styles.concat([
+    `${wClass("solid")} {`,
+    `  background-color: ${cssRGB("solid")};`,
+    `  border-color: ${cssRGB("accent")};`,
+    `  color: ${cssRGB("solid-text")} !important;`,
+    "}"
+    `${wClass("solid")}:is(a,button):is(:hover) {`,
+    `  background-color: ${cssRGB("solid-strong")};`,
+    `  border-color: ${cssRGB("accent-strong")};`,
+    "}"
+    `${wClass("solid")}:is(a,button):is(:active) {`,
+    `  background-color: ${cssRGB("solid-subtle")};`,
+    `  border-color: ${cssRGB("accent-subtle")};`,
+    "}"
+  ])
+
+  /**
+   * .w/focus
+   */
+
+  styles = styles.concat([
+    `${wClass("tint")}:is(a,button):is(:focus-visible), `,
+    `${wClass("solid")}:is(a,button):is(:focus-visible), `,
+    `${wClass("focus")}:is(:focus-visible) {`,
+    `  outline: 2px solid transparent;`,
+    `  outline-offset: 2px;`,
+    `  box-shadow: 0 0 0 1px ${cssRGB("base-bg")}, 0 0 0 9px ${cssRGB(`solid-subtle`)};`,
+    "}"
+  ])
 
   return styles.join("");
 }
@@ -467,6 +501,10 @@ function getCSSBaseStyles(options) {
 /**
  * Helpers
  */
+
+function wClass(v) {
+  `.${NAMESPACE}\/${v}`
+}
 
 function varId(id) {
   return `--w-${id}`;
@@ -507,9 +545,9 @@ function mapValues(obj, fn) {
 export default {
   theme,
   setTheme,
-  setBaseStyles,
-  getCSSDefinitions,
-  getCSSBaseStyles,
+  getThemeCSS,
+  setThemeComponents,
+  getThemeComponentsCSS,
   colorScale,
   colorValues,
   fontFamilyValues,

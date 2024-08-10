@@ -2339,19 +2339,25 @@
     };
   }
   function setTheme(theme2, options) {
-    let styles = "";
-    styles += options?.class ? `.${options.class} { ${getCSSDefinitions(theme2)} }` : `body { ${getCSSDefinitions(theme2)} }`;
-    styles += options?.class ? getThemeBaseStyles(`.${options.class}`) : getThemeBaseStyles("body");
-    if (options?.darkModeTheme) {
-      styles += options.darkModeClass ? options.class ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }` : `body.${options.darkModeClass} { ${getCSSDefinitions(options.darkModeTheme)} }` : `@media (prefers-color-scheme: dark) { body { ${getCSSDefinitions(options.darkModeTheme)} } }`;
-    }
-    appendStyleElement(styles, (el) => el.setAttribute("data-w-theme", true));
+    appendStyleElement(
+      getThemeCSS(theme2, options),
+      (el) => el.setAttribute("data-w-theme", true)
+    );
   }
-  function getThemeBaseStyles(prefix) {
+  function getThemeCSS(theme2, options) {
+    let styles = "";
+    styles += options?.class ? `.${options.class} { ${getThemeBaseCSS(theme2)} ${getThemeColorsCSS(theme2)} }` : `body { ${getThemeBaseCSS(theme2)} ${getThemeColorsCSS(theme2)} }`;
+    styles += options?.class ? getThemeRootCSS(`.${options.class}`) : getThemeRootCSS("body");
+    if (options?.darkModeTheme) {
+      styles += options.darkModeClass ? options.class ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getThemeColorsCSS(options.darkModeTheme)} }` : `body.${options.darkModeClass} { ${getThemeColorsCSS(options.darkModeTheme)} }` : `@media (prefers-color-scheme: dark) { body { ${getThemeColorsCSS(options.darkModeTheme)} } }`;
+    }
+    return styles;
+  }
+  function getThemeRootCSS(prefix) {
     return `
 ${prefix} {
-  background-color: ${cssRGB("base-bg")};
-  color: ${cssRGB("base-text")};
+  background-color: ${cssRGB("bg")};
+  color: ${cssRGB("text")};
   font-family: ${cssVar("font-base")};
 }
 ${prefix} h1,
@@ -2369,22 +2375,26 @@ ${prefix} pre {
   font-family: ${cssVar("font-code")};
 }
 ${prefix} ::selection {
-  background: ${cssRGB("base-text")};
-  color: ${cssRGB("base-bg")};
+  background: ${cssRGB("text")};
+  color: ${cssRGB("bg")};
 }
 `;
   }
-  function setBaseStyles(options) {
-    appendStyleElement(getCSSBaseStyles(options));
-  }
-  function getCSSDefinitions(theme2) {
+  function getThemeBaseCSS(theme2) {
     return [
       themeIdAndColorSchemeVars(theme2),
       toCssVars(fontFamilyValues, theme2.fontFamilies),
       toCssVars(spacingValues, theme2.spacing),
-      toCssVars(borderRadiusValues, theme2.borderRadius),
-      toCssVarsWithVariants(colorValues, theme2.colors)
-    ].flat().map(([k, v]) => k + ":" + v).join(";");
+      toCssVars(borderRadiusValues, theme2.borderRadius)
+    ].flat().map(([k, v]) => `${k}: ${v};`).join("");
+  }
+  function getThemeColorsCSS(theme2) {
+    const baseVariant = colorScale.reduce((acc, color) => {
+      return `${acc} ${varId(color)}: ${cssVar(`base-${color}`)};`;
+    }, "--w-color: base;");
+    return colorValues.reduce((acc, { variant, id, cssId }) => {
+      return `${acc} ${cssId}: ${theme2.colors[variant][id]};`;
+    }, baseVariant);
   }
   function themeIdAndColorSchemeVars(theme2) {
     return [
@@ -2395,69 +2405,58 @@ ${prefix} ::selection {
   function toCssVars(values, themeValues) {
     return values.map(({ id, cssId }) => [cssId, themeValues[id]]);
   }
-  function toCssVarsWithVariants(values, themeValues) {
-    return values.map(({ variant, id, cssId }) => {
-      return [cssId, themeValues[variant][id]];
-    });
+  function setThemeComponents(options) {
+    appendStyleElement(getThemeComponentsCSS(options));
   }
-  function getCSSBaseStyles(options) {
-    const setBase = options?.base ?? true;
-    const setSelectors = options?.selectors ?? true;
+  function getThemeComponentsCSS() {
     let styles = [];
-    if (setBase) {
-      styles = styles.concat(
-        [
-          "body {",
-          `  background: ${cssRGB("base-bg")};`,
-          `  color: ${cssRGB("base-text")};`,
-          `  font-family: ${cssVar("font-base")};`,
-          "}",
-          "h1, h2, h3, h4, h5, h6 {",
-          `  font-family: ${cssVar("font-heading")};`,
-          "}",
-          "code {",
-          `  font-family: ${cssVar("font-code")};`,
-          "}"
-        ]
-      );
-    }
-    if (setSelectors) {
-      palette.forEach((variant) => {
-        styles = styles.concat([
-          `.${NAMESPACE}\\/${variant} {`,
-          `  backgroundColor: ${rawColorCssVar(`${variant}-tint`)};`,
-          `  borderColor: ${rawColorCssVar(`${variant}-nt`)};`,
-          `  color: ${rawColorCssVar(`${variant}-text`)};`,
-          "}",
-          `.${NAMESPACE}\\/${variant}:is(a,button):is(:hover) {`,
-          `  backgroundColor: ${rawColorCssVar(`${variant}-tint-strong`)};`,
-          `  borderColor: ${rawColorCssVar(`${variant}-nt-strong`)};`,
-          "}",
-          `.${NAMESPACE}\\/${variant}:is(a,button):is(:active) {`,
-          `  backgroundColor: ${rawColorCssVar(`${variant}-tint-subtle`)};`,
-          `  borderColor: ${rawColorCssVar(`${variant}-nt-subtle`)};`,
-          `  color: ${rawColorCssVar(`${variant}-text-subtle`)};`,
-          "}",
-          `.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid {`,
-          `  backgroundColor: ${rawColorCssVar(`${variant}-solid`)};`,
-          `  color: ${rawColorCssVar(`${variant}-solid-text`)};`,
-          "}",
-          `.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:hover) {`,
-          `  backgroundColor: ${rawColorCssVar(`${variant}-solid-strong`)}`,
-          "}",
-          `.${NAMESPACE}\\/${variant}.${NAMESPACE}\\/solid:is(a,button):is(:active) {`,
-          `  backgroundColor: ${rawColorCssVar(`${variant}-solid-subtle`)};`,
-          `  color: ${rawColorCssVarWithAlpha(`${variant}-solid-text`, 0.8)};`,
-          "}",
-          `.${NAMESPACE}\\/${variant}:is(a,button):is(:focus-visible) {`,
-          `  outline: 2px solid transparent;`,
-          `  outlineOffset: 2px;`,
-          `  boxShadow: 0 0 0 1px ${rawColorCssVar("base-bg")}, 0 0 0 calc(9px) ${rawColorCssVar(`${variant}-solid-subtle`)};`,
-          `}`
-        ]);
-      });
-    }
+    palette.forEach((variant) => {
+      styles = styles.push(`${wClass(variant)} {`);
+      styles = styles.push(`--w-color: ${variant};`);
+      styles = styles.concat(colorScale.map(
+        (color) => `  ${varId(color)}: ${cssVar(`${variant}-${color}`)};`
+      ));
+      styles = styles.push("}");
+    });
+    styles = styles.concat([
+      `${wClass("tint")} {`,
+      `  background-color: ${cssVar("tint")};`,
+      `  border-color: ${cssVar("accent")};`,
+      `  color: ${cssVar("text")};`,
+      "}"`${wClass("tint")}:is(a,button):is(:hover) {`,
+      `  background-color: ${cssVar("tint-strong")};`,
+      `  border-color: ${cssVar("accent-strong")};`,
+      "}"`${wClass("tint")}:is(a,button):is(:active) {`,
+      `  background-color: ${cssVar("tint-subtle")};`,
+      `  border-color: ${cssVar("accent-subtle")};`,
+      "}"
+    ]);
+    styles = styles.concat([
+      `${wClass("solid")} {`,
+      `  background-color: ${cssRGB("solid")};`,
+      `  border-color: ${cssRGB("accent")};`,
+      `  color: ${cssRGB("solid-text")};`,
+      "}"`${wClass("solid")}:is(a,button):is(:hover) {`,
+      `  background-color: ${cssRGB("solid-strong")};`,
+      `  border-color: ${cssRGB("accent-strong")};`,
+      "}"`${wClass("solid")}:is(a,button):is(:active) {`,
+      `  background-color: ${cssRGB("solid-subtle")};`,
+      `  border-color: ${cssRGB("accent-subtle")};`,
+      "}"
+    ]);
+    styles = styles.concat([
+      `${wClass("tint")}:is(a,button):is(:focus-visible),`,
+      `${wClass("solid")}:is(a,button):is(:focus-visible),`,
+      `${wClass("focus")}:is(:focus-visible) {`,
+      `  outline: 2px solid transparent;`,
+      `  outline-offset: 2px;`,
+      `  box-shadow: 0 0 0 1px ${cssRGB("base-bg")}, 0 0 0 9px ${cssRGB(`solid-subtle`)};`,
+      "}"
+    ]);
     return styles.join("");
+  }
+  function wClass(v) {
+    `.${NAMESPACE}/${v}`;
   }
   function varId(id) {
     return `--w-${id}`;
@@ -2483,9 +2482,9 @@ ${prefix} ::selection {
   var src_default = {
     theme,
     setTheme,
-    setBaseStyles,
-    getCSSDefinitions,
-    getCSSBaseStyles,
+    getThemeCSS,
+    setThemeComponents,
+    getThemeComponentsCSS,
     colorScale,
     colorValues,
     fontFamilyValues,
