@@ -317,13 +317,13 @@ function getThemeCSS(theme, options) {
 
   styles +=
     options?.class
-      ? `.${options.class} { ${getThemeBaseCSS(theme)} ${getThemeColorsCSS(theme)} }`
-      : `body { ${getThemeBaseCSS(theme)} ${getThemeColorsCSS(theme)} }`;
+      ? getThemeRootCSS(`.${options.class}`)
+      : getThemeRootCSS("body");
 
   styles +=
     options?.class
-      ? getThemeRootCSS(`.${options.class}`)
-      : getThemeRootCSS("body");
+      ? `.${options.class} { ${getThemeBaseCSS(theme)} ${getThemeColorsCSS(theme)} }`
+      : `body { ${getThemeBaseCSS(theme)} ${getThemeColorsCSS(theme)} }`;
 
   if (options?.darkModeTheme) {
     styles +=
@@ -490,7 +490,7 @@ function getThemeComponentsCSS() {
     `${wClass("focus")}:is(:focus-visible) {`,
     `  outline: 2px solid transparent;`,
     `  outline-offset: 2px;`,
-    `  box-shadow: 0 0 0 1px ${cssRGB("base-bg")}, 0 0 0 9px ${cssRGB(`solid-subtle`)};`,
+    `  box-shadow: 0 0 0 1px ${cssRGB("bg")}, 0 0 0 4px ${cssRGB(`accent-subtle`)};`,
     "}"
   ])
 
