@@ -447,16 +447,12 @@ function getThemeComponentsCSS() {
   styles = styles.concat([
     `${wClass("tint")} {`,
     `  background-color: ${cssRGB("tint")};`,
-    `  border-color: ${cssRGB("accent")};`,
-    `  color: ${cssRGB("text")};`,
     "}"
     `${wClass("tint")}:is(a,button):is(:hover) {`,
     `  background-color: ${cssRGB("tint-strong")};`,
-    `  border-color: ${cssRGB("accent-strong")};`,
     "}"
     `${wClass("tint")}:is(a,button):is(:active) {`,
     `  background-color: ${cssRGB("tint-subtle")};`,
-    `  border-color: ${cssRGB("accent-subtle")};`,
     "}"
   ])
 
@@ -467,16 +463,13 @@ function getThemeComponentsCSS() {
   styles = styles.concat([
     `${wClass("solid")} {`,
     `  background-color: ${cssRGB("solid")};`,
-    `  border-color: ${cssRGB("accent")};`,
     `  color: ${cssRGB("solid-text")} !important;`,
     "}"
     `${wClass("solid")}:is(a,button):is(:hover) {`,
     `  background-color: ${cssRGB("solid-strong")};`,
-    `  border-color: ${cssRGB("accent-strong")};`,
     "}"
     `${wClass("solid")}:is(a,button):is(:active) {`,
     `  background-color: ${cssRGB("solid-subtle")};`,
-    `  border-color: ${cssRGB("accent-subtle")};`,
     "}"
   ])
 

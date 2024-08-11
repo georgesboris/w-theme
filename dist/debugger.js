@@ -2346,8 +2346,8 @@
   }
   function getThemeCSS(theme2, options) {
     let styles = "";
-    styles += options?.class ? `.${options.class} { ${getThemeBaseCSS(theme2)} ${getThemeColorsCSS(theme2)} }` : `body { ${getThemeBaseCSS(theme2)} ${getThemeColorsCSS(theme2)} }`;
     styles += options?.class ? getThemeRootCSS(`.${options.class}`) : getThemeRootCSS("body");
+    styles += options?.class ? `.${options.class} { ${getThemeBaseCSS(theme2)} ${getThemeColorsCSS(theme2)} }` : `body { ${getThemeBaseCSS(theme2)} ${getThemeColorsCSS(theme2)} }`;
     if (options?.darkModeTheme) {
       styles += options.darkModeClass ? options.class ? ` .${options.darkModeClass} .${options.class}, .${options.class}.${options.darkModeClass} { ${getThemeColorsCSS(options.darkModeTheme)} }` : `body.${options.darkModeClass} { ${getThemeColorsCSS(options.darkModeTheme)} }` : `@media (prefers-color-scheme: dark) { body { ${getThemeColorsCSS(options.darkModeTheme)} } }`;
     }
@@ -2416,41 +2416,35 @@ ${prefix} ::selection {
       styles = styles.concat(colorScale.map(
         (color) => `  ${varId(color)}: ${cssVar(`${variant}-${color}`)};`
       ));
+      styles = styles.push(`color: ${cssRGB("text")};`);
       styles = styles.push("}");
     });
     styles = styles.concat([
       `${wClass("tint")} {`,
-      `  background-color: ${cssVar("tint")};`,
-      `  border-color: ${cssVar("accent")};`,
-      `  color: ${cssVar("text")};`,
+      `  background-color: ${cssRGB("tint")};`,
       "}"`${wClass("tint")}:is(a,button):is(:hover) {`,
-      `  background-color: ${cssVar("tint-strong")};`,
-      `  border-color: ${cssVar("accent-strong")};`,
+      `  background-color: ${cssRGB("tint-strong")};`,
       "}"`${wClass("tint")}:is(a,button):is(:active) {`,
-      `  background-color: ${cssVar("tint-subtle")};`,
-      `  border-color: ${cssVar("accent-subtle")};`,
+      `  background-color: ${cssRGB("tint-subtle")};`,
       "}"
     ]);
     styles = styles.concat([
       `${wClass("solid")} {`,
       `  background-color: ${cssRGB("solid")};`,
-      `  border-color: ${cssRGB("accent")};`,
-      `  color: ${cssRGB("solid-text")};`,
+      `  color: ${cssRGB("solid-text")} !important;`,
       "}"`${wClass("solid")}:is(a,button):is(:hover) {`,
       `  background-color: ${cssRGB("solid-strong")};`,
-      `  border-color: ${cssRGB("accent-strong")};`,
       "}"`${wClass("solid")}:is(a,button):is(:active) {`,
       `  background-color: ${cssRGB("solid-subtle")};`,
-      `  border-color: ${cssRGB("accent-subtle")};`,
       "}"
     ]);
     styles = styles.concat([
-      `${wClass("tint")}:is(a,button):is(:focus-visible),`,
-      `${wClass("solid")}:is(a,button):is(:focus-visible),`,
+      `${wClass("tint")}:is(a,button):is(:focus-visible), `,
+      `${wClass("solid")}:is(a,button):is(:focus-visible), `,
       `${wClass("focus")}:is(:focus-visible) {`,
       `  outline: 2px solid transparent;`,
       `  outline-offset: 2px;`,
-      `  box-shadow: 0 0 0 1px ${cssRGB("base-bg")}, 0 0 0 9px ${cssRGB(`solid-subtle`)};`,
+      `  box-shadow: 0 0 0 1px ${cssRGB("bg")}, 0 0 0 4px ${cssRGB(`accent-subtle`)};`,
       "}"
     ]);
     return styles.join("");

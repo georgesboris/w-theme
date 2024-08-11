@@ -62,7 +62,7 @@ const spacings = {
  */
 
 const colors = {
-  "bg": twCssVar("bg"),
+  "bg-color": twCssVar("bg"),
   "bg-subtle": twCssVar("bg-subtle"),
   "tint": twCssVar("tint"),
   "tint-subtle": twCssVar("tint-subtle"),
@@ -70,7 +70,7 @@ const colors = {
   "accent": twCssVar("accent"),
   "accent-subtle": twCssVar("accent-subtle"),
   "accent-strong": twCssVar("accent-strong"),
-  "solid-color": twCssVar("solid"),
+  "solid-default": twCssVar("solid"),
   "solid-subtle": twCssVar("solid-subtle"),
   "solid-strong": twCssVar("solid-strong"),
   "solid-text": twCssVar("solid-text"),
@@ -127,29 +127,23 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
 }, {
   ".w\\/tint": {
     backgroundColor: "rgb(var(--w-tint))",
-    borderColor: "rgb(var(--w-accent))",
     color: "rgb(var(--w-text))",
   },
   ".w\\/tint:is(a,button):is(:hover)": {
     backgroundColor: "rgb(var(--w-tint-strong))",
-    borderColor: "rgb(var(--w-accent-strong))",
   },
   ".w\\/tint:is(a,button):is(:active)": {
     backgroundColor: "rgb(var(--w-tint-subtle))",
-    borderColor: "rgb(var(--w-accent-subtle))",
   },
   ".w\\/solid": {
     backgroundColor: "rgb(var(--w-solid))",
-    borderColor: "rgb(var(--w-accent))",
     color: "rgb(var(--w-solid-text)) !important",
   },
   ".w\\/solid:is(a,button):is(:hover)": {
     backgroundColor: "rgb(var(--w-solid-strong))",
-    borderColor: "rgb(var(--w-accent-strong))",
   },
   ".w\\/solid:is(a,button):is(:active)": {
     backgroundColor: "rgb(var(--w-solid-subtle))",
-    borderColor: "rgb(var(--w-accent-subtle))",
   },
   ".w\\/tint:is(a,button):is(:focus-visible)": {
     outline: "2px solid transparent",
@@ -167,7 +161,6 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
     boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
   },
 });
-
 
 /**
  * Export
