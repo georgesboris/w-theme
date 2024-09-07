@@ -146,19 +146,19 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
     backgroundColor: "rgb(var(--w-solid-subtle))",
   },
   ".w\\/tint:is(a,button):is(:focus-visible)": {
-    outline: "2px solid transparent",
-    outlineOffset: "2px",
-    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
+    outline: "2px solid transparent !important",
+    outlineOffset: "2px !important",
+    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle)) !important`
   },
   ".w\\/solid:is(a,button):is(:focus-visible)": {
-    outline: "2px solid transparent",
-    outlineOffset: "2px",
-    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
+    outline: "2px solid transparent !important",
+    outlineOffset: "2px !important",
+    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle)) !important`
   },
   ".w\\/focus:is(:focus-visible)": {
-    outline: "2px solid transparent",
-    outlineOffset: "2px",
-    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
+    outline: "2px solid transparent !important",
+    outlineOffset: "2px !important",
+    boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle)) !important`
   },
 });
 
