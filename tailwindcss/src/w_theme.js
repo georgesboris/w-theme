@@ -104,25 +104,25 @@ const colorVariables = [
 
 const colorComponents = colorVariables.reduce((acc, variant) => {
   acc[`.w\\/${variant}`] =
-    {
-      "--w-color": variant,
-      "--w-bg": `var(--w-${variant}-bg)`,
-      "--w-bg-subtle": `var(--w-${variant}-bg-subtle)`,
-      "--w-tint": `var(--w-${variant}-tint)`,
-      "--w-tint-subtle": `var(--w-${variant}-tint-subtle)`,
-      "--w-tint-strong": `var(--w-${variant}-tint-strong)`,
-      "--w-accent": `var(--w-${variant}-accent)`,
-      "--w-accent-subtle": `var(--w-${variant}-accent-subtle)`,
-      "--w-accent-strong": `var(--w-${variant}-accent-strong)`,
-      "--w-solid": `var(--w-${variant}-solid)`,
-      "--w-solid-subtle": `var(--w-${variant}-solid-subtle)`,
-      "--w-solid-strong": `var(--w-${variant}-solid-strong)`,
-      "--w-solid-text": `var(--w-${variant}-solid-text)`,
-      "--w-text": `var(--w-${variant}-text)`,
-      "--w-text-subtle": `var(--w-${variant}-text-subtle)`,
-      "--w-shadow": `var(--w-${variant}-shadow)`,
-      "color": cssColor("text"),
-    };
+  {
+    "--w-color": variant,
+    "--w-bg": `var(--w-${variant}-bg)`,
+    "--w-bg-subtle": `var(--w-${variant}-bg-subtle)`,
+    "--w-tint": `var(--w-${variant}-tint)`,
+    "--w-tint-subtle": `var(--w-${variant}-tint-subtle)`,
+    "--w-tint-strong": `var(--w-${variant}-tint-strong)`,
+    "--w-accent": `var(--w-${variant}-accent)`,
+    "--w-accent-subtle": `var(--w-${variant}-accent-subtle)`,
+    "--w-accent-strong": `var(--w-${variant}-accent-strong)`,
+    "--w-solid": `var(--w-${variant}-solid)`,
+    "--w-solid-subtle": `var(--w-${variant}-solid-subtle)`,
+    "--w-solid-strong": `var(--w-${variant}-solid-strong)`,
+    "--w-solid-text": `var(--w-${variant}-solid-text)`,
+    "--w-text": `var(--w-${variant}-text)`,
+    "--w-text-subtle": `var(--w-${variant}-text-subtle)`,
+    "--w-shadow": `var(--w-${variant}-shadow)`,
+    "color": cssColor("text"),
+  };
   return acc;
 }, {
   ".w\\/tint": {
@@ -155,7 +155,7 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
     outlineOffset: "2px",
     boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
   },
-  ".w\\/focus:is(a,button):is(:focus-visible)": {
+  ".w\\/focus:is(:focus-visible)": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
     boxShadow: `0 0 0 1px rgb(var(--w-bg)), 0 0 0 4px rgb(var(--w-accent-subtle))`
