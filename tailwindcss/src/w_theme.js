@@ -20,7 +20,7 @@ function twCssVar(id) {
 
 const fontFamily = {
   heading: cssVar("font-heading"),
-  base: cssVar("font-base"),
+  text: cssVar("font-text"),
   code: cssVar("font-code"),
 };
 
@@ -62,7 +62,7 @@ const spacings = {
  */
 
 const colors = {
-  "bg-color": twCssVar("bg"),
+  "bg": twCssVar("bg"),
   "bg-subtle": twCssVar("bg-subtle"),
   "tint": twCssVar("tint"),
   "tint-subtle": twCssVar("tint-subtle"),
@@ -70,7 +70,7 @@ const colors = {
   "accent": twCssVar("accent"),
   "accent-subtle": twCssVar("accent-subtle"),
   "accent-strong": twCssVar("accent-strong"),
-  "solid-default": twCssVar("solid"),
+  "solid-color": twCssVar("solid"),
   "solid-subtle": twCssVar("solid-subtle"),
   "solid-strong": twCssVar("solid-strong"),
   "solid-text": twCssVar("solid-text"),
@@ -168,13 +168,41 @@ const colorComponents = colorVariables.reduce((acc, variant) => {
 
 module.exports = {
   optionsHandler: (options = {}) => {
-    return ({ addBase, addComponents }) => {
-      addComponents({
+    return ({ config, addBase, addUtilities }) => {
+      const prefix = config("prefix");
+
+      // Utilities for getting around classes like:
+      // .bg-bg .bg-bg-subtle .bg-solid-color
+
+      addUtilities({
         ".bg": {
           backgroundColor: cssColor("bg")
         },
         ".bg-subtle": {
           backgroundColor: cssColor("bg-subtle")
+        },
+        ".bg-solid": {
+          backgroundColor: cssColor("bg-solid-color")
+        }
+      })
+
+
+      // `.shadow-colored`
+      // automatically applies the proper shadow color + opacity
+      // based on current shadow class.
+
+      addBase({
+        [`.${prefix}shadow-colored.${prefix}shadow-sm, .${prefix}shadow-colored.${prefix}shadow-inner`]: {
+          "--tw-shadow-color": "rgb(var(--w-shadow) / 0.05)",
+          "--tw-shadow": "var(--tw-shadow-colored)",
+        },
+        [`.${prefix}shadow-colored.${prefix}shadow, .${prefix}shadow-colored.${prefix}shadow-md, .${prefix}shadow-colored.${prefix}shadow-lg, .${prefix}shadow-colored.${prefix}shadow-xl`]: {
+          "--tw-shadow-color": "rgb(var(--w-shadow) / 0.1)",
+          "--tw-shadow": "var(--tw-shadow-colored)",
+        },
+        [`.${prefix}shadow-colored.${prefix}shadow-2xl`]: {
+          "--tw-shadow-color": "rgb(var(--w-shadow) / 0.25)",
+          "--tw-shadow": "var(--tw-shadow-colored)",
         },
       })
 

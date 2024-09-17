@@ -12,7 +12,7 @@ import colors from "./w/colors.js"
  *
  * @typedef FontFamilies {
  *   heading: string
- *   base: string
+ *   text: string
  *   code: string
  * }
  *
@@ -40,6 +40,7 @@ import colors from "./w/colors.js"
  *   solid-text: string
  *   text-subtle: string
  *   text: string
+ *   shadow: string
  * }
  *
  * @typedef SizeScale {
@@ -61,7 +62,7 @@ import colors from "./w/colors.js"
 
 const DEFAULT_SANS_SERIF = `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`
 
-const FONT_FAMILIES = ["heading", "base", "code"];
+const FONT_FAMILIES = ["heading", "text", "code"];
 
 const SIZE_SCALE = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"]
 
@@ -174,7 +175,7 @@ const colorValues =
  *   danger?: string | ColorScale
  *   fontFamilies?: {
  *     heading?: string
- *     base?: string
+ *     text?: string
  *     code?: string
  *   }
  *   spacingScale?: number
@@ -207,7 +208,7 @@ function theme(config = {}) {
 
   const fontFamilies = {
     heading: config.fontFamilies?.heading || DEFAULT_SANS_SERIF,
-    base: config.fontFamilies?.base || DEFAULT_SANS_SERIF,
+    text: config.fontFamilies?.text || DEFAULT_SANS_SERIF,
     code: config.fontFamilies?.code || "monospace",
   };
 
@@ -339,11 +340,11 @@ function getThemeCSS(theme, options) {
 
 
 function getThemeRootCSS(prefix) {
- return `
+  return `
 ${prefix} {
   background-color: ${cssRGB("bg")};
   color: ${cssRGB("text")};
-  font-family: ${cssVar("font-base")};
+  font-family: ${cssVar("font-text")};
 }
 ${prefix} h1,
 ${prefix} h2,
@@ -391,7 +392,7 @@ function getThemeColorsCSS(theme) {
   const baseVariant = colorScale.reduce((acc, color) => {
     return `${acc} ${varId(color)}: ${cssVar(`base-${color}`)};`;
   }, "--w-color: base;");
-  
+
   return colorValues.reduce((acc, { variant, id, cssId }) => {
     return `${acc} ${cssId}: ${theme.colors[variant][id]};`;
   }, baseVariant);
@@ -434,7 +435,7 @@ function getThemeComponentsCSS() {
     styles = styles.push(`${wClass(variant)} {`);
     styles = styles.push(`--w-color: ${variant};`);
     styles = styles.concat(colorScale.map((color) =>
-        `  ${varId(color)}: ${cssVar(`${variant}-${color}`)};`,
+      `  ${varId(color)}: ${cssVar(`${variant}-${color}`)};`,
     ))
     styles = styles.push(`color: ${cssRGB("text")};`);
     styles = styles.push("}");
@@ -448,10 +449,10 @@ function getThemeComponentsCSS() {
     `${wClass("tint")} {`,
     `  background-color: ${cssRGB("tint")};`,
     "}"
-    `${wClass("tint")}:is(a,button):is(:hover) {`,
+      `${wClass("tint")}:is(a,button):is(:hover) {`,
     `  background-color: ${cssRGB("tint-strong")};`,
     "}"
-    `${wClass("tint")}:is(a,button):is(:active) {`,
+      `${wClass("tint")}:is(a,button):is(:active) {`,
     `  background-color: ${cssRGB("tint-subtle")};`,
     "}"
   ])
@@ -465,10 +466,10 @@ function getThemeComponentsCSS() {
     `  background-color: ${cssRGB("solid")};`,
     `  color: ${cssRGB("solid-text")} !important;`,
     "}"
-    `${wClass("solid")}:is(a,button):is(:hover) {`,
+      `${wClass("solid")}:is(a,button):is(:hover) {`,
     `  background-color: ${cssRGB("solid-strong")};`,
     "}"
-    `${wClass("solid")}:is(a,button):is(:active) {`,
+      `${wClass("solid")}:is(a,button):is(:active) {`,
     `  background-color: ${cssRGB("solid-subtle")};`,
     "}"
   ])

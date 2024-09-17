@@ -13,7 +13,7 @@
     {% for theme in ["theme", "theme dark"] %}
       <div class="{{ theme }}" style="background:transparent;">
         <article class="p-2xl bg-subtle flex justify-center rounded-3xl">
-          <div class="p-xl bg rounded-2xl shadow-lg shadow-shadow/25 space-y-md max-w-2xl">
+          <div class="p-xl bg rounded-2xl shadow-lg shadow-colored space-y-md max-w-2xl">
 
             <!-- header + code block -->
             <div class="flex flex-col gap-lg">
@@ -30,7 +30,7 @@
             <!-- color samples -->
             <div class="col-span-2 grid grid-cols-2 gap-lg">
               {% for variant in palette %}
-                <article class="w/{{variant}} bg-subtle flex flex-col gap-md border border-solid border-tint p-md shadow shadow-shadow/25 rounded-md">
+                <article class="w/{{variant}} bg-subtle flex flex-col gap-md border border-solid border-tint p-md shadow-lg shadow-colored rounded-md">
 
                   <div class="grid grid-cols-5 items-center">
                     <!-- heading -->

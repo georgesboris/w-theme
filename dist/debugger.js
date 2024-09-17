@@ -2241,7 +2241,7 @@
 
   // src/index.js
   var DEFAULT_SANS_SERIF = `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`;
-  var FONT_FAMILIES = ["heading", "base", "code"];
+  var FONT_FAMILIES = ["heading", "text", "code"];
   var SIZE_SCALE = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"];
   var fontFamilyValues = FONT_FAMILIES.map((id) => ({ id, cssId: varId(`font-${id}`), cssVar: cssVar(`font-${id}`) }));
   var borderRadiusValues = SIZE_SCALE.map((id) => ({ id, cssId: varId(`radius-${id}`), cssVar: cssVar(`radius-${id}`) }));
@@ -2286,7 +2286,7 @@
     const id = config.id || colorScheme;
     const fontFamilies = {
       heading: config.fontFamilies?.heading || DEFAULT_SANS_SERIF,
-      base: config.fontFamilies?.base || DEFAULT_SANS_SERIF,
+      text: config.fontFamilies?.text || DEFAULT_SANS_SERIF,
       code: config.fontFamilies?.code || "monospace"
     };
     const colors = {
@@ -2358,7 +2358,7 @@
 ${prefix} {
   background-color: ${cssRGB("bg")};
   color: ${cssRGB("text")};
-  font-family: ${cssVar("font-base")};
+  font-family: ${cssVar("font-text")};
 }
 ${prefix} h1,
 ${prefix} h2,
