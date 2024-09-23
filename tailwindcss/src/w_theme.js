@@ -41,7 +41,7 @@ const borderRadius = {
 };
 
 /**
- * Border Radius
+ * Spacings
  */
 
 const spacings = {
@@ -55,6 +55,23 @@ const spacings = {
   xl: cssVar("spacing-xl"),
   "2xl": cssVar("spacing-2xl"),
   "3xl": cssVar("spacing-3xl"),
+};
+
+/**
+ * Spacings
+ */
+
+const sizings = {
+  none: "0",
+  "0": "0",
+  full: "100%",
+  xs: cssVar("sizing-xs"),
+  sm: cssVar("sizing-sm"),
+  md: cssVar("sizing-md"),
+  lg: cssVar("sizing-lg"),
+  xl: cssVar("sizing-xl"),
+  "2xl": cssVar("sizing-2xl"),
+  "3xl": cssVar("sizing-3xl"),
 };
 
 /**
@@ -186,7 +203,6 @@ module.exports = {
         }
       })
 
-
       // `.shadow-colored`
       // automatically applies the proper shadow color + opacity
       // based on current shadow class.
@@ -216,12 +232,17 @@ module.exports = {
     const strictTextColors = options.strictTextColors ?? true;
     const strictSpacing = options.strictSpacing ?? false;
     const useSpacing = options.useSpacing ?? false;
+    const strictSizing = options.strictSizing ?? false;
+    const useSizing = options.useSizing ?? false;
 
     const textColor = strictTextColors ? { textColor: textColors } : {};
     const textColorExtended = strictTextColors ? {} : { textColor: textColors };
 
     const spacing = !useSpacing ? {} : strictSpacing ? { spacing: spacings } : {};
     const spacingExtended = !useSpacing ? {} : strictSpacing ? {} : { spacing: spacings };
+
+    const sizing = !useSizing ? {} : strictSizing ? { maxWidth: sizings } : {};
+    const sizingExtended = !useSizing ? {} : strictSizing ? {} : { maxWidth: sizings };
 
     const values = {
       fontFamily,
@@ -240,7 +261,17 @@ module.exports = {
     };
 
     return options.strict
-      ? { theme: { ...values, extend: { ...textColorExtended, ...spacingExtended } } }
-      : { theme: { extend: { ...values, ...textColorExtended, ...spacingExtended }, ...textColor, ...spacing } };
+      ? {
+        theme: {
+          ...values,
+          extend: { ...textColorExtended, ...spacingExtended, ...sizingExtended }
+        }
+      }
+      : {
+        theme: {
+          extend: { ...values, ...textColorExtended, ...spacingExtended, ...sizingExtended }
+          , ...textColor, ...spacing, ...sizing
+        }
+      };
   }
 };
