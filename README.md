@@ -65,10 +65,10 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
 
   /* Font Family Variables */
   --w-font-heading: serif; 
-  --w-font-base: sans-serif; 
+  --w-font-text: sans-serif; 
   --w-font-code: monospace; 
 
-  /* Spacing and Border Radius variables follow a "size scale" that is tailwind compatible */
+  /* Spacing, Sizing and Border Radius variables follow a "size scale" that is tailwind compatible */
 
   --w-spacing-xs: 0.25rem;
   --w-spacing-sm: 0.5rem;
@@ -86,9 +86,16 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-radius-2xl: 1rem;
   --w-radius-3xl: 1.5rem;
 
+  --w-sizing-xs: 16rem;
+  --w-sizing-sm: 20rem;
+  --w-sizing-md: 24rem;
+  --w-sizing-lg: 36rem;
+  --w-sizing-xl: 48rem;
+  --w-sizing-xl2: 64rem;
+  --w-sizing-xl3: 80rem;
+
   /* Each variant of our palette follows a "color scale" that is inspired by radix-ui */
 
-  --w-base-shadow: 28 32 36;
   --w-base-bg: 252 252 253;
   --w-base-bg-subtle: 249 249 251;
   --w-base-tint: 232 232 236;
@@ -103,8 +110,8 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-base-solid-text: 255 255 255;
   --w-base-text-subtle: 96 100 108;
   --w-base-text: 28 32 36;
+  --w-base-shadow: 28 32 36;
 
-  --w-primary-shadow: 17 50 100;
   --w-primary-bg: 251 253 255;
   --w-primary-bg-subtle: 244 250 255;
   --w-primary-tint: 213 239 255;
@@ -119,8 +126,8 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-primary-solid-text: 255 255 255;
   --w-primary-text-subtle: 13 116 206;
   --w-primary-text: 17 50 100;
+  --w-primary-shadow: 17 50 100;
 
-  --w-secondary-shadow: 101 18 73;
   --w-secondary-bg: 255 252 254;
   --w-secondary-bg-subtle: 254 247 251;
   --w-secondary-tint: 251 220 239;
@@ -135,8 +142,8 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-secondary-solid-text: 255 255 255;
   --w-secondary-text-subtle: 194 41 138;
   --w-secondary-text: 101 18 73;
+  --w-secondary-shadow: 101 18 73;
 
-  --w-success-shadow: 25 59 45;
   --w-success-bg: 251 254 252;
   --w-success-bg-subtle: 244 251 246;
   --w-success-tint: 214 241 223;
@@ -151,8 +158,8 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-success-solid-text: 255 255 255;
   --w-success-text-subtle: 33 131 88;
   --w-success-text: 25 59 45;
+  --w-success-shadow: 25 59 45;
 
-  --w-warning-shadow: 71 59 31;
   --w-warning-bg: 253 253 249;
   --w-warning-bg-subtle: 254 252 233;
   --w-warning-tint: 255 243 148;
@@ -167,8 +174,8 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-warning-solid-text: 71 59 31;
   --w-warning-text-subtle: 158 108 0;
   --w-warning-text: 71 59 31;
+  --w-warning-shadow: 71 59 31;
 
-  --w-danger-shadow: 100 23 35;
   --w-danger-bg: 255 252 252;
   --w-danger-bg-subtle: 255 247 247;
   --w-danger-tint: 255 219 220;
@@ -183,6 +190,7 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-danger-solid-text: 255 255 255;
   --w-danger-text-subtle: 206 44 49;
   --w-danger-text: 100 23 35;
+  --w-danger-shadow: 100 23 35;
 }
 ```
 
@@ -281,7 +289,7 @@ Not a lot to cover regarding our font family tokens. You can define then with fa
 
 ```yaml
 - heading
-- base
+- text
 - code
 ```
 
@@ -311,9 +319,26 @@ The idea of using naming based values instead of number based is that you can ev
 - 3xl
 ````
 
+## Sizing
+
+Sizings are related to element sizes. They are mostly used to define widths of elements such as containers, sidebars, modals, etc.
+We advise the usage of `rem` based values so that your sizings will scale consistently.
+
+The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/container).
+
+```yaml
+- xs
+- sm
+- md
+- lg
+- xl
+- 2xl
+- 3xl
+````
+
 ## Border Radius
 
-Just as spacing values, we advise the usage of `rem` based values so that your border radius will scale consistently.
+Just as spacing and sizing values, we advise the usage of `rem` based values so that your border radius will scale consistently.
 
 - xs
 - sm
