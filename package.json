@@ -18,9 +18,10 @@
     "example": "example"
   },
   "scripts": {
-    "build": "npm run build:lib && npm run build:debugger",
+    "build": "npm run build:lib && npm run build:debugger && npm run build:exporter",
     "build:lib": "esbuild ./src/index.js --bundle --minify --format=esm --outdir=dist",
-    "build:debugger": "esbuild ./src/debugger --bundle --outdir=dist"
+    "build:debugger": "esbuild ./src/debugger --bundle --outdir=dist",
+    "build:exporter": "esbuild ./src/exporter --bundle --outdir=dist"
   },
   "keywords": [
     "theme",

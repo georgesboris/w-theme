@@ -110,6 +110,18 @@ const borderRadiusValues = SIZE_SCALE.map(id => ({ id, cssId: varId(`radius-${id
 const spacingValues = SIZE_SCALE.map(id => ({ id, cssId: varId(`spacing-${id}`), cssVar: cssVar(`spacing-${id}`) }))
 
 /**
+ * ```
+ *   [
+ *     {id: "xs", cssId: "--w-sizing-xs", cssVar: "var(--w-sizing-xs)"},
+ *     ...
+ *   ]
+ * ```
+ *
+ * @type {{id: string, cssId: string, cssVar: string}[]}
+ */
+const sizingValues = SIZE_SCALE.map(id => ({ id, cssId: varId(`sizing-${id}`), cssVar: cssVar(`sizing-${id}`) }))
+
+/**
  * @type {string[]}
  */
 const palette = [
@@ -188,6 +200,16 @@ const colorValues =
  *    2xl?: string
  *    3xl?: string
  *   }
+ *   sizingScale?: number
+ *   sizing?: {
+ *    xs?: string
+ *    sm?: string
+ *    md?: string
+ *    lg?: string
+ *    xl?: string
+ *    2xl?: string
+ *    3xl?: string
+ *   }
  *   borderRadiusScale?: number
  *   borderRadius?: {
  *    xs?: string
@@ -225,6 +247,7 @@ function theme(config = {}) {
     id,
     colorScheme,
     fontFamilies,
+    sizing: toThemeSizing(config.sizing, config.sizingScale),
     spacing: toThemeSpacing(config.spacing, config.spacingScale),
     borderRadius: toThemeRadius(config.radius, config.radiusScale),
     colors
@@ -278,6 +301,22 @@ function toThemeRadius(radius = {}, scaleFactor) {
     "xl": radius["xl"] || `${0.75 * scale}rem`,
     "2xl": radius["2xl"] || `${1 * scale}rem`,
     "3xl": radius["3xl"] || `${1.5 * scale}rem`,
+  }
+}
+
+/**
+ * Returns a size scale with default spacing values and applied scale factor.
+ */
+function toThemeSizing(sizing = {}, scaleFactor) {
+  const scale = scaleFactor ?? 1.0;
+  return {
+    "xs": sizing["xs"] || `${16 * scale}rem`,
+    "sm": sizing["sm"] || `${20 * scale}rem`,
+    "md": sizing["md"] || `${24 * scale}rem`,
+    "lg": sizing["lg"] || `${36 * scale}rem`,
+    "xl": sizing["xl"] || `${48 * scale}rem`,
+    "2xl": sizing["2xl"] || `${64 * scale}rem`,
+    "3xl": sizing["3xl"] || `${80 * scale}rem`,
   }
 }
 
@@ -377,6 +416,7 @@ function getThemeBaseCSS(theme) {
     themeIdAndColorSchemeVars(theme),
     toCssVars(fontFamilyValues, theme.fontFamilies),
     toCssVars(spacingValues, theme.spacing),
+    toCssVars(sizingValues, theme.sizing),
     toCssVars(borderRadiusValues, theme.borderRadius),
   ]
     .flat()
@@ -548,5 +588,6 @@ export default {
   palette,
   borderRadiusValues,
   spacingValues,
+  sizingValues,
 };
 
