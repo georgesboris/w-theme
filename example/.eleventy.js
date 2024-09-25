@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.addPassthroughCopy({
     "./index.mjs": "index.mjs",
     "./node_modules/w-theme/dist/debugger.js": "/w-debugger.js",
-    "./node_modules/w-theme/dist/exporter.js": "/w-exporter.js",
+    "../w_exporter/priv/static/w_exporter.min.mjs": "/w-exporter.mjs",
     "./node_modules/w-theme/dist/index.js": "/w-theme.js",
   });
 

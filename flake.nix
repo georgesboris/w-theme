@@ -19,25 +19,15 @@
               inherit inputs pkgs;
               modules = [
                 ({ pkgs, ... }: {
-                  packages = [
-                  
-                    # Basic Utilities
-                    pkgs.inotify-tools
-
-                    # Elixir
-                    pkgs.elixir_ls
-
-                  ];
+                  packages = [];
 
                   enterShell = ''
-                    mix archive.install hex mix_gleam --force > /dev/null
-                    mix deps.get > /dev/null
                     devenv up > /dev/null &
                   '';
 
-                  languages.elixir = {
+                  languages.erlang = {
                     enable = true;
-                    package = pkgs.elixir_1_16;
+                    package = pkgs.erlang_27;
                   };
 
                   languages.gleam = {

@@ -3,8 +3,6 @@ import * as css from "./w/css.js";
 
 const themes = getThemes();
 
-console.log(themes);
-
 function getThemes() {
   let cssRulesets = [];
 
