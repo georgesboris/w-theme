@@ -2522,7 +2522,6 @@ ${prefix} ::selection {
 
   // src/exporter.js
   var themes = getThemes();
-  console.log(themes);
   function getThemes() {
     let cssRulesets = [];
     for (let s of document.styleSheets) {

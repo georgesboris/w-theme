@@ -68,7 +68,33 @@ While `w-theme` is just a schema, there is tooling and libraries that rely on a 
   --w-font-text: sans-serif; 
   --w-font-code: monospace; 
 
-  /* Spacing, Sizing and Border Radius variables follow a "size scale" that is tailwind compatible */
+  /* "Size scales"
+   * Tailwind compatible stepped scales.
+   */
+
+  --w-font-xs: 0.75rem;
+  --w-font-sm: 0.875rem;
+  --w-font-md: 1rem;
+  --w-font-lg: 1.125rem;
+  --w-font-xl: 1.25rem;
+  --w-font-2xl: 1.5rem;
+  --w-font-3xl: 1.875rem;
+
+  --w-leading-xs: 1;
+  --w-leading-sm: 1.25;
+  --w-leading-md: 1.375;
+  --w-leading-lg: 1.5;
+  --w-leading-xl: 1.625;
+  --w-leading-2xl: 2;
+  --w-leading-3xl: 2.25;
+
+  --w-tracking-xs: -0.05em;
+  --w-tracking-sm: -0.025em;
+  --w-tracking-md: 0em;
+  --w-tracking-lg: 0.025em;
+  --w-tracking-xl: 0.05em;
+  --w-tracking-2xl: 0.1em;
+  --w-tracking-3xl: 0.125em;
 
   --w-spacing-xs: 0.25rem;
   --w-spacing-sm: 0.5rem;
@@ -293,13 +319,53 @@ Not a lot to cover regarding our font family tokens. You can define then with fa
 - code
 ```
 
-> ![NOTE]
-> **Why no font size tokens?**
->
-> Font sizes (and related values like line heights, tracking, …) do not have a one-size-fits-all solution.
-> Therefore, we decided to leave that up to the higher level framework that is using **w-theme** for it's design tokens.
-> For example, if you're using [TailwindCSS](https://tailwindcss.com/docs/font-size) you can use their default font size classes.
-> While if you're using [elm-widgets](https://package.elm-lang.org/packages/georgesboris/elm-widgets/latest/) you might want to use the size properties of widgets like `W.Text` and `W.Heading`.
+## Font Size
+
+The font sizes should be defined using `rem` values. This way you can control all of your interface's sizes by moving the base value of your font size in a single place.
+The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/font-size).
+
+```yaml
+- xs
+- sm
+- md
+- lg
+- xl
+- 2xl
+- 3xl
+````
+
+
+## Font Tracking
+
+Also known as **letter spacing**. Font tracking controls how each character is spaced to each other. These values are defined using `em` units, so the setting works in relation to the currently used font size.
+The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/letter-spacing).
+
+
+```yaml
+- xs
+- sm
+- md
+- lg
+- xl
+- 2xl
+- 3xl
+````
+
+## Font Leading
+
+Also known as **line height**. Font tracking controls how each character is spaced to each other. These values are defined using `em` units, so the setting works in relation to the currently used font size.
+The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/line-height).
+
+
+```yaml
+- xs
+- sm
+- md
+- lg
+- xl
+- 2xl
+- 3xl
+````
 
 ## Spacing
 
@@ -321,7 +387,7 @@ The idea of using naming based values instead of number based is that you can ev
 
 ## Sizing
 
-Sizings are related to element sizes. They are mostly used to define widths of elements such as containers, sidebars, modals, etc.
+Sizing values are mostly used to define widths of elements such as containers, sidebars, modals, etc.
 We advise the usage of `rem` based values so that your sizings will scale consistently.
 
 The scale chosen here was deeply inspired by [TailwindCSS](https://tailwindcss.com/docs/container).
@@ -499,6 +565,18 @@ Also, you can get access to just these base styles through the `getCSSBaseStyles
 
 We provide a web-component that can be placed anywhere in your application and it will inherit the currently available tokens.
 This is a great way to test out different themes or debug design token inheritance in real applications.
+
+```bash
+<script src="https://cdn.jsdelivr.net/gh/georgesboris/w-theme/w-theme-sampler.js"></script>
+
+<div class="blue-theme">
+  <w-theme-sampler></w-theme-sampler>
+</div>
+
+<div class="red-theme">
+  <w-theme-sampler></w-theme-sampler>
+</div>
+```
 
 > [!WARNING]
 > Work in progress… you can see a standalone version of the theme sampler on our examples folder.

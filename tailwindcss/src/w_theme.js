@@ -199,7 +199,7 @@ module.exports = {
           backgroundColor: cssColor("bg-subtle")
         },
         ".bg-solid": {
-          backgroundColor: cssColor("bg-solid-color")
+          backgroundColor: cssColor("bg-solid")
         }
       })
 
