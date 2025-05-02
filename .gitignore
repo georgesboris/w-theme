@@ -1,3 +1,4 @@
+.direnv
 .devenv
 node_modules
 example/dist

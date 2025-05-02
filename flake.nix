@@ -1,42 +1,35 @@
 {
+  description = "Gleam Web Development";
   inputs = {
-    systems.url = "github:nix-systems/default";
-    nixpkgs.url = "github:NixOS/nixpkgs/ae8a436bc79e20e05d16f4df99aae01527602f0f";
-    devenv.url = "github:cachix/devenv/v0.6.3";
+    nixpkgs.url = "github:nixos/nixpkgs?rev=032bc6539bd5f14e9d0c51bd79cfe9a055b094c3";
+    flake-utils.url = "github:numtide/flake-utils?rev=11707dc2f618dd54ca8739b309ec4fc024de578b";
   };
-  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
-    let
-      forEachSystem = nixpkgs.lib.genAttrs (import systems);
-    in
+  outputs =
     {
-      devShells = forEachSystem
-        (system:
-          let
-            pkgs = nixpkgs.legacyPackages.${system};
-          in
-          {
-            default = devenv.lib.mkShell {
-              inherit inputs pkgs;
-              modules = [
-                ({ pkgs, ... }: {
-                  packages = [];
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { };
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            # erlang
+            pkgs.erlang_28
+            pkgs.beamMinimal27Packages.rebar3
 
-                  enterShell = ''
-                    devenv up > /dev/null &
-                  '';
+            # gleam
+            pkgs.gleam
 
-                  languages.erlang = {
-                    enable = true;
-                    package = pkgs.erlang_27;
-                  };
-
-                  languages.gleam = {
-                    enable = true;
-                    package = pkgs.gleam;
-                  };
-                })
-              ];
-            };
-          });
-    };
+            # tailwind
+            pkgs.tailwindcss_4
+          ];
+          shellHook = "";
+        };
+      }
+    );
 }
