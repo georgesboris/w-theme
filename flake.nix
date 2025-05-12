@@ -19,8 +19,8 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             # erlang
-            pkgs.erlang_28
-            pkgs.beamMinimal27Packages.rebar3
+            pkgs.beam27Packages.erlang
+            pkgs.beam27Packages.rebar3
 
             # gleam
             pkgs.gleam
