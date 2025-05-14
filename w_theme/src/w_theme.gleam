@@ -69,22 +69,32 @@ fn init(_) -> #(Model, Effect(Msg)) {
     ),
   )
 
+  // let base_bg = from_rgb255(42, 47, 54)
+  let base_bg = from_rgb255(30, 35, 40)
+
   let default_base = #(
     VariantKey(name: "Base", order: 1),
     color_scale_from_key_colors(
-      bg: { benchmark_base.1 }.bg,
+      bg: base_bg,
       tint: from_hsl(214.0, 0.13, 0.225),
       accent: from_hsl(214.0, 0.13, 0.4),
-      solid: { benchmark_base.1 }.solid,
+      solid: from_hsl(214.0, 0.13, 0.5),
       text: { benchmark_base.1 }.text,
     ),
   )
+
+  let default_primary = #(
+    VariantKey(name: "Primary", order: 2),
+    color_scale_merged_with_key_colors(default_base.1, from_hex("#1677ff")),
+  )
+
   let default_success = #(
     VariantKey(name: "Success", order: 2),
     color_scale_merged_with_key_colors(
       default_base.1,
       // from_hsl(98.0, 0.99, 0.36),
-      from_hsl(131.0, 0.41, 0.46),
+      // from_hsl(131.0, 0.41, 0.46),
+      from_hex("#52c41a"),
     ),
   )
 
@@ -101,9 +111,14 @@ fn init(_) -> #(Model, Effect(Msg)) {
 
   #(
     Model(
-      active: default_success.0,
+      active: default_primary.0,
       variant_input: "",
-      variants: dict.from_list([benchmark_base, default_base, default_success]),
+      variants: dict.from_list([
+        benchmark_base,
+        default_base,
+        default_success,
+        default_primary,
+      ]),
       show_contrast: False,
     ),
     effect.none(),
@@ -477,7 +492,7 @@ fn color_scale_merged_with_key_colors(
   color: Color,
 ) -> ColorScale {
   let #(h, _, _, _) = colour.to_hsla(color)
-  let color_accent = from_hsl(h *. 360.0, 0.8, 0.6)
+  let color_accent = from_hsl(h *. 360.0, 1.0, 0.6)
   let color_solid = from_hsl(h *. 360.0, 0.7, 0.55)
 
   let tint = lerp_color(base_scale.bg, color_accent, 0.075)
@@ -578,7 +593,6 @@ fn color_scale_from_key_colors(
 type ContrastRatioStatus {
   Great
   Good
-  GoodForUI
   Bad
 }
 
@@ -586,7 +600,6 @@ fn constrast_ratio_icon(status: ContrastRatioStatus) -> Element(msg) {
   case status {
     Great -> html.span([attr.style("color", "lime")], [html.text("S")])
     Good -> html.span([attr.style("color", "green")], [html.text("A")])
-    GoodForUI -> html.span([attr.style("color", "orange")], [html.text("A")])
     Bad -> html.span([attr.style("color", "red")], [html.text("X")])
   }
 }
@@ -620,37 +633,37 @@ fn view(model: Model) -> Element(Msg) {
       attr.classes([#("m--contrast", model.show_contrast)]),
     ],
     [
-      html.div([attr.class("py-4")], [
-        html.ul(
-          [attr.class("pb-2")],
-          variants_list(model)
-            |> list.map(fn(variant) {
-              html.li([], [
-                html.button(
-                  [
-                    attr.class("py-2 px-4 w-full text-left"),
-                    attr.class("cursor-pointer hover:bg-tint-subtle"),
-                    attr.classes([#("bg-tint", variant.key == model.active)]),
-                    event.on_click(OnSelectVariant(variant.key)),
-                  ],
-                  [html.text(variant.name)],
-                ),
-              ])
-            }),
-        ),
-        html.form(
-          [attr.class("pr-4"), event.on_submit(fn(_) { CreateVariant })],
-          [
-            html.input([
-              attr.placeholder("new variant…"),
-              attr.class("border border-tint rounded"),
-              attr.class("px-4 py-2"),
-              attr.value(model.variant_input),
-              event.on_input(InputVariant),
-            ]),
-          ],
-        ),
-      ]),
+      // html.div([attr.class("py-4")], [
+      //   html.ul(
+      //     [attr.class("pb-2")],
+      //     variants_list(model)
+      //       |> list.map(fn(variant) {
+      //         html.li([], [
+      //           html.button(
+      //             [
+      //               attr.class("py-2 px-4 w-full text-left"),
+      //               attr.class("cursor-pointer hover:bg-tint-subtle"),
+      //               attr.classes([#("bg-tint", variant.key == model.active)]),
+      //               event.on_click(OnSelectVariant(variant.key)),
+      //             ],
+      //             [html.text(variant.name)],
+      //           ),
+      //         ])
+      //       }),
+      //   ),
+      //   html.form(
+      //     [attr.class("pr-4"), event.on_submit(fn(_) { CreateVariant })],
+      //     [
+      //       html.input([
+      //         attr.placeholder("new variant…"),
+      //         attr.class("border border-tint rounded"),
+      //         attr.class("px-4 py-2"),
+      //         attr.value(model.variant_input),
+      //         event.on_input(InputVariant),
+      //       ]),
+      //     ],
+      //   ),
+      // ]),
       case dict.get(model.variants, model.active) {
         Ok(variant) ->
           view_sample_table(model.active.name, variant, model.show_contrast)
@@ -698,14 +711,14 @@ fn to_color_scale_matrix_row(
   ColorScaleMatrixRow(
     color:,
     color_key: bg,
-    text_contrast: to_contrast_ratio(color_scale.text, color),
-    text_subtle_contrast: to_contrast_ratio(color_scale.text_subtle, color),
-    accent_contrast: to_contrast_ratio(color_scale.accent, color),
-    accent_subtle_contrast: to_contrast_ratio(color_scale.accent_subtle, color),
-    accent_strong_contrast: to_contrast_ratio(color_scale.accent_strong, color),
-    solid_contrast: to_contrast_ratio(color_scale.solid, color),
-    solid_subtle_contrast: to_contrast_ratio(color_scale.solid_subtle, color),
-    solid_strong_contrast: to_contrast_ratio(color_scale.solid_strong, color),
+    text_contrast: to_contrast_ratio(color_scale, Text, color).0,
+    text_subtle_contrast: to_contrast_ratio(color_scale, TextSubtle, color).0,
+    accent_contrast: to_contrast_ratio(color_scale, Accent, color).0,
+    accent_subtle_contrast: to_contrast_ratio(color_scale, AccentSubtle, color).0,
+    accent_strong_contrast: to_contrast_ratio(color_scale, AccentStrong, color).0,
+    solid_contrast: to_contrast_ratio(color_scale, Solid, color).0,
+    solid_subtle_contrast: to_contrast_ratio(color_scale, SolidSubtle, color).0,
+    solid_strong_contrast: to_contrast_ratio(color_scale, SolidStrong, color).0,
   )
 }
 
@@ -717,15 +730,17 @@ fn to_color_scale_matrix(color_scale: ColorScale) -> ColorScaleMatrix {
     tint: to_color_scale_matrix_row(color_scale, Tint),
     tint_subtle: to_color_scale_matrix_row(color_scale, TintSubtle),
     tint_strong: to_color_scale_matrix_row(color_scale, TintStrong),
-    solid_contrast: to_contrast_ratio(color_scale.solid_text, color_scale.solid),
+    solid_contrast: to_contrast_ratio(color_scale, SolidText, color_scale.solid).0,
     solid_subtle_contrast: to_contrast_ratio(
-      color_scale.solid_text,
+      color_scale,
+      SolidText,
       color_scale.solid_subtle,
-    ),
+    ).0,
     solid_strong_contrast: to_contrast_ratio(
-      color_scale.solid_text,
+      color_scale,
+      SolidText,
       color_scale.solid_strong,
-    ),
+    ).0,
   )
 }
 
@@ -802,32 +817,22 @@ fn view_sample_table(
             "bg-subtle",
             color_scale,
             BgSubtle,
-            color_scale.bg_subtle,
           ),
-          view_matrix_row(variant, "bg", "bg", color_scale, Bg, color_scale.bg),
+          view_matrix_row(variant, "bg", "bg", color_scale, Bg),
           view_matrix_row(
             variant,
             "tint-subtle",
             "bg-tint-subtle",
             color_scale,
             TintSubtle,
-            color_scale.tint_subtle,
           ),
-          view_matrix_row(
-            variant,
-            "tint",
-            "bg-tint",
-            color_scale,
-            Tint,
-            color_scale.tint,
-          ),
+          view_matrix_row(variant, "tint", "bg-tint", color_scale, Tint),
           view_matrix_row(
             variant,
             "tint-strong",
             "bg-tint-strong",
             color_scale,
             TintStrong,
-            color_scale.tint_strong,
           ),
         ]),
       ]),
@@ -905,7 +910,9 @@ fn view_input_color_btn(
 
   html.span(
     [
-      attr.class("flex rounded relative border-1 border-white/20"),
+      attr.class(
+        "flex rounded relative border border-white/5 shadow-sm shadow-shadow/15",
+      ),
       attr.class(class),
       attr.style("background", color_string),
     ],
@@ -926,62 +933,93 @@ fn view_matrix_row(
   class: String,
   color_scale: ColorScale,
   color_key: ColorKey,
-  bg: Color,
 ) -> Element(Msg) {
-  let row_color = get_color_scale_color(color_scale, color_key)
-
   html.tr([attr.class(class)], [
     html.th([attr.attribute("scope", "row")], [
       html.label(
         [
           attr.class("flex items-center gap-2"),
-          attr.class("p-2 cursor-pointer hover:bg-white/[0.05] rounded"),
+          attr.class("p-2 cursor-pointer hover:bg-white/[0.05]"),
         ],
         [html.text(label)],
       ),
     ]),
-    html.td([attr.class("w--sample-table-td-group-start text-color")], [
-      html.text("text"),
-      view_matrix_row_constrast_ratio_tag(color_scale.text, bg),
-    ]),
-    html.td([attr.class("text-subtle")], [
-      html.text("text"),
-      view_matrix_row_constrast_ratio_tag(color_scale.text_subtle, bg),
-    ]),
-    html.td([attr.class("w--sample-table-td-group-start text-accent-subtle")], [
-      view_accent_sample(),
-      view_matrix_row_constrast_ratio_tag(color_scale.accent_subtle, bg),
-    ]),
-    html.td([attr.class("text-accent")], [
-      view_accent_sample(),
-      view_matrix_row_constrast_ratio_tag(color_scale.accent, bg),
-    ]),
-    html.td([attr.class("text-accent-strong")], [
-      view_accent_sample(),
-      view_matrix_row_constrast_ratio_tag(color_scale.accent_strong, bg),
-    ]),
-    html.td([attr.class("w--sample-table-td-group-start")], [
-      view_solid_sample("bg-solid-subtle"),
-      view_matrix_row_constrast_ratio_tag(color_scale.solid_subtle, bg),
-    ]),
-    html.td([], [
-      view_solid_sample("bg-solid"),
-      view_matrix_row_constrast_ratio_tag(color_scale.solid, bg),
-    ]),
-    html.td([], [
-      view_solid_sample("bg-solid-strong"),
-      view_matrix_row_constrast_ratio_tag(color_scale.solid_strong, bg),
-    ]),
+    view_matrix_row_cell_group(
+      color_scale: color_scale,
+      bg: color_key,
+      children: [#(Text, html.text("text")), #(TextSubtle, html.text("text"))],
+    ),
+    view_matrix_row_cell_group(
+      color_scale: color_scale,
+      bg: color_key,
+      children: [
+        #(AccentSubtle, view_accent_sample()),
+        #(Accent, view_accent_sample()),
+        #(AccentStrong, view_accent_sample()),
+      ],
+    ),
+    view_matrix_row_cell_group(
+      color_scale: color_scale,
+      bg: color_key,
+      children: [
+        #(SolidSubtle, view_solid_sample("bg-solid-subtle")),
+        #(Solid, view_solid_sample("bg-solid")),
+        #(SolidStrong, view_solid_sample("bg-solid-strong")),
+      ],
+    ),
   ])
 }
 
-fn view_matrix_row_constrast_ratio_tag(fg: Color, bg: Color) {
+fn view_matrix_row_cell_group(
+  color_scale color_scale: ColorScale,
+  bg bg_key: ColorKey,
+  children children: List(#(ColorKey, Element(msg))),
+) {
+  let bg = get_color_scale_color(color_scale, bg_key)
+
+  element.fragment(
+    children
+    |> list.index_map(fn(item, index) {
+      let #(fg_key, row) = item
+      let fg = get_color_scale_color(color_scale, fg_key)
+
+      html.td(
+        [
+          attr.classes([#("border-l border-accent-subtle", index == 0)]),
+          attr.style("color", colour.to_css_rgba_string(fg)),
+        ],
+        [
+          view_matrix_row_cell_contrast(color_scale, fg_key, bg),
+          html.div([attr.class("p-2")], [row]),
+        ],
+      )
+    }),
+  )
+}
+
+fn view_matrix_row_cell_contrast(
+  color_scale: ColorScale,
+  fg_key: ColorKey,
+  bg: Color,
+) {
+  let #(contrast_status, constrast_ratio) =
+    to_contrast_ratio(color_scale, fg_key, bg)
+
+  let constrast_ratio_string =
+    constrast_ratio |> float.to_precision(2) |> float.to_string()
+
   html.div(
     [
       attr.class("w--sample--table-contrast"),
-      attr.class("absolute bottom-0 left-0"),
+      attr.class("flex items-center justify-center gap-1"),
+      attr.class("bg-black/20 backdrop-blur-md text-white py-0.5 px-1"),
+      attr.class("border-l border-white/10"),
+      attr.class("text-xs tracking-wider"),
     ],
-    [view_constrast_ratio_tag(fg, bg)],
+    [
+      constrast_ratio_icon(contrast_status),
+      html.p([], [html.text(constrast_ratio_string)]),
+    ],
   )
 }
 
@@ -1008,210 +1046,45 @@ fn view_solid_sample(class: String) -> Element(msg) {
   )
 }
 
-fn view_constrast_ratio(label: String, fg: Color, bg: Color) -> Element(msg) {
-  html.p(
-    [
-      attr.class("flex items-center justify-start"),
-      attr.class("gap-2 py-0.5 px-2 rounded"),
-      attr.styles([
-        #("color", colour.to_css_rgba_string(fg)),
-        #("background", colour.to_css_rgba_string(bg)),
-      ]),
-    ],
-    [html.div([], [html.text(label)]), view_constrast_ratio_tag(fg, bg)],
-  )
-}
+fn to_contrast_ratio(
+  color_scale: ColorScale,
+  fg_key: ColorKey,
+  bg: Color,
+) -> #(ContrastRatioStatus, Float) {
+  let fg = get_color_scale_color(color_scale, fg_key)
+  let contrast_ratio = accessibility.contrast_ratio(fg, bg)
+  let #(great_ratio, good_ratio) = to_contrast_thresholds(fg_key)
 
-fn to_contrast_ratio(fg: Color, bg: Color) -> ContrastRatioStatus {
-  let constrast_ratio = accessibility.contrast_ratio(fg, bg)
-
-  case
-    constrast_ratio >=. 7.0,
-    constrast_ratio >=. 4.5,
-    constrast_ratio >=. 1.5
+  let constrast_ratio_status = case
+    contrast_ratio >=. great_ratio,
+    contrast_ratio >=. good_ratio
   {
     // recommended is 3.0
-    True, _, _ -> Great
-    False, True, _ -> Good
-    False, False, True -> GoodForUI
-    False, False, False -> Bad
+    True, _ -> Great
+    False, True -> Good
+    False, False -> Bad
   }
+
+  #(constrast_ratio_status, contrast_ratio)
 }
 
-fn view_constrast_ratio_tag(fg: Color, bg: Color) -> Element(msg) {
-  let constrast_ratio = accessibility.contrast_ratio(fg, bg)
-  let constrast_status = to_contrast_ratio(fg, bg)
-  let constrast_ratio_string =
-    constrast_ratio |> float.to_precision(2) |> float.to_string()
-
-  html.div(
-    [
-      attr.class("flex items-center gap-1"),
-      attr.class("bg-black/40 backdrop-blur-md text-white py-0.5 px-1"),
-      attr.class("text-xs tracking-wider"),
-    ],
-    [
-      constrast_ratio_icon(constrast_status),
-      html.p([], [html.text(constrast_ratio_string)]),
-    ],
-  )
-}
-
-fn view_variant(name: String, color_scale: ColorScale) -> Element(Msg) {
-  html.article(
-    [
-      color_scale_css_vars_attr(color_scale),
-      attr.class("w-theme"),
-      attr.class("bg rounded p-4 flex gap-4"),
-    ],
-    [
-      html.h1([attr.class("text-xl text-color flex-grow")], [html.text(name)]),
-      html.div([], [
-        html.div([attr.class("space-y-2 py-2")], [
-          view_constrast_ratio("bg", color_scale.text, color_scale.bg),
-          view_constrast_ratio(
-            "bg subtle",
-            color_scale.text,
-            color_scale.bg_subtle,
-          ),
-          view_constrast_ratio(
-            "tint strong",
-            color_scale.text,
-            color_scale.tint_strong,
-          ),
-          view_constrast_ratio(
-            "bg + subtle",
-            color_scale.text_subtle,
-            color_scale.bg,
-          ),
-          view_constrast_ratio(
-            "bg subtle + subtle",
-            color_scale.text_subtle,
-            color_scale.bg_subtle,
-          ),
-          view_constrast_ratio(
-            "tint strong + subtle",
-            color_scale.text_subtle,
-            color_scale.tint_strong,
-          ),
-          view_constrast_ratio(
-            "solid subtle",
-            color_scale.solid_text,
-            color_scale.solid_subtle,
-          ),
-          view_constrast_ratio(
-            "solid strong",
-            color_scale.solid_text,
-            color_scale.solid_strong,
-          ),
-        ]),
-        html.div(
-          [],
-          color_scale
-            |> to_color_scale_colors()
-            |> list.map(fn(item) {
-              let #(k, v) = item
-              let color_string = to_hex_string(v)
-              let variant_key = case name == "Base" {
-                True -> ""
-                False -> name
-              }
-
-              html.input([
-                attr.class(""),
-                attr.type_("color"),
-                attr.value(color_string),
-                event.on_input(fn(c) { OnColorInput(variant_key, k, c) }),
-              ])
-            }),
-        ),
-        html.div([], [
-          html.div(
-            [
-              attr.class("h-8 w-full"),
-              bg_gradient_attr(
-                from: "var(--w-tint-strong)",
-                to: "var(--w-bg)",
-                through: [],
-                at: 90,
-              ),
-            ],
-            [],
-          ),
-          html.div(
-            [
-              attr.class("h-8 w-full"),
-              bg_gradient_attr(
-                from: "var(--w-text)",
-                to: "var(--w-accent-subtle)",
-                through: ["var(--w-text-subtle)"],
-                at: 90,
-              ),
-            ],
-            [],
-          ),
-          html.div(
-            [
-              attr.class("h-8 w-full"),
-              bg_gradient_attr(
-                from: "var(--w-solid-subtle)",
-                to: "var(--w-solid-strong)",
-                through: ["var(--w-solid)"],
-                at: 90,
-              ),
-            ],
-            [],
-          ),
-        ]),
-        html.div([attr.class("my-4 border-t border-tint")], []),
-        view_bg_sample("bg"),
-        html.div([attr.class("my-4 border-t border-tint")], []),
-        view_bg_sample("bg-subtle"),
-        html.div([attr.class("my-4 border-t border-tint")], []),
-        view_bg_sample("bg-tint"),
-      ]),
-    ],
-  )
-}
-
-fn view_bg_sample(class: String) -> Element(msg) {
-  html.div(
-    [
-      attr.class(class),
-      attr.class("space-y-4 p-4"),
-      attr.class(
-        "border border-solid-color rounded-sm shadow-lg shadow-shadow/10",
-      ),
-    ],
-    [
-      html.div([attr.class("flex items-center gap-4")], [
-        html.div([], [
-          html.p([attr.class("text-color")], [html.text("Default text")]),
-          html.p([attr.class("text-subtle")], [html.text("Subtle text")]),
-        ]),
-        html.div([attr.class("self-stretch mx-8 border-l border-accent")], []),
-        html.div([attr.class("flex gap-4 items-center")], [
-          html.button(
-            [
-              attr.class("flex items-center justify-center"),
-              attr.class("size-8 rounded-full"),
-              attr.class("border border-accent"),
-              attr.class("text-accent text-xl leading-none font-bold"),
-            ],
-            [html.text("?")],
-          ),
-          view_button("border-2 border-accent text-color"),
-          view_button("border border-transparent bg-transparent text-color"),
-          view_button("border border-tint bg-tint text-color"),
-          view_solid_button("border border-solid-color bg-solid text-solid"),
-        ]),
-      ]),
-    ],
-  )
+fn to_contrast_thresholds(key: ColorKey) -> #(Float, Float) {
+  case key {
+    Text | TextSubtle | SolidText | Shadow -> #(7.0, 4.5)
+    Accent | AccentSubtle | AccentStrong -> #(1.5, 1.25)
+    Solid | SolidSubtle | SolidStrong -> #(1.5, 1.25)
+    Bg | BgSubtle | Tint | TintSubtle | TintStrong -> #(0.5, 0.25)
+  }
 }
 
 fn to_hex_string(c: Color) {
   "#" <> string.pad_start(colour.to_rgb_hex_string(c), 6, "0")
+}
+
+fn from_rgb255(r: Int, g: Int, b: Int) -> Color {
+  let assert Ok(color) = colour.from_rgb255(r, g, b)
+
+  color
 }
 
 fn from_hex(hex: String) -> Color {

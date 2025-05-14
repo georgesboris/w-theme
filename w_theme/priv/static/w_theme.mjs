@@ -422,11 +422,6 @@ function from_list(list4) {
   return from_list_loop(list4, new_map());
 }
 
-// build/dev/javascript/gleam_stdlib/gleam/pair.mjs
-function new$(first2, second) {
-  return [first2, second];
-}
-
 // build/dev/javascript/gleam_stdlib/gleam/list.mjs
 var Ascending = class extends CustomType {
 };
@@ -449,34 +444,6 @@ function reverse_and_prepend(loop$prefix, loop$suffix) {
 function reverse(list4) {
   return reverse_and_prepend(list4, toList([]));
 }
-function filter_map_loop(loop$list, loop$fun, loop$acc) {
-  while (true) {
-    let list4 = loop$list;
-    let fun = loop$fun;
-    let acc = loop$acc;
-    if (list4.hasLength(0)) {
-      return reverse(acc);
-    } else {
-      let first$1 = list4.head;
-      let rest$1 = list4.tail;
-      let _block;
-      let $ = fun(first$1);
-      if ($.isOk()) {
-        let first$2 = $[0];
-        _block = prepend(first$2, acc);
-      } else {
-        _block = acc;
-      }
-      let new_acc = _block;
-      loop$list = rest$1;
-      loop$fun = fun;
-      loop$acc = new_acc;
-    }
-  }
-}
-function filter_map(list4, fun) {
-  return filter_map_loop(list4, fun, toList([]));
-}
 function map_loop(loop$list, loop$fun, loop$acc) {
   while (true) {
     let list4 = loop$list;
@@ -495,6 +462,28 @@ function map_loop(loop$list, loop$fun, loop$acc) {
 }
 function map(list4, fun) {
   return map_loop(list4, fun, toList([]));
+}
+function index_map_loop(loop$list, loop$fun, loop$index, loop$acc) {
+  while (true) {
+    let list4 = loop$list;
+    let fun = loop$fun;
+    let index4 = loop$index;
+    let acc = loop$acc;
+    if (list4.hasLength(0)) {
+      return reverse(acc);
+    } else {
+      let first$1 = list4.head;
+      let rest$1 = list4.tail;
+      let acc$1 = prepend(fun(first$1, index4), acc);
+      loop$list = rest$1;
+      loop$fun = fun;
+      loop$index = index4 + 1;
+      loop$acc = acc$1;
+    }
+  }
+}
+function index_map(list4, fun) {
+  return index_map_loop(list4, fun, 0, toList([]));
 }
 function append_loop(loop$first, loop$second) {
   while (true) {
@@ -915,11 +904,6 @@ function try$(result, fun) {
 }
 function then$(result, fun) {
   return try$(result, fun);
-}
-function values2(results) {
-  return filter_map(results, (r) => {
-    return r;
-  });
 }
 
 // build/dev/javascript/gleam_stdlib/dict.mjs
@@ -1866,6 +1850,9 @@ function divide(a, b) {
     return new Ok(divideFloat(a, b$1));
   }
 }
+function multiply(a, b) {
+  return a * b;
+}
 
 // build/dev/javascript/gleam_stdlib/gleam/int.mjs
 function to_base16(x) {
@@ -1874,19 +1861,6 @@ function to_base16(x) {
 function power3(base, exponent) {
   let _pipe = identity(base);
   return power2(_pipe, exponent);
-}
-function compare2(a, b) {
-  let $ = a === b;
-  if ($) {
-    return new Eq();
-  } else {
-    let $1 = a < b;
-    if ($1) {
-      return new Lt();
-    } else {
-      return new Gt();
-    }
-  }
 }
 
 // build/dev/javascript/gleam_stdlib/gleam/string.mjs
@@ -1944,6 +1918,31 @@ function repeat_loop(loop$string, loop$times, loop$acc) {
 function repeat(string5, times) {
   return repeat_loop(string5, times, "");
 }
+function join_loop(loop$strings, loop$separator, loop$accumulator) {
+  while (true) {
+    let strings = loop$strings;
+    let separator = loop$separator;
+    let accumulator = loop$accumulator;
+    if (strings.hasLength(0)) {
+      return accumulator;
+    } else {
+      let string5 = strings.head;
+      let strings$1 = strings.tail;
+      loop$strings = strings$1;
+      loop$separator = separator;
+      loop$accumulator = accumulator + separator + string5;
+    }
+  }
+}
+function join(strings, separator) {
+  if (strings.hasLength(0)) {
+    return "";
+  } else {
+    let first$1 = strings.head;
+    let rest = strings.tail;
+    return join_loop(rest, separator, first$1);
+  }
+}
 function padding(size2, pad_string) {
   let pad_string_length = string_length(pad_string);
   let num_pads = divideInt(size2, pad_string_length);
@@ -1983,24 +1982,6 @@ function index2(data, key) {
     return new Ok(new None());
   }
   return new Error(key_is_int ? "Indexable" : "Dict");
-}
-function list(data, decode2, pushPath, index4, emptyList) {
-  if (!(data instanceof List || Array.isArray(data))) {
-    const error = new DecodeError2("List", classify_dynamic(data), emptyList);
-    return [emptyList, List.fromArray([error])];
-  }
-  const decoded = [];
-  for (const element3 of data) {
-    const layer = decode2(element3);
-    const [out, errors] = layer;
-    if (errors instanceof NonEmpty) {
-      const [_, errors2] = pushPath(layer, index4.toString());
-      return [emptyList, errors2];
-    }
-    decoded.push(out);
-    index4++;
-  }
-  return [List.fromArray(decoded), emptyList];
 }
 function int(data) {
   if (Number.isInteger(data)) return new Ok(data);
@@ -2128,21 +2109,6 @@ function decode_string2(data) {
   return run_dynamic_function(data, "String", string);
 }
 var string2 = /* @__PURE__ */ new Decoder(decode_string2);
-function list2(inner) {
-  return new Decoder(
-    (data) => {
-      return list(
-        data,
-        inner.function,
-        (p2, k) => {
-          return push_path(p2, toList([k]));
-        },
-        0,
-        toList([])
-      );
-    }
-  );
-}
 function push_path(layer, path) {
   let decoder = one_of(
     string2,
@@ -2241,9 +2207,6 @@ function subfield(field_path, field_decoder, next) {
       return [out$1, append(errors1, errors2)];
     }
   );
-}
-function field(field_name, field_decoder, next) {
-  return subfield(toList([field_name]), field_decoder, next);
 }
 
 // build/dev/javascript/gleam_json/gleam_json_ffi.mjs
@@ -2394,13 +2357,13 @@ function rgba_to_hsla(r, g, b, a) {
       return new Ok(4 + d);
     });
   }
-  let h12 = _block;
+  let h1 = _block;
   let _block$1;
-  if (h12.isOk()) {
-    let v = h12[0];
+  if (h1.isOk()) {
+    let v = h1[0];
     _block$1 = new Ok(v * divideFloat(1, 6));
   } else {
-    _block$1 = h12;
+    _block$1 = h1;
   }
   let h2 = _block$1;
   let _block$2;
@@ -2562,6 +2525,66 @@ function to_hsla(colour) {
     return rgba_to_hsla(r, g, b, a);
   }
 }
+function to_css_rgba_string(colour) {
+  let $ = to_rgba(colour);
+  let r = $[0];
+  let g = $[1];
+  let b = $[2];
+  let a = $[3];
+  let percent = (x) => {
+    let _block;
+    let _pipe = x;
+    let _pipe$1 = multiply(_pipe, 1e4);
+    let _pipe$2 = round(_pipe$1);
+    let _pipe$3 = identity(_pipe$2);
+    _block = divide(_pipe$3, 100);
+    let $1 = _block;
+    if (!$1.isOk()) {
+      throw makeError(
+        "let_assert",
+        "gleam_community/colour",
+        706,
+        "",
+        "Pattern match failed, no pattern matched the value.",
+        { value: $1 }
+      );
+    }
+    let p2 = $1[0];
+    return p2;
+  };
+  let round_to = (x) => {
+    let _block;
+    let _pipe = x;
+    let _pipe$1 = multiply(_pipe, 1e3);
+    let _pipe$2 = round(_pipe$1);
+    let _pipe$3 = identity(_pipe$2);
+    _block = divide(_pipe$3, 1e3);
+    let $1 = _block;
+    if (!$1.isOk()) {
+      throw makeError(
+        "let_assert",
+        "gleam_community/colour",
+        718,
+        "",
+        "Pattern match failed, no pattern matched the value.",
+        { value: $1 }
+      );
+    }
+    let r$1 = $1[0];
+    return r$1;
+  };
+  return join(
+    toList([
+      "rgba(",
+      float_to_string(percent(r)) + "%,",
+      float_to_string(percent(g)) + "%,",
+      float_to_string(percent(b)) + "%,",
+      float_to_string(round_to(a)),
+      ")"
+    ]),
+    ""
+  );
+}
 function to_rgb_hex(colour) {
   let $ = to_rgba(colour);
   let r = $[0];
@@ -2653,7 +2676,7 @@ var Set2 = class extends CustomType {
     this.dict = dict2;
   }
 };
-function new$2() {
+function new$() {
   return new Set2(new_map());
 }
 function contains(set, member) {
@@ -2671,7 +2694,7 @@ var EMPTY_DICT = /* @__PURE__ */ Dict.new();
 function empty_dict() {
   return EMPTY_DICT;
 }
-var EMPTY_SET = /* @__PURE__ */ new$2();
+var EMPTY_SET = /* @__PURE__ */ new$();
 function empty_set() {
   return EMPTY_SET;
 }
@@ -2718,13 +2741,13 @@ var Property = class extends CustomType {
   }
 };
 var Event2 = class extends CustomType {
-  constructor(kind, name, handler, include, prevent_default2, stop_propagation, immediate2, limit) {
+  constructor(kind, name, handler, include, prevent_default, stop_propagation, immediate2, limit) {
     super();
     this.kind = kind;
     this.name = name;
     this.handler = handler;
     this.include = include;
-    this.prevent_default = prevent_default2;
+    this.prevent_default = prevent_default;
     this.stop_propagation = stop_propagation;
     this.immediate = immediate2;
     this.limit = limit;
@@ -2819,13 +2842,13 @@ function property(name, value2) {
   return new Property(property_kind, name, value2);
 }
 var event_kind = 2;
-function event(name, handler, include, prevent_default2, stop_propagation, immediate2, limit) {
+function event(name, handler, include, prevent_default, stop_propagation, immediate2, limit) {
   return new Event2(
     event_kind,
     name,
     handler,
     include,
-    prevent_default2,
+    prevent_default,
     stop_propagation,
     immediate2,
     limit
@@ -2908,9 +2931,6 @@ function styles(properties) {
 }
 function checked(is_checked) {
   return boolean_attribute("checked", is_checked);
-}
-function placeholder(text4) {
-  return attribute2("placeholder", text4);
 }
 function type_(control_type) {
   return attribute2("type", control_type);
@@ -3367,7 +3387,7 @@ var Remove = class extends CustomType {
     this.count = count;
   }
 };
-function new$5(index4, removed, changes, children) {
+function new$4(index4, removed, changes, children) {
   return new Patch(index4, removed, changes, children);
 }
 var replace_text_kind = 0;
@@ -3984,7 +4004,7 @@ function do_diff(loop$old, loop$old_keyed, loop$new, loop$new_keyed, loop$moved,
       let old$1 = old.tail;
       let next = new$8.head;
       let new$1 = new$8.tail;
-      let child = new$5(
+      let child = new$4(
         node_index,
         0,
         toList([replace_text(next.content)]),
@@ -4047,7 +4067,7 @@ function do_diff(loop$old, loop$old_keyed, loop$new, loop$new_keyed, loop$moved,
         _block$2 = children;
       } else {
         _block$2 = prepend(
-          new$5(node_index, 0, child_changes$1, toList([])),
+          new$4(node_index, 0, child_changes$1, toList([])),
           children
         );
       }
@@ -4631,7 +4651,7 @@ var Runtime = class {
       }
     });
     this.#vdom = virtualise(this.root);
-    this.#events = new$6();
+    this.#events = new$5();
     this.#shouldFlush = true;
     this.#tick(effects);
   }
@@ -4756,7 +4776,7 @@ var Events = class extends CustomType {
     this.next_dispatched_paths = next_dispatched_paths;
   }
 };
-function new$6() {
+function new$5() {
   return new Events(
     empty2(),
     empty_list,
@@ -5095,12 +5115,6 @@ function thead(attrs, children) {
 function tr(attrs, children) {
   return element2("tr", attrs, children);
 }
-function button(attrs, children) {
-  return element2("button", attrs, children);
-}
-function form(attrs, children) {
-  return element2("form", attrs, children);
-}
 function input(attrs) {
   return element2("input", attrs, empty_list);
 }
@@ -5139,7 +5153,7 @@ var Config2 = class extends CustomType {
     this.on_form_restore = on_form_restore;
   }
 };
-function new$7(options) {
+function new$6(options) {
   let init2 = new Config2(
     false,
     true,
@@ -5213,7 +5227,7 @@ var ElementNotFound = class extends CustomType {
 var NotABrowser = class extends CustomType {
 };
 function application(init2, update3, view2) {
-  return new App(init2, update3, view2, new$7(empty_list));
+  return new App(init2, update3, view2, new$6(empty_list));
 }
 function start3(app, selector, start_args) {
   return guard(
@@ -5256,26 +5270,6 @@ function on(name, handler) {
     new NoLimit(0)
   );
 }
-function prevent_default(event4) {
-  if (event4 instanceof Event2) {
-    let _record = event4;
-    return new Event2(
-      _record.kind,
-      _record.name,
-      _record.handler,
-      _record.include,
-      true,
-      _record.stop_propagation,
-      _record.immediate,
-      _record.limit
-    );
-  } else {
-    return event4;
-  }
-}
-function on_click(msg) {
-  return on("click", success(msg));
-}
 function on_input(msg) {
   return on(
     "input",
@@ -5300,61 +5294,8 @@ function on_check(msg) {
     )
   );
 }
-function formdata_decoder() {
-  let string_value_decoder = field(
-    0,
-    string2,
-    (key) => {
-      return field(
-        1,
-        one_of(
-          map3(string2, (var0) => {
-            return new Ok(var0);
-          }),
-          toList([success(new Error(void 0))])
-        ),
-        (value2) => {
-          let _pipe2 = value2;
-          let _pipe$12 = map2(
-            _pipe2,
-            (_capture) => {
-              return new$(key, _capture);
-            }
-          );
-          return success(_pipe$12);
-        }
-      );
-    }
-  );
-  let _pipe = string_value_decoder;
-  let _pipe$1 = list2(_pipe);
-  return map3(_pipe$1, values2);
-}
-function on_submit(msg) {
-  let _pipe = on(
-    "submit",
-    subfield(
-      toList(["detail", "formData"]),
-      formdata_decoder(),
-      (formdata) => {
-        let _pipe2 = formdata;
-        let _pipe$1 = msg(_pipe2);
-        return success(_pipe$1);
-      }
-    )
-  );
-  return prevent_default(_pipe);
-}
 
 // build/dev/javascript/w_theme/w_theme.mjs
-var Variant = class extends CustomType {
-  constructor(key, name, color_scale) {
-    super();
-    this.key = key;
-    this.name = name;
-    this.color_scale = color_scale;
-  }
-};
 var VariantKey = class extends CustomType {
   constructor(name, order) {
     super();
@@ -5453,8 +5394,6 @@ var Great = class extends CustomType {
 };
 var Good = class extends CustomType {
 };
-var GoodForUI = class extends CustomType {
-};
 var Bad = class extends CustomType {
 };
 var ColorScaleMatrix = class extends CustomType {
@@ -5486,22 +5425,6 @@ var ColorScaleMatrixRow = class extends CustomType {
     this.solid_strong_contrast = solid_strong_contrast;
   }
 };
-function variants_list(model) {
-  let _pipe = model.variants;
-  let _pipe$1 = map_to_list(_pipe);
-  let _pipe$2 = map(
-    _pipe$1,
-    (x) => {
-      return new Variant(x[0], x[0].name, x[1]);
-    }
-  );
-  return sort(
-    _pipe$2,
-    (a, b) => {
-      return compare2(a.key.order, b.key.order);
-    }
-  );
-}
 function variant_by_name(model, name) {
   let _pipe = model.variants;
   let _pipe$1 = map_to_list(_pipe);
@@ -6006,7 +5929,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      378,
+      393,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }
@@ -6018,7 +5941,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      379,
+      394,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $1 }
@@ -6030,7 +5953,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      380,
+      395,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $2 }
@@ -6042,7 +5965,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      381,
+      396,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $3 }
@@ -6054,7 +5977,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      382,
+      397,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $4 }
@@ -6066,7 +5989,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      383,
+      398,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $5 }
@@ -6078,7 +6001,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      384,
+      399,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $6 }
@@ -6090,7 +6013,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      385,
+      400,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $7 }
@@ -6102,7 +6025,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      386,
+      401,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $8 }
@@ -6114,7 +6037,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      387,
+      402,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $9 }
@@ -6126,7 +6049,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      388,
+      403,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $10 }
@@ -6138,7 +6061,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      389,
+      404,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $11 }
@@ -6150,7 +6073,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      390,
+      405,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $12 }
@@ -6162,7 +6085,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      391,
+      406,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $13 }
@@ -6174,7 +6097,7 @@ function to_variant(bg_str, bg_subtle_str, tint_str, tint_subtle_str, tint_stron
     throw makeError(
       "let_assert",
       "w_theme",
-      392,
+      407,
       "to_variant",
       "Pattern match failed, no pattern matched the value.",
       { value: $14 }
@@ -6228,7 +6151,7 @@ function lerp_color(current, target, value2) {
     throw makeError(
       "let_assert",
       "w_theme",
-      511,
+      526,
       "lerp_color",
       "Pattern match failed, no pattern matched the value.",
       { value: $1 }
@@ -6265,7 +6188,7 @@ function color_scale_from_key_colors(bg, text4, tint, accent, solid) {
       throw makeError(
         "let_assert",
         "w_theme",
-        547,
+        562,
         "",
         "Pattern match failed, no pattern matched the value.",
         { value: $2 }
@@ -6301,11 +6224,6 @@ function constrast_ratio_icon(status) {
   } else if (status instanceof Good) {
     return span(
       toList([style("color", "green")]),
-      toList([text3("A")])
-    );
-  } else if (status instanceof GoodForUI) {
-    return span(
-      toList([style("color", "orange")]),
       toList([text3("A")])
     );
   } else {
@@ -6345,34 +6263,71 @@ function view_solid_sample(class$2) {
     ])
   );
 }
-function to_contrast_ratio(fg, bg) {
-  let constrast_ratio = contrast_ratio(fg, bg);
-  let $ = constrast_ratio >= 7;
-  let $1 = constrast_ratio >= 4.5;
-  let $2 = constrast_ratio >= 1.5;
-  if ($) {
-    return new Great();
-  } else if (!$ && $1) {
-    return new Good();
-  } else if (!$ && !$1 && $2) {
-    return new GoodForUI();
+function to_contrast_thresholds(key) {
+  if (key instanceof Text2) {
+    return [7, 4.5];
+  } else if (key instanceof TextSubtle) {
+    return [7, 4.5];
+  } else if (key instanceof SolidText) {
+    return [7, 4.5];
+  } else if (key instanceof Shadow) {
+    return [7, 4.5];
+  } else if (key instanceof Accent) {
+    return [1.5, 1.25];
+  } else if (key instanceof AccentSubtle) {
+    return [1.5, 1.25];
+  } else if (key instanceof AccentStrong) {
+    return [1.5, 1.25];
+  } else if (key instanceof Solid) {
+    return [1.5, 1.25];
+  } else if (key instanceof SolidSubtle) {
+    return [1.5, 1.25];
+  } else if (key instanceof SolidStrong) {
+    return [1.5, 1.25];
+  } else if (key instanceof Bg) {
+    return [0.5, 0.25];
+  } else if (key instanceof BgSubtle) {
+    return [0.5, 0.25];
+  } else if (key instanceof Tint) {
+    return [0.5, 0.25];
+  } else if (key instanceof TintSubtle) {
+    return [0.5, 0.25];
   } else {
-    return new Bad();
+    return [0.5, 0.25];
   }
+}
+function to_contrast_ratio(color_scale, fg_key, bg) {
+  let fg = get_color_scale_color(color_scale, fg_key);
+  let contrast_ratio2 = contrast_ratio(fg, bg);
+  let $ = to_contrast_thresholds(fg_key);
+  let great_ratio = $[0];
+  let good_ratio = $[1];
+  let _block;
+  let $1 = contrast_ratio2 >= great_ratio;
+  let $2 = contrast_ratio2 >= good_ratio;
+  if ($1) {
+    _block = new Great();
+  } else if (!$1 && $2) {
+    _block = new Good();
+  } else {
+    _block = new Bad();
+  }
+  let constrast_ratio_status = _block;
+  return [constrast_ratio_status, contrast_ratio2];
 }
 function to_color_scale_matrix_row(color_scale, bg) {
   let color = get_color_scale_color(color_scale, bg);
   return new ColorScaleMatrixRow(
     color,
     bg,
-    to_contrast_ratio(color_scale.text, color),
-    to_contrast_ratio(color_scale.text_subtle, color),
-    to_contrast_ratio(color_scale.accent, color),
-    to_contrast_ratio(color_scale.accent_subtle, color),
-    to_contrast_ratio(color_scale.accent_strong, color),
-    to_contrast_ratio(color_scale.solid, color),
-    to_contrast_ratio(color_scale.solid_subtle, color),
-    to_contrast_ratio(color_scale.solid_strong, color)
+    to_contrast_ratio(color_scale, new Text2(), color)[0],
+    to_contrast_ratio(color_scale, new TextSubtle(), color)[0],
+    to_contrast_ratio(color_scale, new Accent(), color)[0],
+    to_contrast_ratio(color_scale, new AccentSubtle(), color)[0],
+    to_contrast_ratio(color_scale, new AccentStrong(), color)[0],
+    to_contrast_ratio(color_scale, new Solid(), color)[0],
+    to_contrast_ratio(color_scale, new SolidSubtle(), color)[0],
+    to_contrast_ratio(color_scale, new SolidStrong(), color)[0]
   );
 }
 function to_color_scale_matrix(color_scale) {
@@ -6383,14 +6338,15 @@ function to_color_scale_matrix(color_scale) {
     to_color_scale_matrix_row(color_scale, new Tint()),
     to_color_scale_matrix_row(color_scale, new TintSubtle()),
     to_color_scale_matrix_row(color_scale, new TintStrong()),
-    to_contrast_ratio(color_scale.solid_text, color_scale.solid),
-    to_contrast_ratio(color_scale.solid_text, color_scale.solid_subtle),
-    to_contrast_ratio(color_scale.solid_text, color_scale.solid_strong)
+    to_contrast_ratio(color_scale, new SolidText(), color_scale.solid)[0],
+    to_contrast_ratio(color_scale, new SolidText(), color_scale.solid_subtle)[0],
+    to_contrast_ratio(color_scale, new SolidText(), color_scale.solid_strong)[0]
   );
 }
-function view_constrast_ratio_tag(fg, bg) {
-  let constrast_ratio = contrast_ratio(fg, bg);
-  let constrast_status = to_contrast_ratio(fg, bg);
+function view_matrix_row_cell_contrast(color_scale, fg_key, bg) {
+  let $ = to_contrast_ratio(color_scale, fg_key, bg);
+  let contrast_status = $[0];
+  let constrast_ratio = $[1];
   let _block;
   let _pipe = constrast_ratio;
   let _pipe$1 = to_precision(_pipe, 2);
@@ -6398,27 +6354,47 @@ function view_constrast_ratio_tag(fg, bg) {
   let constrast_ratio_string = _block;
   return div(
     toList([
-      class$("flex items-center gap-1"),
-      class$("bg-black/40 backdrop-blur-md text-white py-0.5 px-1"),
+      class$("w--sample--table-contrast"),
+      class$("flex items-center justify-center gap-1"),
+      class$("bg-black/20 backdrop-blur-md text-white py-0.5 px-1"),
+      class$("border-l border-white/10"),
       class$("text-xs tracking-wider")
     ]),
     toList([
-      constrast_ratio_icon(constrast_status),
+      constrast_ratio_icon(contrast_status),
       p(toList([]), toList([text3(constrast_ratio_string)]))
     ])
   );
 }
-function view_matrix_row_constrast_ratio_tag(fg, bg) {
-  return div(
-    toList([
-      class$("w--sample--table-contrast"),
-      class$("absolute bottom-0 left-0")
-    ]),
-    toList([view_constrast_ratio_tag(fg, bg)])
+function view_matrix_row_cell_group(color_scale, bg_key, children) {
+  let bg = get_color_scale_color(color_scale, bg_key);
+  return fragment2(
+    (() => {
+      let _pipe = children;
+      return index_map(
+        _pipe,
+        (item, index4) => {
+          let fg_key = item[0];
+          let row = item[1];
+          let fg = get_color_scale_color(color_scale, fg_key);
+          return td(
+            toList([
+              classes(
+                toList([["border-l border-accent-subtle", index4 === 0]])
+              ),
+              style("color", to_css_rgba_string(fg))
+            ]),
+            toList([
+              view_matrix_row_cell_contrast(color_scale, fg_key, bg),
+              div(toList([class$("p-2")]), toList([row]))
+            ])
+          );
+        }
+      );
+    })()
   );
 }
-function view_matrix_row(variant_key, label2, class$2, color_scale, color_key, bg) {
-  let row_color = get_color_scale_color(color_scale, color_key);
+function view_matrix_row(variant_key, label2, class$2, color_scale, color_key) {
   return tr(
     toList([class$(class$2)]),
     toList([
@@ -6428,68 +6404,36 @@ function view_matrix_row(variant_key, label2, class$2, color_scale, color_key, b
           label(
             toList([
               class$("flex items-center gap-2"),
-              class$("p-2 cursor-pointer hover:bg-white/[0.05] rounded")
+              class$("p-2 cursor-pointer hover:bg-white/[0.05]")
             ]),
             toList([text3(label2)])
           )
         ])
       ),
-      td(
-        toList([class$("w--sample-table-td-group-start text-color")]),
+      view_matrix_row_cell_group(
+        color_scale,
+        color_key,
         toList([
-          text3("text"),
-          view_matrix_row_constrast_ratio_tag(color_scale.text, bg)
+          [new Text2(), text3("text")],
+          [new TextSubtle(), text3("text")]
         ])
       ),
-      td(
-        toList([class$("text-subtle")]),
+      view_matrix_row_cell_group(
+        color_scale,
+        color_key,
         toList([
-          text3("text"),
-          view_matrix_row_constrast_ratio_tag(color_scale.text_subtle, bg)
+          [new AccentSubtle(), view_accent_sample()],
+          [new Accent(), view_accent_sample()],
+          [new AccentStrong(), view_accent_sample()]
         ])
       ),
-      td(
+      view_matrix_row_cell_group(
+        color_scale,
+        color_key,
         toList([
-          class$("w--sample-table-td-group-start text-accent-subtle")
-        ]),
-        toList([
-          view_accent_sample(),
-          view_matrix_row_constrast_ratio_tag(color_scale.accent_subtle, bg)
-        ])
-      ),
-      td(
-        toList([class$("text-accent")]),
-        toList([
-          view_accent_sample(),
-          view_matrix_row_constrast_ratio_tag(color_scale.accent, bg)
-        ])
-      ),
-      td(
-        toList([class$("text-accent-strong")]),
-        toList([
-          view_accent_sample(),
-          view_matrix_row_constrast_ratio_tag(color_scale.accent_strong, bg)
-        ])
-      ),
-      td(
-        toList([class$("w--sample-table-td-group-start")]),
-        toList([
-          view_solid_sample("bg-solid-subtle"),
-          view_matrix_row_constrast_ratio_tag(color_scale.solid_subtle, bg)
-        ])
-      ),
-      td(
-        toList([]),
-        toList([
-          view_solid_sample("bg-solid"),
-          view_matrix_row_constrast_ratio_tag(color_scale.solid, bg)
-        ])
-      ),
-      td(
-        toList([]),
-        toList([
-          view_solid_sample("bg-solid-strong"),
-          view_matrix_row_constrast_ratio_tag(color_scale.solid_strong, bg)
+          [new SolidSubtle(), view_solid_sample("bg-solid-subtle")],
+          [new Solid(), view_solid_sample("bg-solid")],
+          [new SolidStrong(), view_solid_sample("bg-solid-strong")]
         ])
       )
     ])
@@ -6523,7 +6467,9 @@ function view_input_color_btn(value2, class$2, on_input2) {
   let color_string = to_hex_string(value2);
   return span(
     toList([
-      class$("flex rounded relative border-1 border-white/20"),
+      class$(
+        "flex rounded relative border border-white/5 shadow-sm shadow-shadow/15"
+      ),
       class$(class$2),
       style("background", color_string)
     ]),
@@ -6656,40 +6602,29 @@ function view_sample_table(variant, color_scale, show_contrast) {
                     "bg-subtle",
                     "bg-subtle",
                     color_scale,
-                    new BgSubtle(),
-                    color_scale.bg_subtle
+                    new BgSubtle()
                   ),
-                  view_matrix_row(
-                    variant,
-                    "bg",
-                    "bg",
-                    color_scale,
-                    new Bg(),
-                    color_scale.bg
-                  ),
+                  view_matrix_row(variant, "bg", "bg", color_scale, new Bg()),
                   view_matrix_row(
                     variant,
                     "tint-subtle",
                     "bg-tint-subtle",
                     color_scale,
-                    new TintSubtle(),
-                    color_scale.tint_subtle
+                    new TintSubtle()
                   ),
                   view_matrix_row(
                     variant,
                     "tint",
                     "bg-tint",
                     color_scale,
-                    new Tint(),
-                    color_scale.tint
+                    new Tint()
                   ),
                   view_matrix_row(
                     variant,
                     "tint-strong",
                     "bg-tint-strong",
                     color_scale,
-                    new TintStrong(),
-                    color_scale.tint_strong
+                    new TintStrong()
                   )
                 ])
               )
@@ -6820,61 +6755,6 @@ function view(model) {
       classes(toList([["m--contrast", model.show_contrast]]))
     ]),
     toList([
-      div(
-        toList([class$("py-4")]),
-        toList([
-          ul(
-            toList([class$("pb-2")]),
-            (() => {
-              let _pipe = variants_list(model);
-              return map(
-                _pipe,
-                (variant) => {
-                  return li(
-                    toList([]),
-                    toList([
-                      button(
-                        toList([
-                          class$("py-2 px-4 w-full text-left"),
-                          class$("cursor-pointer hover:bg-tint-subtle"),
-                          classes(
-                            toList([
-                              ["bg-tint", isEqual(variant.key, model.active)]
-                            ])
-                          ),
-                          on_click(new OnSelectVariant(variant.key))
-                        ]),
-                        toList([text3(variant.name)])
-                      )
-                    ])
-                  );
-                }
-              );
-            })()
-          ),
-          form(
-            toList([
-              class$("pr-4"),
-              on_submit((_) => {
-                return new CreateVariant();
-              })
-            ]),
-            toList([
-              input(
-                toList([
-                  placeholder("new variant\u2026"),
-                  class$("border border-tint rounded"),
-                  class$("px-4 py-2"),
-                  value(model.variant_input),
-                  on_input((var0) => {
-                    return new InputVariant(var0);
-                  })
-                ])
-              )
-            ])
-          )
-        ])
-      ),
       (() => {
         let $ = map_get(model.variants, model.active);
         if ($.isOk()) {
@@ -6891,13 +6771,43 @@ function view(model) {
     ])
   );
 }
+function from_rgb2552(r, g, b) {
+  let $ = from_rgb255(r, g, b);
+  if (!$.isOk()) {
+    throw makeError(
+      "let_assert",
+      "w_theme",
+      1085,
+      "from_rgb255",
+      "Pattern match failed, no pattern matched the value.",
+      { value: $ }
+    );
+  }
+  let color = $[0];
+  return color;
+}
+function from_hex(hex) {
+  let $ = from_rgb_hex_string(hex);
+  if (!$.isOk()) {
+    throw makeError(
+      "let_assert",
+      "w_theme",
+      1091,
+      "from_hex",
+      "Pattern match failed, no pattern matched the value.",
+      { value: $ }
+    );
+  }
+  let color = $[0];
+  return color;
+}
 function from_hsl2(h, s, l) {
   let $ = from_hsl(divideFloat(h, 360), s, l);
   if (!$.isOk()) {
     throw makeError(
       "let_assert",
       "w_theme",
-      1224,
+      1097,
       "from_hsl",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }
@@ -6909,7 +6819,7 @@ function from_hsl2(h, s, l) {
 function color_scale_merged_with_key_colors(base_scale, color) {
   let $ = to_hsla(color);
   let h = $[0];
-  let color_accent = from_hsl2(h * 360, 0.8, 0.6);
+  let color_accent = from_hsl2(h * 360, 1, 0.6);
   let color_solid = from_hsl2(h * 360, 0.7, 0.55);
   let tint = lerp_color(base_scale.bg, color_accent, 0.075);
   let accent = lerp_color(base_scale.bg, color_accent, 0.5);
@@ -6938,28 +6848,32 @@ function init(_) {
       "#000000"
     )
   ];
+  let base_bg = from_rgb2552(30, 35, 40);
   let default_base = [
     new VariantKey("Base", 1),
     color_scale_from_key_colors(
-      benchmark_base[1].bg,
+      base_bg,
       benchmark_base[1].text,
       from_hsl2(214, 0.13, 0.225),
       from_hsl2(214, 0.13, 0.4),
-      benchmark_base[1].solid
+      from_hsl2(214, 0.13, 0.5)
     )
+  ];
+  let default_primary = [
+    new VariantKey("Primary", 2),
+    color_scale_merged_with_key_colors(default_base[1], from_hex("#1677ff"))
   ];
   let default_success = [
     new VariantKey("Success", 2),
-    color_scale_merged_with_key_colors(
-      default_base[1],
-      from_hsl2(131, 0.41, 0.46)
-    )
+    color_scale_merged_with_key_colors(default_base[1], from_hex("#52c41a"))
   ];
   return [
     new Model(
-      default_success[0],
+      default_primary[0],
       "",
-      from_list(toList([benchmark_base, default_base, default_success])),
+      from_list(
+        toList([benchmark_base, default_base, default_success, default_primary])
+      ),
       false
     ),
     none()
@@ -6972,7 +6886,7 @@ function main() {
     throw makeError(
       "let_assert",
       "w_theme",
-      1269,
+      1142,
       "main",
       "Pattern match failed, no pattern matched the value.",
       { value: $ }

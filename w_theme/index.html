@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>w_theme</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
+  <title>w_theme</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
         --color-*: initial;
         --color-black: #000;
         --color-darkgray: #111;
@@ -58,161 +59,173 @@
       }
     </style>
 
-    <style id="theme-stylesheet">
-      .w--sample--table {
-        width: 100%;
-        overflow-x: auto;
-        border: 1px solid var(--w-accent);
-        border-radius: 0.5rem;
-        background: var(--w-tint);
+  <style id="theme-stylesheet">
+    .w--sample--table {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--w-accent);
+      border-radius: 0.5rem;
+      background: var(--w-tint);
 
-        table {
-          min-width: 100%;
-          border-top: 1px solid var(--w-accent-subtle);
-          border-bottom: 1px solid var(--w-accent-subtle);
-          background: var(--w-bg);
-        }
-        
-        thead th:first-child, tbody th {
-          text-align: left;
-        }
-
-        thead th:not(:first-child) {
-          width: 8rem;
-        }
-
-        th, td {
-          position: relative;
-          padding: 0.5rem;
-          text-align: center;
-        }
-
-        th {
-          font-weight: semibold;
-          font-size: 0.75rem;
-          text-transform: uppercase;
-          letter-spacing: 0.075em;
-        }
-
-        thead {
-          border-bottom: 1px solid var(--w-accent-subtle);
-        }
-      }
-
-      .w--sample-table-td-group-start {
-        border-left: 1px solid var(--w-accent-subtle);
-      }
-
-      .w--sample--table-contrast {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 150ms;
-      }
-
-      .w--sample.m--contrast .w--sample--table-contrast {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      
-    
-      html, body, .w-theme {
-        --color-bg: var(--w-bg);
-        --color-bg-subtle: var(--w-bg-subtle);
-        --color-tint: var(--w-tint);
-        --color-tint-subtle: var(--w-tint-subtle);
-        --color-tint-strong: var(--w-tint-strong);
-        --color-accent: var(--w-accent);
-        --color-accent-subtle: var(--w-accent-subtle);
-        --color-accent-strong: var(--w-accent-strong);
-        --color-solid: var(--w-solid);
-        --color-solid-subtle: var(--w-solid-subtle);
-        --color-solid-strong: var(--w-solid-strong);
-        --color-solid-text: var(--w-solid-text);
-        --color-text: var(--w-text);
-        --color-text-subtle: var(--w-text-subtle);
-        --color-shadow: var(--w-shadow);
-
+      table {
+        min-width: 100%;
+        border-top: 1px solid var(--w-accent-subtle);
+        border-bottom: 1px solid var(--w-accent-subtle);
         background: var(--w-bg);
-        color: var(--w-text);
       }
 
-      body, .w-theme--base {
-        --w-bg: #2A2F36;
-        --w-bg-subtle: #1E2328;
-        --w-tint: #393F47;
-        --w-tint-subtle: #363b43;
-        --w-tint-strong: #404650;
-        --w-accent: #505866;
-        --w-accent-subtle: #404650;
-        --w-accent-strong: #404650;
-        --w-solid: #505866;
-        --w-solid-subtle: #454C57;
-        --w-solid-strong: #5F6773;
-        --w-solid-text: #FFFFFF;
-        --w-text: #F3F4F6;
-        --w-text-subtle: #9DA3AE;
-        --w-shadow: #000000;
+      thead th:first-child,
+      tbody th {
+        text-align: left;
       }
 
-      .w-theme--success {
-        --w-bg: rgb(45 52 46);
-        --w-bg-subtle: rgb(42 49 43);
-        --w-tint-subtle: rgb(51 66 52);
-        --w-tint: rgb(53 80 56);
-        --w-tint-strong: rgb(58 92 62);
-        --w-accent-subtle: rgb(58 92 62);
-        --w-accent: rgb(64 104 69);
-        --w-accent-strong: rgb(70 118 77);
-        --w-solid-subtle: rgb(60 151 77);
-        --w-solid: rgb(70 167 88);
-        --w-solid-strong: rgb(83 179 101);
-        --w-solid-text: rgb(255 255 255);
-        --w-text-subtle: rgb(113 208 131);
-        --w-text: rgb(194 240 194);
-        --w-shadow: rgb(0 0 0);
+      thead th:not(:first-child) {
+        width: 8rem;
       }
 
-      .w-theme--warning {
-        --w-bg: rgb(55 50 42);
-        --w-bg-subtle: rgb(49 46 40);
-        --w-tint-subtle: rgb(69 58 36);
-        --w-tint: rgb(83 64 24);
-        --w-tint-strong: rgb(93 71 23);
-        --w-accent-subtle: rgb(93 71 23);
-        --w-accent: rgb(104 83 37);
-        --w-accent-strong: rgb(121 98 50);
-        --w-solid-subtle: rgb(255 179 0);
-        --w-solid: rgb(255 197 61);
-        --w-solid-strong: rgb(255 208 97);
-        --w-solid-text: rgb(29 24 15);
-        --w-text-subtle: rgb(255 202 22);
-        --w-text: rgb(255 231 179);
-        --w-shadow: rgb(0 0 0);
+      thead th {
+        padding: 0.5rem;
       }
 
-      .w-theme--danger {
-        --w-bg: rgb(58 44 43);
-        --w-bg-subtle: rgb(53 44 43);
-        --w-tint-subtle: rgb(86 43 41);
-        --w-tint: rgb(106 40 39);
-        --w-tint-strong: rgb(120 44 45);
-        --w-accent-subtle: rgb(120 44 45);
-        --w-accent: rgb(135 54 54);
-        --w-accent-strong: rgb(157 67 66);
-        --w-solid-subtle: rgb(220 52 57);
-        --w-solid: rgb(229 72 77);
-        --w-solid-strong: rgb(236 93 94);
-        --w-solid-text: rgb(255 255 255);
-        --w-text-subtle: rgb(255 149 146);
-        --w-text: rgb(255 209 217);
-        --w-shadow: rgb(0 0 0);
+      th,
+      td {
+        position: relative;
+        text-align: center;
+        vertical-align: top;
       }
-    </style>
 
-    <script type="module" src="/priv/static/w_theme.mjs"></script>
-  </head>
+      th {
+        font-weight: semibold;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.075em;
+      }
 
-  <body>
-    <div id="app"></div>
-  </body>
+      thead {
+        border-bottom: 1px solid var(--w-accent-subtle);
+      }
+    }
+
+    .w--sample-table-td-group-start {
+      border-left: 1px solid var(--w-accent-subtle);
+    }
+
+    .w--sample--table-contrast {
+      display: none;
+      border-left: 1px solid rgb(255 255 255 / 0.1);
+    }
+
+    .w--sample-table-td-group-start .w--sample--table-contrast {
+      border-left: none;
+    }
+
+    .w--sample.m--contrast .w--sample--table-contrast {
+      display: flex;
+    }
+
+
+    html,
+    body,
+    .w-theme {
+      --color-bg: var(--w-bg);
+      --color-bg-subtle: var(--w-bg-subtle);
+      --color-tint: var(--w-tint);
+      --color-tint-subtle: var(--w-tint-subtle);
+      --color-tint-strong: var(--w-tint-strong);
+      --color-accent: var(--w-accent);
+      --color-accent-subtle: var(--w-accent-subtle);
+      --color-accent-strong: var(--w-accent-strong);
+      --color-solid: var(--w-solid);
+      --color-solid-subtle: var(--w-solid-subtle);
+      --color-solid-strong: var(--w-solid-strong);
+      --color-solid-text: var(--w-solid-text);
+      --color-text: var(--w-text);
+      --color-text-subtle: var(--w-text-subtle);
+      --color-shadow: var(--w-shadow);
+
+      background: var(--w-bg);
+      color: var(--w-text);
+    }
+
+    body,
+    .w-theme--base {
+      --w-bg: #2A2F36;
+      --w-bg-subtle: #1E2328;
+      --w-tint: #393F47;
+      --w-tint-subtle: #363b43;
+      --w-tint-strong: #404650;
+      --w-accent: #505866;
+      --w-accent-subtle: #404650;
+      --w-accent-strong: #404650;
+      --w-solid: #505866;
+      --w-solid-subtle: #454C57;
+      --w-solid-strong: #5F6773;
+      --w-solid-text: #FFFFFF;
+      --w-text: #F3F4F6;
+      --w-text-subtle: #9DA3AE;
+      --w-shadow: #000000;
+    }
+
+    .w-theme--success {
+      --w-bg: rgb(45 52 46);
+      --w-bg-subtle: rgb(42 49 43);
+      --w-tint-subtle: rgb(51 66 52);
+      --w-tint: rgb(53 80 56);
+      --w-tint-strong: rgb(58 92 62);
+      --w-accent-subtle: rgb(58 92 62);
+      --w-accent: rgb(64 104 69);
+      --w-accent-strong: rgb(70 118 77);
+      --w-solid-subtle: rgb(60 151 77);
+      --w-solid: rgb(70 167 88);
+      --w-solid-strong: rgb(83 179 101);
+      --w-solid-text: rgb(255 255 255);
+      --w-text-subtle: rgb(113 208 131);
+      --w-text: rgb(194 240 194);
+      --w-shadow: rgb(0 0 0);
+    }
+
+    .w-theme--warning {
+      --w-bg: rgb(55 50 42);
+      --w-bg-subtle: rgb(49 46 40);
+      --w-tint-subtle: rgb(69 58 36);
+      --w-tint: rgb(83 64 24);
+      --w-tint-strong: rgb(93 71 23);
+      --w-accent-subtle: rgb(93 71 23);
+      --w-accent: rgb(104 83 37);
+      --w-accent-strong: rgb(121 98 50);
+      --w-solid-subtle: rgb(255 179 0);
+      --w-solid: rgb(255 197 61);
+      --w-solid-strong: rgb(255 208 97);
+      --w-solid-text: rgb(29 24 15);
+      --w-text-subtle: rgb(255 202 22);
+      --w-text: rgb(255 231 179);
+      --w-shadow: rgb(0 0 0);
+    }
+
+    .w-theme--danger {
+      --w-bg: rgb(58 44 43);
+      --w-bg-subtle: rgb(53 44 43);
+      --w-tint-subtle: rgb(86 43 41);
+      --w-tint: rgb(106 40 39);
+      --w-tint-strong: rgb(120 44 45);
+      --w-accent-subtle: rgb(120 44 45);
+      --w-accent: rgb(135 54 54);
+      --w-accent-strong: rgb(157 67 66);
+      --w-solid-subtle: rgb(220 52 57);
+      --w-solid: rgb(229 72 77);
+      --w-solid-strong: rgb(236 93 94);
+      --w-solid-text: rgb(255 255 255);
+      --w-text-subtle: rgb(255 149 146);
+      --w-text: rgb(255 209 217);
+      --w-shadow: rgb(0 0 0);
+    }
+  </style>
+
+  <script type="module" src="/priv/static/w_theme.mjs"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
 </html>
